@@ -1,0 +1,217 @@
+@import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
+
+body {
+    background-color: #ffffff;
+}
+
+body, button, html, input, select, textarea, div, p, span, label {
+    font-family: "Roboto", "Open Sans", "Helvetica Neue", "Helvetica", "Arial", "sans-serif" !important;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body, button, html, input, select, textarea, div, p, span, label {
+    font-family: "SFProText", "Open Sans", "Helvetica Neue", "Helvetica", "Arial", "sans-serif" !important;
+}
+
+input:focus {
+    border: solid 1px #0099ff;
+}
+
+.display-none {
+    display: none !important;
+}
+
+.display-block {
+    display: block;
+}
+
+.display-flex {
+    display: flex;
+}
+
+.display-inline {
+    display: inline;
+}
+
+/*Cursor-CSS*/
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-default {
+    cursor: default;
+}
+
+.cursor-not-allowed {
+    cursor: not-allowed;
+}
+
+/*Borders*/
+.b-1-blue {
+    border: 1px solid #0052cc;
+}
+
+.b-1-white {
+    border: 1px solid #e6e6e6;
+}
+
+/*Border-radius*/
+.br-4 {
+    border-radius: 4px;
+}
+
+/*Font-sizes*/
+
+.fs-sm {
+    font-size: 10px !important;
+}
+
+.fs-12 {
+    font-size: 12px !important;
+}
+
+.fs-13 {
+    font-size: 13px !important;
+}
+
+.fs-14 {
+    font-size: 14px !important;
+}
+
+.fs-15 {
+    font-size: 15px !important;
+}
+
+.fs-16 {
+    font-size: 16px !important;
+}
+
+.fs-17 {
+    font-size: 17px !important;
+}
+
+.fs-18 {
+    font-size: 18px !important;
+}
+
+.fs-19 {
+    font-size: 19px !important;
+}
+
+.fs-20 {
+    font-size: 20px !important;
+}
+
+.fs-22 {
+    font-size: 22px !important;
+}
+
+.fs-24 {
+    font-size: 24px !important;
+}
+
+.fs-26 {
+    font-size: 26px !important;
+}
+
+.fs-28 {
+    font-size: 28px !important;
+}
+
+.fs-40 {
+    font-size: 40px;
+}
+
+/*Font-color*/
+
+.fc-warm-grey {
+    color: #999999;
+}
+
+.fc-blue {
+    color: #0052cc !important;
+}
+
+.fc-dark-slate-blue {
+    color: #172b4d;
+}
+
+.fc-white {
+    color: #ffffff !important;
+}
+
+.fc-black {
+    color: #000000;
+}
+
+.fc-blue-grey {
+    color: #5e6c84;
+}
+
+.fc-red {
+    color: red;
+}
+
+.fc-brownish-grey {
+    color: #666666;
+}
+
+.fc-dusky-blue {
+    color: #465d85;
+}
+
+/*Background-color*/
+
+.bg-blue {
+    background-color: #0052cc !important;
+}
+
+/*Width-CSS*/
+
+.outline-none {
+    outline: none !important;
+}
+
+/*Width-CSS*/
+
+.w-150 {
+    width: 150px;
+}
+
+.w-450 {
+    width: 450px;
+}
+
+.w-250 {
+    width: 250px;
+}
+
+.z-index-100 {
+    z-index: 100;
+}
+
+.text-transform-capitalize {
+    text-transform: capitalize !important;
+}
+
+.input-border {
+    border: solid 1px #dfe1e6;
+    border-radius: 2px;
+    background-color: #fafbfc;
+}
+
+.checkbox-border {
+    border-radius: 2px;
+    border: solid 1px #b9bbc2;
+    background-color: #ffffff;
+}
+
+.subscription-plan-card-shadow {
+    box-shadow: 0px 3px 21px 0 rgba(0, 0, 0, 0.07);
+}
+
