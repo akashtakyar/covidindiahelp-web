@@ -5,19 +5,21 @@ import './column.css'
 function ColumnComponent(props) {
     const { Option } = Select;
     const children = [];
-    for (let i = 10; i < 36; i++) {
-        children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
-    }
+    
+        children.push(<Option key={"uttar"}>{"uttar"}</Option>);
+        children.push(<Option key={"delhi"}>{"delhi"}</Option>);
 
+    const [selected  , setSelected ] = useState("delhi")
 
     function handleChange(value) {
-        console.log(`Selected: ${value}`);
+        setSelected(value)
+        props.getStates(value)
     }
     return (
         <Row gutter={[24, 16]} style={{backgroundColor : "#474951" , height: "68px"}}>
             <Col span={3}>
                 <Row style={{marginTop : "20px" , marginLeft : "12px"}}>
-                    <Select style={{background : "#55575E" , color : "white"}} size={"medium"} defaultValue="State" onChange={handleChange} style={{ width: 150 }}>
+                    <Select style={{background : "#55575E" , color : "white"}} size={"medium"} defaultValue={selected} onChange={handleChange} style={{ width: 150 }}>
                         {children}
                     </Select>
                 </Row>

@@ -20,7 +20,7 @@ class ColumnCard extends BaseComponent {
 
     render() {
         return (
-            <ColumnCardComponent state={this.state} />
+            <ColumnCardComponent responseData={this.props.responseData} state={this.state} />
         );
     }
 }

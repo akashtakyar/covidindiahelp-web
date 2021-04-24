@@ -18,7 +18,7 @@ function ColumnComponent(props) {
 
     return (
         <>
-            <NavBar />
+            <NavBar getStates={props.getStates}/>
             <Row style={{ height: "1000px" }}>
 
                 <Col xs={24} sm={12} md={4} lg={3} xl={3} style={{ borderRight: "1px solid #D5D5D5" }} >
@@ -26,9 +26,7 @@ function ColumnComponent(props) {
                         <Col span={20}> <span className="oxygen-beds">Blood Plasma</span></Col>
                         {/* <Col span={4}> {blood ? <CaretUpOutlined onClick={() => setBlood(false)} /> : <CaretDownOutlined onClick={() => setBlood(true)} />} </Col> */}
                     </Row>
-                    <Row>
-                        <ColumnCard></ColumnCard>
-                    </Row>
+                   
                 </Col>
                 <Col xs={24} sm={12} md={4} lg={3} xl={3} style={{ borderRight: "1px solid #D5D5D5" }} >
                     <Row style={{ marginTop: "10px" }}>
@@ -60,6 +58,9 @@ function ColumnComponent(props) {
                     <Row style={{ marginTop: "10px" }}>
                         <Col span={20}> <span className="oxygen-beds">Oxygen</span></Col>
                         {/* <Col span={4}> {oxy ? <CaretUpOutlined onClick={() => setOxy(false)} /> : <CaretDownOutlined onClick={() => setOxy(true)} />} </Col> */}
+                    </Row>
+                    <Row>
+                        <ColumnCard responseData={props.responseData}></ColumnCard>
                     </Row>
                 </Col>
                 <Col xs={24} sm={12} md={4} lg={3} xl={3} style={{ borderRight: "1px solid #D5D5D5" }}>
