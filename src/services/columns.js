@@ -8,8 +8,8 @@ export default {
 }
 
 
-export async function states(toadd){
-    let url = `https://25adb87f7f46.ngrok.io/getCards?duration=200000&state=` + toadd;
+export async function states(stateName){
+    let url = `http://www.covidindiahelp.info:3002/getCards?duration=200000&state=` + stateName;
     return httpService(httpConstants.METHOD_TYPE.GET, {'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON},{},url)
         .then(response => {
             console.log("response dasd",response)
