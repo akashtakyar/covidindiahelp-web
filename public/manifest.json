@@ -1,22 +1,17 @@
 {
-  "short_name": "Limb",
-  "name": "Limb CRE",
+  "short_name": "Covid19 Help",
+  "name": "Covid19 Help Info",
   "icons": [
     {
-      "src": "favicon-32.png",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "src": "favicon-16.png",
+      "sizes": "24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "favicon-192.png",
+      "src": "favicon-32.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "32x32 64x64"
     },
-    {
-      "src": "favicon-228.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }	    
   ],
   "start_url": ".",
   "display": "standalone",
