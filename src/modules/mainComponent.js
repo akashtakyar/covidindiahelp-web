@@ -28,7 +28,12 @@ const useStyles = makeStyles({
     mx10: {
         marginLeft: 10,
         marginRight: 10
-    }
+    },
+    dropdown:{
+     '.& MuiSelect-outlined.MuiSelect-outlined':{     
+     paddingRight: '82px'
+     }
+    },
   });
 
   
@@ -37,7 +42,7 @@ function Main() {
 
     return (
         <Container disableGutters="true" maxWidth="xl" className={classes.root}>
-            <Navbar classes={classes} />
+            {/* <Navbar classes={classes} /> */}
             <Coloumn />
         </Container>
     );

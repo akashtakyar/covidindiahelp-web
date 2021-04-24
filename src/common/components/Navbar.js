@@ -12,7 +12,7 @@ class Navbar extends BaseComponent {
             <AppBar position="static">
                  <Toolbar className={this.props.classes.navbar}>
                      <FormControl variant="outlined" className={this.props.classes.mx10}>
-                         <InputLabel id="demo-simple-select-outlined-label">States</InputLabel>
+                         <InputLabel id="demo-simple-select-outlined-label" style={{paddingRight: "82px"}}>States</InputLabel>
                          <Select
                              labelId="demo-simple-select-outlined-label"
                              id="demo-simple-select-outlined"
