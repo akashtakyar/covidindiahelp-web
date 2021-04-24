@@ -21,42 +21,36 @@ function ColumnComponent(props) {
             <NavBar getStates={props.getStates}/>
             <Row style={{ height: "1000px" }}>
 
-                <Col xs={24} sm={12} md={4} lg={3} xl={3} style={{ borderRight: "1px solid #D5D5D5" }} >
+                <Col xs={24} sm={12} md={4} lg={3} xl={4} style={{ borderRight: "1px solid #D5D5D5" }} >
                     <Row style={{ marginTop: "10px" }}>
-                        <Col span={20}> <span className="oxygen-beds">Blood Plasma</span></Col>
+                        <Col span={20}> <span className="oxygen-beds" style={{fontSize: "12px"}}>Blood Plasma</span></Col>
                         {/* <Col span={4}> {blood ? <CaretUpOutlined onClick={() => setBlood(false)} /> : <CaretDownOutlined onClick={() => setBlood(true)} />} </Col> */}
                     </Row>
                    
                 </Col>
-                <Col xs={24} sm={12} md={4} lg={3} xl={3} style={{ borderRight: "1px solid #D5D5D5" }} >
-                    <Row style={{ marginTop: "10px" }}>
-                        <Col span={20}> <span className="oxygen-beds">Medicine</span></Col>
-                        {/* <Col span={4}> {medicine ? <CaretUpOutlined onClick={() => setMedicine(false)} /> : <CaretDownOutlined onClick={() => setMedicine(true)} />} </Col> */}
-                    </Row>
-
-                </Col>
+           
                 <Col xs={24} sm={12} md={4} lg={3} xl={3} style={{ borderRight: "1px solid #D5D5D5" }}>
                     <Row style={{ marginTop: "10px" }}>
-                        <Col span={20}> <span className="oxygen-beds">Remdisvir</span></Col>
+                        <Col span={20}> <span className="oxygen-beds" style={{fontSize: "12px"}}>Remdisvir</span></Col>
                         {/* <Col span={4}> {rem ? <CaretUpOutlined onClick={() => setrem(false)} /> : <CaretDownOutlined onClick={() => setrem(true)} />} </Col> */}
                     </Row>
                 </Col>
                 <Col xs={24} sm={12} md={4} lg={3} xl={3} style={{ borderRight: "1px solid #D5D5D5" }}>
                     <Row style={{ marginTop: "10px" }}>
-                        <Col span={20}> <span className="oxygen-beds">Tocilizumab</span></Col>
+                        <Col span={20}> <span className="oxygen-beds" style={{fontSize: "12px"}}>Tocilizumab</span></Col>
                         {/* <Col span={4}> {toc ? <CaretUpOutlined onClick={() => setToc(false)} /> : <CaretDownOutlined onClick={() => setToc(true)} />} </Col> */}
                     </Row>
                 </Col>
-                <Col xs={24} sm={12} md={4} lg={3} xl={3} style={{ borderRight: "1px solid #D5D5D5" }}>
+                <Col xs={24} sm={12} md={4} lg={3} xl={4} style={{ borderRight: "1px solid #D5D5D5" }}>
                     <Row style={{ marginTop: "10px" }}>
-                        <Col span={20}> <span className="oxygen-beds">Ventilator</span></Col>
+                        <Col span={20}> <span className="oxygen-beds" style={{fontSize: "12px"}}>Ventilator</span></Col>
                         {/* <Col span={4}> {ven ? <CaretUpOutlined onClick={() => setVen(false)} /> : <CaretDownOutlined onClick={() => setVen(true)} />} </Col> */}
 
                     </Row>
                 </Col>
-                <Col xs={24} sm={12} md={4} lg={3} xl={3} style={{ borderRight: "1px solid #D5D5D5" }}>
+                <Col xs={24} sm={12} md={4} lg={3} xl={4} style={{ borderRight: "1px solid #D5D5D5" }}>
                     <Row style={{ marginTop: "10px" }}>
-                        <Col span={20}> <span className="oxygen-beds">Oxygen</span></Col>
+                        <Col span={20}> <span className="oxygen-beds" style={{fontSize: "12px"}}>Oxygen</span></Col>
                         {/* <Col span={4}> {oxy ? <CaretUpOutlined onClick={() => setOxy(false)} /> : <CaretDownOutlined onClick={() => setOxy(true)} />} </Col> */}
                     </Row>
                     <Row>
@@ -65,13 +59,13 @@ function ColumnComponent(props) {
                 </Col>
                 <Col xs={24} sm={12} md={4} lg={3} xl={3} style={{ borderRight: "1px solid #D5D5D5" }}>
                     <Row style={{ marginTop: "10px" }}>
-                        <Col span={20}> <span className="oxygen-beds">Bed</span></Col>
+                        <Col span={20}> <span className="oxygen-beds" style={{fontSize: "12px"}}>Bed</span></Col>
                         {/* <Col span={4}> {bed ? <CaretUpOutlined onClick={() => setBed(false)} /> : <CaretDownOutlined onClick={() => setBed(true)} />} </Col> */}
                     </Row>
                 </Col>
                 <Col xs={24} sm={12} md={4} lg={3} xl={3} style={{ borderRight: "1px solid #D5D5D5" }}>
                     <Row style={{ marginTop: "10px" }}>
-                        <Col span={20}> <span className="oxygen-beds">ICU</span></Col>
+                        <Col span={20}> <span className="oxygen-beds" style={{fontSize: "12px"}}>ICU</span></Col>
                         {/* <Col span={4}> {icu ? <CaretUpOutlined onClick={() => setIcu(false)} /> : <CaretDownOutlined onClick={() => setIcu(true)} />} </Col> */}
                     </Row>
                 </Col>
