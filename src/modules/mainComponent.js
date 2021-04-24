@@ -60,33 +60,6 @@ function Main() {
             <Navbar classes={classes} />
             <Coloumn />
         </Container>
-
-        // <Container disableGutters="true" maxWidth="xl" className={classes.root}>
-        //     
-        //     <div className={classes.swimlaneContainer}>
-        //         <Grid container spacing={3}>
-        //             <Grid item>
-        //                 <Card>
-        //                     <CardContent>
-        //                         <Typography className={classes.mb10} variant="body2">
-        //                             Verified On 23/4/21
-        //                             <Avatar>+8</Avatar>
-        //                             </Typography>
-        //                         <Typography variant="body2">Rajeev Gandhi Super Speciality Hospital, Dilshad Garden</Typography>
-        //                     </CardContent>
-        //                 </Card>
-        //             </Grid>
-        //             <Grid item>
-        //                 <Card>
-        //                     <CardContent>
-        //                         <Typography className={classes.mb10} variant="body2">Verified On 23/4/21</Typography>
-        //                         <Typography variant="body2">Rajeev Gandhi Super Speciality Hospital, Dilshad Garden</Typography>
-        //                     </CardContent>
-        //                 </Card>
-        //             </Grid>
-        //         </Grid>
-        //     </div>
-        // </Container>
     );
 }
 
