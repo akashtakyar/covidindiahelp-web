@@ -26,17 +26,17 @@ function ColumnComponent(props) {
             </Col>
             <Col span={3}>
                 <Row style={{marginTop : "25px"}}>
-                    <span className="bookmarked">Leads</span>
+                    <span className="bookmarked" style={{fontSize: "12px"}}>Leads</span>
                 </Row>
             </Col>
             <Col span={14}>
                 <Row style={{marginTop : "25px"}}>
-                    <span className="bookmarked">Bookmarked</span>
+                    <span className="bookmarked" style={{fontSize: "12px"}}>Bookmarked</span>
                 </Row>
             </Col>
             <Col span={4}>
                 <Row style={{marginTop : "25px"}}>
-                    <span className="bookmarked">Show data of last: 4 hours</span>
+                    <span className="bookmarked" style={{fontSize: "12px"}}>Show data of last: 4 hours</span>
                 </Row>
             </Col>
         </Row>

@@ -10,7 +10,6 @@ function ColumnCardComponent(props) {
                 <Card className="m-10">
                     <CardContent>
                         <Typography className="mb-10" variant="body2">
-                            Verified On 23/4/21
                                 <span className="vote-count">{ite.verifyScore}</span>
                         </Typography>
                         <Typography variant="body2">{ite.description}</Typography>
