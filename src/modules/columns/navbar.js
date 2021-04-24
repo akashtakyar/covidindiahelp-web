@@ -41,6 +41,8 @@ function ColumnComponent(props) {
     children.push(<Option key={"ladakh"}>{"Ladakh"}</Option>);
     children.push(<Option key={"lakshadweep"}>{"Lakshadweep"}</Option>);
     children.push(<Option key={"puducherry"}>{"Puducherry"}</Option>)
+    children.push(<Option key={"dadra"}>{"Dadra and Nagar Haveli"}</Option>)
+    children.push(<Option key={"daman"}>{"Daman and Diu"}</Option>)
 
     const [selected  , setSelected ] = useState("Delhi")
 
