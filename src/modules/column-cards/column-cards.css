@@ -1,0 +1,21 @@
+.swimlane-container {
+  padding: 5px
+}
+
+.mb-10 {
+  margin-bottom: 10px
+}
+
+.m-10 {
+  margin: 10px;
+}
+
+.vote-count {
+  border-radius: 9px;
+  background-color: red;
+  font-size: 11px;
+  width: 30px;
+  height: 30px;
+  color: white;
+  padding: 2px;
+}

@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import {Coloumn} from "./modules";
 import {history} from "./managers/history";
 import BaseComponent from "./modules/baseComponent";
+import Main from './modules/mainComponent';
 
 class Routes extends BaseComponent {
 
@@ -20,7 +21,7 @@ class Routes extends BaseComponent {
             <MuiThemeProvider muiTheme={getMuiTheme()}>
                 <Router history={history}>
                     <Switch>
-                        <Route exact path={'/'} component={Coloumn}/>
+                        <Route exact path={'/'} component={Main}/>
                    
                         <Redirect exact from='*' to="/"/>
                         

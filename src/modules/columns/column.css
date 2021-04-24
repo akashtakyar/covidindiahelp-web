@@ -1,10 +1,20 @@
 .oxygen-beds {
     color: #18265C;
     font-family: Roboto;
-    font-size: 26px;
+    font-size: 20px;
     letter-spacing: 1px;
     line-height: 31px;
     text-align: left;
     padding-top: 15px;
     padding-left : 12px
+  }
+
+
+  .bookmarked {
+    color: #FFFFFF;
+    font-family: Roboto;
+    font-size: 16px;
+    letter-spacing: 0.62px;
+    line-height: 19px;
+    text-align: left;
   }
