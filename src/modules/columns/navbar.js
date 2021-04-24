@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { Row, Col } from 'antd';
 import { Select, Radio } from 'antd';
 import './column.css'
+import Credits from './credits';
+import InfoIcon from '@material-ui/icons/Info';
+import RefreshIcon from '@material-ui/icons/Refresh';
 function ColumnComponent(props) {
     const { Option } = Select;
     const children = [];
@@ -45,45 +48,55 @@ function ColumnComponent(props) {
     children.push(<Option key={"daman"}>{"Daman and Diu"}</Option>)
 
     const [selected  , setSelected ] = useState("Delhi")
+    const [showCredits  , setshowCredits ] = useState(false)
 
     function handleChange(value) {
         setSelected(value)
         props.getStates(value)
     }
     return (
-        <Row gutter={[24, 16]} style={{backgroundColor : "#474951" , height: "55px",marginLeft:'0px',marginRight:'0px'}}>
-             <Col span={2.5}>
-                <Row style={{marginTop : "17px"}}>
+        <Row gutter={[24, 16]} style={{backgroundColor : "#474951" , height: "35px",marginLeft:'0px',marginRight:'0px'}}>
+             <Col className="navbar-cont" span={2.5}>
+                <Row>
                     <span className="bookmarked" style={{fontSize: "12px",marginLeft:'10px'}}>Covid India Help</span>
                 </Row>
             </Col>
-            <Col span={3}>
-                <Row style={{marginTop : "10px" , marginLeft : "12px"}}>
-                    <Select style={{background : "#55575E" , color : "white"}} size={"medium"} defaultValue={selected} onChange={handleChange} style={{ width: 150 }}>
+            <Col className="navbar-cont" span={3}>
+                <Row style={{marginLeft : "12px"}}>
+                    <Select style={{background : "#55575E" , color : "white",fontSize:'11px',height:'30px'}} size={"medium"} defaultValue={selected} onChange={handleChange} style={{ width: 150 }}>
                         {children}
                     </Select>
                 </Row>
             </Col>
-            <Col span={1}>
-                <Row style={{marginTop : "17px"}}>
+            <Col className="navbar-cont" span={15}>
+                <Row onClick={props.onRefresh} style={{cursor:'pointer'}}>
+                    <span className="bookmarked" style={{fontSize: "12px"}}><RefreshIcon style={{color:'white',fontSize:'20px'}} /></span>
+                </Row>
+            </Col>
+            {/* <Col  className="navbar-cont"span={1}>
+                <Row>
                     <span className="bookmarked" style={{fontSize: "12px"}}>Leads</span>
                 </Row>
             </Col>
-            <Col span={12}>
-                <Row style={{marginTop : "17px"}}>
+            <Col  className="navbar-cont"span={12}>
+                <Row>
                     <span className="bookmarked" style={{fontSize: "12px"}}>Bookmarked</span>
                 </Row>
-            </Col>
-            <Col span={4}>
-                <Row style={{marginTop : "17px"}}>
-                    <span className="bookmarked" style={{fontSize: "12px"}}>Show data of last: 4 hours</span>
+            </Col> */}
+            <Col  className="navbar-cont" span={2}>
+                <Row>
+                    <span className="bookmarked" style={{fontSize: "12px"}}>Showing Recent</span>
                 </Row>
             </Col>
-            <Col span={1}>
-                <Row onClick={props.onRefresh} style={{marginTop : "17px",cursor:'pointer'}}>
-                    <span className="bookmarked" style={{fontSize: "12px"}}><svg style={{fill:'white'}} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.5 2c-5.621 0-10.211 4.443-10.475 10h-3.025l5 6.625 5-6.625h-2.975c.257-3.351 3.06-6 6.475-6 3.584 0 6.5 2.916 6.5 6.5s-2.916 6.5-6.5 6.5c-1.863 0-3.542-.793-4.728-2.053l-2.427 3.216c1.877 1.754 4.389 2.837 7.155 2.837 5.79 0 10.5-4.71 10.5-10.5s-4.71-10.5-10.5-10.5z"/></svg></span>
+            
+            <Col onClick={()=>setshowCredits(!showCredits)} className="navbar-cont" span={1}>
+                <Row style={{cursor:'pointer'}}>
+                    <span className="bookmarked" style={{fontSize: "11px"}}><InfoIcon style={{color:'white',fontSize:'20px'}} /> </span>
                 </Row>
             </Col>
+            
+                <Credits show={showCredits} setShow={setshowCredits} />
+                
         </Row>
     );
 }

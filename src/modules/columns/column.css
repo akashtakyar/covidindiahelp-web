@@ -1,20 +1,42 @@
 .oxygen-beds {
-    color: #18265C;
-    font-family: Roboto;
-    font-size: 20px;
-    letter-spacing: 1px;
-    line-height: 31px;
-    text-align: left;
-    padding-top: 15px;
-    padding-left : 12px
-  }
+  color: #18265c;
+  font-family: Roboto;
+  font-size: 20px;
+  letter-spacing: 1px;
+  line-height: 31px;
+  text-align: left;
+  font-weight: 700;
+  padding-left: 12px;
+}
 
+.bookmarked {
+  color: #ffffff;
+  font-family: Roboto;
+  font-size: 16px;
+  letter-spacing: 0.62px;
+  line-height: 19px;
+  text-align: left;
+}
+.ant-select-selector {
+  height: 25px !important;
+  font-size: 10px;
+}
+.navbar-cont {
+  height: 100%;
+  align-items: center;
+  /* justify-content: center; */
+  display: flex !important;
+}
 
-  .bookmarked {
-    color: #FFFFFF;
-    font-family: Roboto;
-    font-size: 16px;
-    letter-spacing: 0.62px;
-    line-height: 19px;
-    text-align: left;
-  }
+#style-1::-webkit-scrollbar-track {
+  background-color: #fafafa;
+}
+
+#style-1::-webkit-scrollbar {
+  width: 8px;
+  background-color: #fafafa;
+}
+
+#style-1::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+}
