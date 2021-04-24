@@ -3,5 +3,17 @@
 }
 
 .mb-10 {
-  margin-bottom: 10
+  margin-bottom: 10px
+}
+
+.m-10 {
+  margin: 10px;
+}
+
+.vote-count {
+  border-radius: 9px;
+  background-color: red;
+  font-size: small;
+  width: 30px;
+  height: 30px;
 }
