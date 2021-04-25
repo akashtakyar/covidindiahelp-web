@@ -57,7 +57,8 @@ const utility = {
     secondsToTime,
     getDateFormat,
     changeDateFormat,
-    getAggregatedPercWercQueryObject
+    getAggregatedPercWercQueryObject,
+    toSentenceCase
 };
 export default utility;
 
@@ -697,11 +698,16 @@ function extractDate(date, getType) {
 
 }
 
+
 function changeDateFormat(date, newFormat) {
     let currentFormat = getDateFormat()
     return moment(date, currentFormat).format(newFormat)
 }
 
+function toSentenceCase(stringToChange)
+{
+    return stringToChange.toLowerCase().replace(/(^\s*\w|[\.\!\?]\s*\w)/g,function(c){return c.toUpperCase()});
+}
 function getAggregatedPercWercQueryObject(start, end, skip, id) {
     console.log(start, end, skip, id);
     return [

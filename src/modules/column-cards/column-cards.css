@@ -26,9 +26,22 @@
 .card-timestamp {
   font-size: 9px !important;
   color: #757575;
-  text-align: right;
+  text-align: left;
+  width: 100%;
+  margin-top:5px;
+  justify-content: space-between;
+}
+.card-vote-buttons {
+  font-size: 9px !important;
+  color: #757575;
+  text-align: left;
 }
 
+.card-footer-info {
+  font-size: 9px !important;
+  color: #757575;
+  text-align: right;
+}
 .card-desc-container {
   padding: 6px !important;
   padding-bottom: 6px !important;

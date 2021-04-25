@@ -41,7 +41,7 @@ function Main() {
     const classes = useStyles();
 
     return (
-        <Container disableGutters="true" maxWidth="xl" className={classes.root}>
+        <Container disableGutters={true} maxWidth="xl" className={classes.root}>
             {/* <Navbar classes={classes} /> */}
             <Coloumn />
         </Container>

@@ -4,7 +4,9 @@ import {httpConstants} from "../constants";
 
 
 export default {
-    states
+    states,
+    upVote,
+    downVote
 }
 
 
@@ -20,3 +22,35 @@ export async function states(toadd){
             return Promise.reject(err);
         });
 }
+
+
+
+export async function upVote(id){
+    let url = `http://www.covidindiahelp.info:3002/upVote?id=` + id;
+    return httpService(httpConstants.METHOD_TYPE.GET, {'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON},{},url)
+        .then(response => {
+                // console.log("response dasd",response)
+                return Promise.resolve(response);
+            }
+        ).catch(function (err) {
+            // console.log("err dasd",err)
+            return Promise.reject(err);
+        });
+}
+
+
+
+
+export async function downVote(id){
+    let url = `http://www.covidindiahelp.info:3002/downVote?id=` + id;
+    return httpService(httpConstants.METHOD_TYPE.GET, {'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON},{},url)
+        .then(response => {
+                // console.log("response dasd",response)
+                return Promise.resolve(response);
+            }
+        ).catch(function (err) {
+            // console.log("err dasd",err)
+            return Promise.reject(err);
+        });
+}
+

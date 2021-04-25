@@ -8,7 +8,7 @@ import NavBar from './navbar'
 function ColumnComponent(props) {
     const cardStyle= {
         maxWidth:'20%',
-        flex:'0 0 20%', 
+        flex:'0 0 20%',
         borderRight: "1px solid #D5D5D5",
         height: '95vh',
         overflowY: 'scroll', 
@@ -49,15 +49,19 @@ function ColumnComponent(props) {
     return (
         <>
             <NavBar getStates={props.getStates} onRefresh={props.getStates} />
-            <Row style={{ height: "1000px" }}>
+            <Row style={{ height: "1000px" }} wrap={true} >
                 {
-                    list.map((col)=>(
-                        <Col id="style-1" xs={24} sm={12} md={4} lg={3}  style={cardStyle} >
+                    list.map((col,index)=>(
+                        <Col id="style-1" xs={24} sm={12} md={4} lg={3}  style={cardStyle} key={index} >
                             <Row>
                                 <Col span={20}> <span className="oxygen-beds" style={{fontSize: "12px"}}>{col.label}</span></Col>
                             </Row>
                             <Row>
-                                <ColumnCard responseData={props.responseData.filter((row)=>row.category.toLowerCase()===col.filterKey||row.category.toLowerCase()===col.filterKey2)}></ColumnCard>
+                                <ColumnCard
+                                    responseData={props.responseData.filter((row)=>row.category.toLowerCase()===col.filterKey||row.category.toLowerCase()===col.filterKey2)}
+                                    incrementUpVote = {props.incrementUpVote}
+                                    incrementDownVote = {props.incrementDownVote}
+                                ></ColumnCard>
                             </Row>
                         </Col>
                     ))

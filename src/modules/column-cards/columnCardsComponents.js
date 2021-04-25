@@ -3,17 +3,38 @@ import './column-cards.css'
 import 'antd/dist/antd.css';
 import { Avatar, Card, CardContent, Typography } from '@material-ui/core';
 import moment from 'moment'
+import {Row,Column} from "simple-flexbox";
+import utility from "../../utility";
 function ColumnCardComponent(props) {
     return (
         <>
-            {props.responseData && props.responseData.map(ite => (
-                <Card className="m-10">
+            {props.responseData && props.responseData.map((ite,index) => (
+                <Card className="m-10" key={index}>
                     <CardContent className="card-desc-container">
                         <Typography className="mb-10" variant="body2">
                               
                         </Typography>
                         <Typography className="card-desc" variant="body2">{ite.description}</Typography>
-                        <Typography className="card-timestamp" variant="body2"> {ite.state} {ite.district} {moment(ite.channelCreatedOn).fromNow()}</Typography>
+                        <Row className="card-timestamp" >
+                            <Row className="card-vote-buttons"  style={{cursor:'pointer'}}><span onClick=
+                                {() => {
+
+
+                                    props.incrementUpVote(ite._id);
+
+                                    props.sendUpVoteRequest(ite._id)
+                                }}
+                            >Working({ite.upVoteCount})</span>&nbsp;&nbsp;
+
+                            <span  className="card-vote-buttons" style={{cursor:'pointer'}} onClick=
+                                {() => {
+                                    props.incrementDownVote(ite._id);
+                                    props.sendDownVoteRequest(ite._id)
+                                }}
+                            >Not Working({ite.downVoteCount})</span></Row>&nbsp;
+
+                            <Column className="card-footer-info">{ utility.toSentenceCase(ite.state)} {utility.toSentenceCase(ite.district)} {moment(ite.channelCreatedOn).fromNow()}</Column>
+                        </Row>
                     </CardContent>
                 </Card>
             ))}
