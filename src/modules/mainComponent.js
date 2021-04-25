@@ -41,10 +41,10 @@ function Main() {
     const classes = useStyles();
 
     return (
-        <Container disableGutters={true} maxWidth="xl" className={classes.root}>
+        <div disableGutters={true} style={{width:"100% !important"}} className={classes.root}>
             {/* <Navbar classes={classes} /> */}
             <Coloumn />
-        </Container>
+        </div>
     );
 }
 

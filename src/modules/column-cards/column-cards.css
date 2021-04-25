@@ -37,6 +37,10 @@
   text-align: left;
 }
 
+.underline-text{
+  text-decoration: underline;
+}
+
 .card-footer-info {
   font-size: 9px !important;
   color: #757575;

@@ -7,6 +7,7 @@ import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 import NavBar from './navbar'
 function ColumnComponent(props) {
     const cardStyle= {
+        minWidth:'250px',
         maxWidth:'20%',
         flex:'0 0 20%',
         borderRight: "1px solid #D5D5D5",
@@ -49,10 +50,10 @@ function ColumnComponent(props) {
     return (
         <>
             <NavBar getStates={props.getStates} onRefresh={props.getStates} />
-            <Row style={{ height: "1000px" }} wrap={true} >
+            <Row style={{ height: "1000px" }} className="wrapOnMedia">
                 {
                     list.map((col,index)=>(
-                        <Col id="style-1" xs={24} sm={12} md={4} lg={3}  style={cardStyle} key={index} >
+                        <Col id="style-1"  className="cardStyle" key={index} >
                             <Row>
                                 <Col span={20}> <span className="oxygen-beds" style={{fontSize: "12px"}}>{col.label}</span></Col>
                             </Row>

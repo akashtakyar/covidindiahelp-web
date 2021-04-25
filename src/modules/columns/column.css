@@ -40,3 +40,34 @@
 #style-1::-webkit-scrollbar-thumb {
   background-color: #cccccc;
 }
+ {
+
+}
+
+.cardStyle {
+  min-width: 200px;
+  max-width:20%;
+  flex: 0 0 20%;
+  border-right: 1px solid #D5D5D5;
+  height: 95vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+}
+
+
+
+@media (max-width: 768px) {
+
+  .cardStyle {
+    min-width: 100% !important;
+    border-right: 1px solid #D5D5D5;
+    height: 25vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+  }
+  .wrapOnMedia{
+    flex-wrap: wrap;
+  }
+}

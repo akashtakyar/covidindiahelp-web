@@ -16,7 +16,7 @@ function ColumnCardComponent(props) {
                         </Typography>
                         <Typography className="card-desc" variant="body2">{ite.description}</Typography>
                         <Row className="card-timestamp" >
-                            <Row className="card-vote-buttons"  style={{cursor:'pointer'}}><span onClick=
+                            <Row className="card-vote-buttons"  style={{cursor:'pointer'}}><span className="underline-text" onClick=
                                 {() => {
 
 
@@ -24,14 +24,14 @@ function ColumnCardComponent(props) {
 
                                     props.sendUpVoteRequest(ite._id)
                                 }}
-                            >Working({ite.upVoteCount})</span>&nbsp;&nbsp;
+                            >Working:&nbsp;{ite.upVoteCount}</span>&nbsp;&nbsp;
 
-                            <span  className="card-vote-buttons" style={{cursor:'pointer'}} onClick=
+                            <span  className="card-vote-buttons  underline-text" style={{cursor:'pointer'}} onClick=
                                 {() => {
                                     props.incrementDownVote(ite._id);
                                     props.sendDownVoteRequest(ite._id)
                                 }}
-                            >Not Working({ite.downVoteCount})</span></Row>&nbsp;
+                            >Not working:&nbsp;{ite.downVoteCount}</span></Row>&nbsp;
 
                             <Column className="card-footer-info">{ utility.toSentenceCase(ite.state)} {utility.toSentenceCase(ite.district)} {moment(ite.channelCreatedOn).fromNow()}</Column>
                         </Row>
