@@ -25,7 +25,7 @@ function ColumnComponent(props) {
     const [icu, setIcu] = useState(true)
     const list = [
         {
-            label:"Blood",
+            label:"Blood Plasma",
             filterKey:"plasma"
         },
         {
@@ -57,7 +57,8 @@ function ColumnComponent(props) {
                             <Row>
                                 <Col span={20}> <span className="oxygen-beds" style={{fontSize: "12px"}}>{col.label}</span></Col>
                             </Row>
-                            <Row>
+                            <Row className="coloumn-scroll">
+
                                 <ColumnCard
                                     responseData={props.responseData.filter((row)=>row.category.toLowerCase()===col.filterKey||row.category.toLowerCase()===col.filterKey2)}
                                     incrementUpVote = {props.incrementUpVote}

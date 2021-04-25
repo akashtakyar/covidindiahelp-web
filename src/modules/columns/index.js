@@ -61,24 +61,24 @@ class Coloumn extends BaseComponent {
                             "index": index,
                             ...obj
                         }
-
-                        if (obj.state) {
-                            keyToSave = obj.state;
-                        }
-                        if (obj.district) {
-                            keyToSave = obj.district;
-                        }
-
-                        // Make it Sentense case
-                        keyToSave = utility.toSentenceCase(keyToSave);
-
-                        if (responseByLocation[keyToSave] === undefined)
-                            responseByLocation[keyToSave] = [];
-
-                        responseByLocation[keyToSave].push({
-                            "index": index,
-                            ...obj
-                        })
+                        //
+                        // if (obj.state) {
+                        //     keyToSave = obj.state;
+                        // }
+                        // if (obj.district) {
+                        //     keyToSave = obj.district;
+                        // }
+                        //
+                        // // Make it Sentense case
+                        // keyToSave = utility.toSentenceCase(keyToSave);
+                        //
+                        // if (responseByLocation[keyToSave] === undefined)
+                        //     responseByLocation[keyToSave] = [];
+                        //
+                        // responseByLocation[keyToSave].push({
+                        //     "index": index,
+                        //     ...obj
+                        // })
 
 
                     })

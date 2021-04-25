@@ -62,12 +62,19 @@
   .cardStyle {
     min-width: 100% !important;
     border-right: 1px solid #D5D5D5;
-    height: 25vh;
-    overflow-y: scroll;
     overflow-x: hidden;
+    height: 60vh;
 
   }
   .wrapOnMedia{
     flex-wrap: wrap;
+    margin: 0 10px 0 10px;
   }
+
+  .coloumn-scroll
+  {
+    overflow-y: scroll;
+    max-height: 55vh;
+  }
+
 }

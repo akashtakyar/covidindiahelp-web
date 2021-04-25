@@ -8,7 +8,11 @@ import utility from "../../utility";
 function ColumnCardComponent(props) {
     return (
         <>
-            {props.responseData && props.responseData.map((ite,index) => (
+
+            {
+
+                props.responseData.length>0?
+                props.responseData && props.responseData.map((ite,index) => (
                 <Card className="m-10" key={index}>
                     <CardContent className="card-desc-container">
                         <Typography className="mb-10" variant="body2">
@@ -37,7 +41,10 @@ function ColumnCardComponent(props) {
                         </Row>
                     </CardContent>
                 </Card>
-            ))}
+            )
+                    ):
+                    <div className="loading">Loading...</div>
+            }
         </>
 
     );

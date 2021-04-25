@@ -30,7 +30,8 @@ function Credits({show,setShow}) {
             <li>Sharad Gupta</li>
             <li>Shivansh Mehendiratta</li>
             <li>Jayesh Gadewar</li>
-            <li>Srinjoy Chowdhary</li>
+                <li>Srinjoy Chowdhary</li>
+                <li>Sunny Kumar</li>
             <br/>
             For any further queries please contact at covidindiahelp.info@gmail.com<br/><br/>v0.1 - beta
             </p>
