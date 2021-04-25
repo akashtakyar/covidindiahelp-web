@@ -10,7 +10,7 @@ class Coloumn extends BaseComponent {
         this.state = {
             name: "",
             nameError: "",
-            selectedState: "Delhi",
+            selectedState: "All States",
             selectedTime: "4",
             responseData : []
           
@@ -18,10 +18,9 @@ class Coloumn extends BaseComponent {
     }
 
      componentDidMount() {
-        this.getStates("delhi")
+        this.getStates("")
 
-        console.log("===================compdiodi mount")
-          
+
     }
    
      getStates = async(stateValue) => {
@@ -29,7 +28,6 @@ class Coloumn extends BaseComponent {
          
         try{
             let response = await states(data)
-            console.log("state respons",response)
             if(response.responseData && Array.isArray(response.responseData) && response.responseData.length){
                 this.setState({responseData : response.responseData})
             }

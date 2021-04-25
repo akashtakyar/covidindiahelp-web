@@ -24,7 +24,7 @@ function ColumnComponent(props) {
     const [icu, setIcu] = useState(true)
     const list = [
         {
-            label:"Blood Plasma",
+            label:"Blood",
             filterKey:"plasma"
         },
         {

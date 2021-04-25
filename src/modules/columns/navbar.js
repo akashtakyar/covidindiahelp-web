@@ -8,46 +8,46 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 function ColumnComponent(props) {
     const { Option } = Select;
     const children = [];
-    children.push(<Option key={""}>{"All"}</Option>);
-    children.push(<Option key={"andhra"}>{"Andhra Pradesh"}</Option>);
-    children.push(<Option key={"arunachal"}>{"Arunachal Pradesh"}</Option>);
-    children.push(<Option key={"assam"}>{"Assam"}</Option>);
-    children.push(<Option key={"bihar"}>{"Bihar"}</Option>);
-    children.push(<Option key={"chhattisgarh"}>{"Chhattisgarh"}</Option>);
-    children.push(<Option key={"goa"}>{"Goa"}</Option>);
-    children.push(<Option key={"gujarat"}>{"Gujarat"}</Option>);
-    children.push(<Option key={"haryana"}>{"Haryana"}</Option>);
-    children.push(<Option key={"himachal"}>{"Himachal Pradesh"}</Option>);
-    children.push(<Option key={"jharkhand"}>{"Jharkhand"}</Option>);
-    children.push(<Option key={"karnataka"}>{"Karnataka"}</Option>);
-    children.push(<Option key={"kerala"}>{"Kerala"}</Option>);
-    children.push(<Option key={"madhya"}>{"Madhya Pradesh"}</Option>);
-    children.push(<Option key={"maharashtra"}>{"Maharashtra"}</Option>);
-    children.push(<Option key={"manipur"}>{"Manipur"}</Option>);
-    children.push(<Option key={"meghalaya"}>{"Meghalaya"}</Option>);
-    children.push(<Option key={"mizoram"}>{"Mizoram"}</Option>);
-    children.push(<Option key={"nagaland"}>{"Nagaland"}</Option>);
-    children.push(<Option key={"odisha"}>{"Odisha"}</Option>);
-    children.push(<Option key={"punjab"}>{"Punjab"}</Option>);
-    children.push(<Option key={"rajasthan"}>{"Rajasthan"}</Option>);
-    children.push(<Option key={"sikkim"}>{"Sikkim"}</Option>);
-    children.push(<Option key={"tamil"}>{"Tamil Nadu"}</Option>);
-    children.push(<Option key={"telangana"}>{"Telangana"}</Option>);
-    children.push(<Option key={"tripura"}>{"Tripura"}</Option>);
-    children.push(<Option key={"uttarakhand"}>{"Uttarakhand"}</Option>);
-    children.push(<Option key={"uttar"}>{"Uttar Pradesh"}</Option>);
-    children.push(<Option key={"bengal"}>{"West Bengal"}</Option>);
-    children.push(<Option key={"andaman"}>{"Andaman And Nicobar Islands"}</Option>);
-    children.push(<Option key={"chandigarh"}>{"Chandigarh"}</Option>);
-    children.push(<Option key={"delhi"}>{"Delhi"}</Option>);
-    children.push(<Option key={"jammu"}>{"Jammu & Kashmir"}</Option>);
-    children.push(<Option key={"ladakh"}>{"Ladakh"}</Option>);
-    children.push(<Option key={"lakshadweep"}>{"Lakshadweep"}</Option>);
-    children.push(<Option key={"puducherry"}>{"Puducherry"}</Option>)
-    children.push(<Option key={"dadra"}>{"Dadra and Nagar Haveli"}</Option>)
-    children.push(<Option key={"daman"}>{"Daman and Diu"}</Option>)
+    children.push(<Option key={""}>{"All States"}</Option>);
+    // children.push(<Option key={"andhra"}>{"Andhra Pradesh"}</Option>);
+    // children.push(<Option key={"arunachal"}>{"Arunachal Pradesh"}</Option>);
+    // children.push(<Option key={"assam"}>{"Assam"}</Option>);
+    // children.push(<Option key={"bihar"}>{"Bihar"}</Option>);
+    // children.push(<Option key={"chhattisgarh"}>{"Chhattisgarh"}</Option>);
+    // children.push(<Option key={"goa"}>{"Goa"}</Option>);
+    // children.push(<Option key={"gujarat"}>{"Gujarat"}</Option>);
+    // children.push(<Option key={"haryana"}>{"Haryana"}</Option>);
+    // children.push(<Option key={"himachal"}>{"Himachal Pradesh"}</Option>);
+    // children.push(<Option key={"jharkhand"}>{"Jharkhand"}</Option>);
+    // children.push(<Option key={"karnataka"}>{"Karnataka"}</Option>);
+    // children.push(<Option key={"kerala"}>{"Kerala"}</Option>);
+    // children.push(<Option key={"madhya"}>{"Madhya Pradesh"}</Option>);
+    // children.push(<Option key={"maharashtra"}>{"Maharashtra"}</Option>);
+    // children.push(<Option key={"manipur"}>{"Manipur"}</Option>);
+    // children.push(<Option key={"meghalaya"}>{"Meghalaya"}</Option>);
+    // children.push(<Option key={"mizoram"}>{"Mizoram"}</Option>);
+    // children.push(<Option key={"nagaland"}>{"Nagaland"}</Option>);
+    // children.push(<Option key={"odisha"}>{"Odisha"}</Option>);
+    // children.push(<Option key={"punjab"}>{"Punjab"}</Option>);
+    // children.push(<Option key={"rajasthan"}>{"Rajasthan"}</Option>);
+    // children.push(<Option key={"sikkim"}>{"Sikkim"}</Option>);
+    // children.push(<Option key={"tamil"}>{"Tamil Nadu"}</Option>);
+    // children.push(<Option key={"telangana"}>{"Telangana"}</Option>);
+    // children.push(<Option key={"tripura"}>{"Tripura"}</Option>);
+    // children.push(<Option key={"uttarakhand"}>{"Uttarakhand"}</Option>);
+    // children.push(<Option key={"uttar"}>{"Uttar Pradesh"}</Option>);
+    // children.push(<Option key={"bengal"}>{"West Bengal"}</Option>);
+    // children.push(<Option key={"andaman"}>{"Andaman And Nicobar Islands"}</Option>);
+    // children.push(<Option key={"chandigarh"}>{"Chandigarh"}</Option>);
+    // children.push(<Option key={"delhi"}>{"Delhi"}</Option>);
+    // children.push(<Option key={"jammu"}>{"Jammu & Kashmir"}</Option>);
+    // children.push(<Option key={"ladakh"}>{"Ladakh"}</Option>);
+    // children.push(<Option key={"lakshadweep"}>{"Lakshadweep"}</Option>);
+    // children.push(<Option key={"puducherry"}>{"Puducherry"}</Option>)
+    // children.push(<Option key={"dadra"}>{"Dadra and Nagar Haveli"}</Option>)
+    // children.push(<Option key={"daman"}>{"Daman and Diu"}</Option>)
 
-    const [selected  , setSelected ] = useState("Delhi")
+    const [selected  , setSelected ] = useState("All States")
     const [showCredits  , setshowCredits ] = useState(false)
 
     function handleChange(value) {
@@ -68,24 +68,14 @@ function ColumnComponent(props) {
                     </Select>
                 </Row>
             </Col>
-            <Col className="navbar-cont" span={15}>
+            <Col className="navbar-cont" span={16}>
                 <Row onClick={props.onRefresh} style={{cursor:'pointer'}}>
-                    <span className="bookmarked" style={{fontSize: "12px"}}><RefreshIcon style={{color:'white',fontSize:'20px'}} /></span>
+                    <span className="bookmarked" style={{fontSize: "10px"}}></span>
                 </Row>
             </Col>
-            {/* <Col  className="navbar-cont"span={1}>
+            <Col  className="navbar-cont" span={1}>
                 <Row>
-                    <span className="bookmarked" style={{fontSize: "12px"}}>Leads</span>
-                </Row>
-            </Col>
-            <Col  className="navbar-cont"span={12}>
-                <Row>
-                    <span className="bookmarked" style={{fontSize: "12px"}}>Bookmarked</span>
-                </Row>
-            </Col> */}
-            <Col  className="navbar-cont" span={2}>
-                <Row>
-                    <span className="bookmarked" style={{fontSize: "12px"}}>Showing Recent</span>
+                    <span className="bookmarked" style={{fontSize: "10px"}}></span>
                 </Row>
             </Col>
             

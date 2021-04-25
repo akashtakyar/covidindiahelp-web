@@ -12,15 +12,15 @@ function Credits({show,setShow}) {
                 Contributors
             </p>
             <p style={{fontWeight:'400',fontSize:'11px',marginLeft:'10px',marginTop:'15px',marginBottom:'5px'}}>
-            We are a team working to help people find relevant and verified information at the time of the pandemic. Here is the list of contributors:
+            We are a team working to help people find relevant and verified information at the time of the pandemic. Please be careful before sending any money to anyone. We are not responsible for any loss. The information is crowd sourced and it can be inaccurate. Here is the list of contributors of the project:
 
             <br/>
             <br/>
             <li>Akash Takyar</li>
             <li>Kapil Saxena</li>
             <li>Prashant Raghav</li>
-            <li>Anurag Kumar</li>
             <li>Ayush Kulshrestha</li>
+            <li>Anurag Kumar</li>
             <li>Chandrika</li>
             <li>Rituraj</li>
             <li>Nishant Garg</li>
@@ -32,7 +32,7 @@ function Credits({show,setShow}) {
             <li>Jayesh Gadewar</li>
             <li>Srinjoy Chowdhary</li>
             <br/>
-            For any further queries please contact at covidindiahelp.info@gmail.com
+            For any further queries please contact at covidindiahelp.info@gmail.com<br/><br/>v0.1 - beta
             </p>
         </div>:""}
        </>

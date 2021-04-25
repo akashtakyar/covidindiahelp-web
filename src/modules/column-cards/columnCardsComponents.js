@@ -13,7 +13,7 @@ function ColumnCardComponent(props) {
                               
                         </Typography>
                         <Typography className="card-desc" variant="body2">{ite.description}</Typography>
-                        <Typography className="card-timestamp" variant="body2">{moment(ite.channelCreatedOn).fromNow()}</Typography>
+                        <Typography className="card-timestamp" variant="body2"> {ite.state} {ite.district} {moment(ite.channelCreatedOn).fromNow()}</Typography>
                     </CardContent>
                 </Card>
             ))}
