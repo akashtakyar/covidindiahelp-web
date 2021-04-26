@@ -40,6 +40,7 @@ class Coloumn extends BaseComponent {
 
     getStates = async (stateValue) => {
         let data = `${stateValue}`
+        this.setState({responseData: [], originalResponseData: []})
 
         try {
             let response = await states(data)
@@ -87,6 +88,7 @@ class Coloumn extends BaseComponent {
     }
 
     handleChangeForCountryState = (event, selectedCountryState) => {
+        console.log("selectedCountryState===", selectedCountryState)
         let responseData = selectedCountryState ? this.state.responseByLocation[selectedCountryState] : this.state.originalResponseData
         if (!responseData)
             return
