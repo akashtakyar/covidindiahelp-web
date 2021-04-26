@@ -7,7 +7,7 @@ function Credits({show,setShow}) {
     
     return (
        <>
-        {show? <div className="scrollbar" id="style-1" style={{right:'80px',top:'33px',position:'absolute',width:'290px',zIndex:'100000',height:'300px',overflowY:'scroll',overflowX:'hidden',background:'white',borderRadius:'5px',boxShadow:'0px 0px 3px #0005'}}>
+        {show? <div className="scrollbar" id="style-1" style={{right:'12px',top:'33px',position:'absolute',width:'290px',zIndex:'100000',height:'300px',overflowY:'scroll',overflowX:'hidden',background:'white',borderRadius:'5px',boxShadow:'0px 0px 3px #0005'}}>
             <p style={{fontWeight:'700',fontSize:'17px',marginLeft:'10px',marginTop:'15px',marginBottom:'5px'}}>
                 Contributors
             </p>

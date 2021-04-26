@@ -27,16 +27,16 @@ function ColumnComponent(props) {
     const [icu, setIcu] = useState(true)
     const list = [
         {
-            label: "Blood Plasma",
-            filterKey: "plasma"
-        },
-        {
             label: "Oxygen",
             filterKey: "oxygen"
         },
         {
             label: "Bed",
             filterKey: "bed"
+        },
+        {
+            label: "Blood Plasma",
+            filterKey: "plasma"
         },
         {
             label: "Remdesivir/Tocilizumab",
