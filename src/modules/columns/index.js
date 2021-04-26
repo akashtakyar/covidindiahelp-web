@@ -14,6 +14,7 @@ class Coloumn extends BaseComponent {
             selectedTime: "4",
             responseData: [],
             originalResponseData: [],
+            countryStateList: [],
             responseByIndex: {},
             responseByLocation: {},
 
@@ -46,6 +47,7 @@ class Coloumn extends BaseComponent {
 
                 let responseByIndex = {};
                 let responseByLocation = {};
+                let countryStateList = [];
                 let keyToSave = "";
 
                 response.responseData.forEach((obj, index) => {
@@ -58,8 +60,10 @@ class Coloumn extends BaseComponent {
 
                     // Make it Sentense case
                     keyToSave = utility.toSentenceCase(keyToSave);
-                    if (!responseByLocation[keyToSave])
+                    if (!responseByLocation[keyToSave]) {
                         responseByLocation[keyToSave] = [];
+                        countryStateList.push({title: keyToSave})
+                    }
 
                     responseByLocation[keyToSave].push({
                         "index": index,
@@ -72,7 +76,8 @@ class Coloumn extends BaseComponent {
                     responseData: response.responseData,
                     originalResponseData: response.responseData,
                     responseByIndex: responseByIndex,
-                    responseByLocation: responseByLocation
+                    responseByLocation: responseByLocation,
+                    countryStateList: countryStateList.sort((a, b) => b.title < a.title ? 1 : -1)
                 })
             }
         } catch (error) {
@@ -81,8 +86,10 @@ class Coloumn extends BaseComponent {
 
     }
 
-    handleChangeForCountryState = (selectedCountryState) => {
+    handleChangeForCountryState = (event, selectedCountryState) => {
         let responseData = selectedCountryState ? this.state.responseByLocation[selectedCountryState] : this.state.originalResponseData
+        if (!responseData)
+            return
         this.setState({responseData})
     }
 

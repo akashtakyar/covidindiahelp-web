@@ -12,7 +12,8 @@ import { Coloumn } from ".";
 const useStyles = makeStyles({
     root: {
         marginLeft: 0,
-        marginRight: 0
+        marginRight: 0,
+        position:"relative"
     },
     navbar: {
         backgroundColor: '#333333',

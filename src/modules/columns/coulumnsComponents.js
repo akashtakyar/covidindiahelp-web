@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 import ColumnCard from '../column-cards';
 import {CaretDownOutlined, CaretUpOutlined} from '@ant-design/icons';
 import NavBar from './navbar'
+import Footer from "./footer";
 
 function ColumnComponent(props) {
     const cardStyle = {
@@ -30,17 +31,17 @@ function ColumnComponent(props) {
             filterKey: "plasma"
         },
         {
-            label: "Remdesvir/ Tocilizumab",
-            filterKey: "remdesivir",
-            filterKey2: "tocilizumab"
-        },
-        {
             label: "Oxygen",
             filterKey: "oxygen"
         },
         {
             label: "Bed",
             filterKey: "bed"
+        },
+        {
+            label: "Remdesivir/Tocilizumab",
+            filterKey: "remdesivir",
+            filterKey2: "tocilizumab"
         },
         {
             label: "Fabiflu",
@@ -51,18 +52,20 @@ function ColumnComponent(props) {
     return (
         <>
             <NavBar handleChangeForCountryState={props.handleChangeForCountryState} onRefresh={props.getStates}
-                    responseByLocation={props.state.responseByLocation}/>
-            <Row style={{height: "1000px"}} className="wrapOnMedia">
+                    countryStateList={props.state.countryStateList}
+            />
+            <Row className="wrapOnMedia">
                 {
                     list.map((col, index) => (
                         <Col id="style-1" className="cardStyle" key={index}>
                             <Row>
                                 <Col span={20}> <span className="oxygen-beds"
-                                                      style={{fontSize: "12px"}}>{col.label}</span></Col>
+                                                      style={{fontSize: "10px"}}>{col.label}</span></Col>
                             </Row>
                             <Row className="coloumn-scroll">
 
                                 <ColumnCard
+                                    originalResponseData={props.state.originalResponseData}
                                     responseData={props.responseData.filter((row) => row.category.toLowerCase() === col.filterKey || row.category.toLowerCase() === col.filterKey2)}
                                     incrementUpVote={props.incrementUpVote}
                                     incrementDownVote={props.incrementDownVote}
@@ -71,9 +74,8 @@ function ColumnComponent(props) {
                         </Col>
                     ))
                 }
-
-
             </Row>
+            <Footer/>
         </>
 
     );
