@@ -49,6 +49,7 @@
 .card-desc-container {
   padding: 6px !important;
   padding-bottom: 6px !important;
+  cursor: pointer;
 }
 
 .loading
