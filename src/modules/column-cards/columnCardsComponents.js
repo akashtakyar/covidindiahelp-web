@@ -7,7 +7,16 @@ import {Row, Column} from "simple-flexbox";
 import utility from "../../utility";
 import {makeStyles} from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
-import { FacebookShareButton,FacebookIcon,LinkedinIcon,WhatsappIcon,TwitterIcon,WhatsappShareButton,TwitterShareButton,LinkedinShareButton} from 'react-share';
+import {
+    FacebookShareButton,
+    FacebookIcon,
+    LinkedinIcon,
+    WhatsappIcon,
+    TwitterIcon,
+    WhatsappShareButton,
+    TwitterShareButton,
+    LinkedinShareButton
+} from 'react-share';
 
 
 const useStyles = makeStyles((theme) => ({
