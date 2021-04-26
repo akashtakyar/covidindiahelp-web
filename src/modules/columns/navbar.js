@@ -9,6 +9,10 @@ function ColumnComponent(props) {
     const { Option } = Select;
     const children = [];
     children.push(<Option key={""}>{"All States"}</Option>);
+    props.responseByLocation && Object.keys(props.responseByLocation).length>0 && Object.keys(props.responseByLocation).map((stateName, index)=>
+        children.push(<Option key={index} value={stateName}>{stateName}</Option>)
+    )
+
     // children.push(<Option key={"andhra"}>{"Andhra Pradesh"}</Option>);
     // children.push(<Option key={"arunachal"}>{"Arunachal Pradesh"}</Option>);
     // children.push(<Option key={"assam"}>{"Assam"}</Option>);
@@ -49,11 +53,6 @@ function ColumnComponent(props) {
 
     const [selected  , setSelected ] = useState("All States")
     const [showCredits  , setshowCredits ] = useState(false)
-
-    function handleChange(value) {
-        setSelected(value)
-        props.getStates(value)
-    }
     return (
         <Row gutter={[24, 16]} style={{backgroundColor : "#474951" , height: "35px",marginLeft:'0px',marginRight:'0px'}}>
              <Col className="navbar-cont" span={2.5}>
@@ -63,7 +62,10 @@ function ColumnComponent(props) {
             </Col>
             <Col className="navbar-cont" span={3}>
                 <Row style={{marginLeft : "12px"}}>
-                    <Select style={{background : "#55575E" , color : "white",fontSize:'11px',height:'30px'}} size={"medium"} defaultValue={selected} onChange={handleChange} style={{ width: 150 }}>
+                    <Select style={{background : "#55575E" , color : "white",fontSize:'11px',height:'30px'}} size={"medium"} defaultValue={selected} onChange={(value=> {
+                        props.handleChangeForCountryState(value)
+                        setSelected(value)
+                    })} style={{ width: 150 }}>
                         {children}
                     </Select>
                 </Row>
