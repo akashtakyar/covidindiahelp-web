@@ -30,7 +30,7 @@ function ColumnComponent(props) {
                             id="AllStates"
                             options={props.countryStateList}
                             getOptionLabel={(option) => option.title}
-                            style={{width: 150, zIndex: 100000}}
+                            style={{width: 160, zIndex: 100000}}
                             onInputChange={(event, value) => props.handleChangeForCountryState(event, value)}
                             renderInput={(params) => <TextField {...params} label="All States" variant="outlined"/>}
                         />

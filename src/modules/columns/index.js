@@ -3,6 +3,7 @@ import BaseComponent from '../baseComponent'
 import CoulumnComponent from './coulumnsComponents'
 import {states} from "../../services/columns"
 import utility from "../../utility";
+import {stateNamesConstant} from "../../constants";
 
 class Coloumn extends BaseComponent {
     constructor(props) {
@@ -60,7 +61,7 @@ class Coloumn extends BaseComponent {
                         keyToSave = obj.district;
 
                     // Make it Sentense case
-                    keyToSave = utility.toSentenceCase(keyToSave);
+                    keyToSave = stateNamesConstant[keyToSave] ? stateNamesConstant[keyToSave] : utility.toSentenceCase(keyToSave);
                     if (!responseByLocation[keyToSave]) {
                         responseByLocation[keyToSave] = [];
                         countryStateList.push({title: keyToSave})
