@@ -117,7 +117,7 @@ function DialogBox(props) {
 
                                                                                                  props.sendUpVoteRequest(props.state.selectedItem._id)
                                                                                              }}
-                    ><img style={{width: "25px", paddingRight: "1px"}}
+                    ><img style={{width: "20px", paddingRight: "1px"}}
                           src="/images/Working.svg"></img>Working:{props.state.selectedItem.upVoteCount}</span>&nbsp;
 
                         <span className="  not-working-text" style={{cursor: 'pointer'}} onClick=
@@ -125,20 +125,20 @@ function DialogBox(props) {
                                 props.incrementDownVote(props.state.selectedItem._id);
                                 props.sendDownVoteRequest(props.state.selectedItem._id)
                             }}
-                        ><img style={{width: "25px", paddingRight: "1px"}} src="/images/NotWorking.svg"></img>Not working:{props.state.selectedItem.downVoteCount}</span></Row>&nbsp;
+                        ><img style={{width: "20px", paddingRight: "1px"}} src="/images/NotWorking.svg"></img>Not working:{props.state.selectedItem.downVoteCount}</span></Row>&nbsp;
 
                     <Column className="card-footer-info">
                         <Row>
-                        <FacebookShareButton  url={process.env.REACT_APP_WEBAPP_URL} quote={`${props.state.selectedItem.description} Found at`}>
+                        <FacebookShareButton style={{paddingRight:"2px"}} url={process.env.REACT_APP_WEBAPP_URL} quote={`${props.state.selectedItem.description} Found at`}>
                 <FacebookIcon  size={20} round={true}></FacebookIcon>
             </FacebookShareButton>
-            <WhatsappShareButton url={process.env.REACT_APP_WEBAPP_URL} title={`${props.state.selectedItem.description} Found at`}>
+            <WhatsappShareButton style={{paddingRight:"2px"}} url={process.env.REACT_APP_WEBAPP_URL} title={`${props.state.selectedItem.description} Found at`}>
                 <WhatsappIcon size={20} round={true}></WhatsappIcon>
             </WhatsappShareButton>
-            <TwitterShareButton url={process.env.REACT_APP_WEBAPP_URL} title={`${props.state.selectedItem.description} Found at`}>
+            <TwitterShareButton style={{paddingRight:"2px"}} url={process.env.REACT_APP_WEBAPP_URL} title={`${props.state.selectedItem.description} Found at`}>
                 <TwitterIcon size={20} round={true}></TwitterIcon>
             </TwitterShareButton>
-            <LinkedinShareButton url={process.env.REACT_APP_WEBAPP_URL} summary={`${props.state.selectedItem.description} Found at`}>
+            <LinkedinShareButton style={{paddingRight:"2px"}}url={process.env.REACT_APP_WEBAPP_URL} summary={`${props.state.selectedItem.description} Found at`}>
             <LinkedinIcon size={20} round={true}></LinkedinIcon>
             </LinkedinShareButton>
                         </Row>
