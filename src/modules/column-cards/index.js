@@ -83,6 +83,7 @@ class ColumnCard extends BaseComponent {
         return (
             <ColumnCardComponent
                 responseData={this.props.responseData}
+                originalResponseData={this.props.originalResponseData}
                 state={this.state}
                 sendUpVoteRequest={this.sendUpVoteRequest}
                 sendDownVoteRequest={this.sendDownVoteRequest}

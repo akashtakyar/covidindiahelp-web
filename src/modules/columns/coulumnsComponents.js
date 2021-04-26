@@ -1,19 +1,21 @@
-import React, { useState } from 'react'
-import { Row, Col } from 'antd';
+import React, {useState} from 'react'
+import {Row, Col} from 'antd';
 import './column.css'
 import 'antd/dist/antd.css';
 import ColumnCard from '../column-cards';
-import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
+import {CaretDownOutlined, CaretUpOutlined} from '@ant-design/icons';
 import NavBar from './navbar'
+import Footer from "./footer";
+
 function ColumnComponent(props) {
-    const cardStyle= {
-        minWidth:'250px',
-        maxWidth:'20%',
-        flex:'0 0 20%',
+    const cardStyle = {
+        minWidth: '250px',
+        maxWidth: '20%',
+        flex: '0 0 20%',
         borderRight: "1px solid #D5D5D5",
         height: '95vh',
-        overflowY: 'scroll', 
-        overflowX: 'hidden' 
+        overflowY: 'scroll',
+        overflowX: 'hidden'
     }
     const [blood, setBlood] = useState(true)
     const [medicine, setMedicine] = useState(true)
@@ -25,54 +27,55 @@ function ColumnComponent(props) {
     const [icu, setIcu] = useState(true)
     const list = [
         {
-            label:"Blood Plasma",
-            filterKey:"plasma"
+            label: "Blood Plasma",
+            filterKey: "plasma"
         },
         {
-            label:"Remdesvir/ Tocilizumab",
-            filterKey:"remdesivir",
-            filterKey2:"tocilizumab"
+            label: "Oxygen",
+            filterKey: "oxygen"
         },
         {
-            label:"Oxygen",
-            filterKey:"oxygen"
+            label: "Bed",
+            filterKey: "bed"
         },
         {
-            label:"Bed",
-            filterKey:"bed"
+            label: "Remdesivir/Tocilizumab",
+            filterKey: "remdesivir",
+            filterKey2: "tocilizumab"
         },
         {
-            label:"Fabiflu",
-            filterKey:"fabiflu"
+            label: "Fabiflu",
+            filterKey: "fabiflu"
         },
     ]
 
     return (
         <>
-            <NavBar getStates={props.getStates} onRefresh={props.getStates} />
-            <Row style={{ height: "1000px" }} className="wrapOnMedia">
+            <NavBar handleChangeForCountryState={props.handleChangeForCountryState} onRefresh={props.getStates}
+                    countryStateList={props.state.countryStateList}
+            />
+            <Row className="wrapOnMedia">
                 {
-                    list.map((col,index)=>(
-                        <Col id="style-1"  className="cardStyle" key={index} >
+                    list.map((col, index) => (
+                        <Col id="style-1" className="cardStyle" key={index}>
                             <Row>
-                                <Col span={20}> <span className="oxygen-beds" style={{fontSize: "12px"}}>{col.label}</span></Col>
+                                <Col span={20}> <span className="oxygen-beds"
+                                                      style={{fontSize: "10px"}}>{col.label}</span></Col>
                             </Row>
                             <Row className="coloumn-scroll">
 
                                 <ColumnCard
-                                    responseData={props.responseData.filter((row)=>row.category.toLowerCase()===col.filterKey||row.category.toLowerCase()===col.filterKey2)}
-                                    incrementUpVote = {props.incrementUpVote}
-                                    incrementDownVote = {props.incrementDownVote}
-                                ></ColumnCard>
+                                    originalResponseData={props.state.originalResponseData}
+                                    responseData={props.responseData.filter((row) => row.category.toLowerCase() === col.filterKey || row.category.toLowerCase() === col.filterKey2)}
+                                    incrementUpVote={props.incrementUpVote}
+                                    incrementDownVote={props.incrementDownVote}
+                                />
                             </Row>
                         </Col>
                     ))
                 }
-                
-           
-               
-                
             </Row>
+            <Footer/>
         </>
 
     );

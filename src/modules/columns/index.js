@@ -1,9 +1,7 @@
 import React from "react";
 import BaseComponent from '../baseComponent'
 import CoulumnComponent from './coulumnsComponents'
-import Utils from "../../utility";
 import {states} from "../../services/columns"
-import ColumnCard from "../column-cards";
 import utility from "../../utility";
 
 class Coloumn extends BaseComponent {
@@ -14,94 +12,98 @@ class Coloumn extends BaseComponent {
             nameError: "",
             selectedState: "All States",
             selectedTime: "4",
-            responseData : [],
-            responseByIndex : {}
-          
+            responseData: [],
+            originalResponseData: [],
+            countryStateList: [],
+            responseByIndex: {},
+            responseByLocation: {},
+
         }
     }
 
-     componentDidMount() {
+    componentDidMount() {
         this.getStates("")
     }
 
-    incrementUpVote = (id) =>
-    {
-
+    incrementUpVote = (id) => {
         let index = this.state.responseByIndex[id].index;
-        this.state.responseData[index].upVoteCount = this.state.responseData[index].upVoteCount+1;
+        this.state.responseData[index].upVoteCount = this.state.responseData[index].upVoteCount + 1;
+        this.setState({responseData: this.state.responseData, originalResponseData: this.state.responseData})
+    }
 
-        this.setState({responseData: this.state.responseData})
+    incrementDownVote = (id) => {
+        let index = this.state.responseByIndex[id].index;
+        this.state.responseData[index].downVoteCount = this.state.responseData[index].downVoteCount + 1;
+        this.setState({responseData: this.state.responseData, originalResponseData: this.state.responseData})
 
     }
 
-    incrementDownVote = (id) =>
-    {
-        let index = this.state.responseByIndex[id].index;
+    getStates = async (stateValue) => {
+        let data = `${stateValue}`
 
-        this.state.responseData[index].downVoteCount = this.state.responseData[index].downVoteCount+1;
-
-        this.setState({responseData: this.state.responseData})
-
-    }
-
-     getStates = async(stateValue) => {
-         let data = `${stateValue}`
-         
-        try{
+        try {
             let response = await states(data)
-            if(response.responseData && Array.isArray(response.responseData) && response.responseData.length){
+            if (response.responseData && Array.isArray(response.responseData) && response.responseData.length) {
 
                 let responseByIndex = {};
                 let responseByLocation = {};
+                let countryStateList = [];
                 let keyToSave = "";
 
-                response.responseData.forEach(
-                    (obj,index) => {
-                        responseByIndex[obj._id] = {
-                            "index": index,
-                            ...obj
-                        }
-                        //
-                        // if (obj.state) {
-                        //     keyToSave = obj.state;
-                        // }
-                        // if (obj.district) {
-                        //     keyToSave = obj.district;
-                        // }
-                        //
-                        // // Make it Sentense case
-                        // keyToSave = utility.toSentenceCase(keyToSave);
-                        //
-                        // if (responseByLocation[keyToSave] === undefined)
-                        //     responseByLocation[keyToSave] = [];
-                        //
-                        // responseByLocation[keyToSave].push({
-                        //     "index": index,
-                        //     ...obj
-                        // })
+                response.responseData.forEach((obj, index) => {
+                    responseByIndex[obj._id] = {"index": index, ...obj}
 
+                    if (obj.state)
+                        keyToSave = obj.state;
+                    else if (obj.district)
+                        keyToSave = obj.district;
 
+                    // Make it Sentense case
+                    keyToSave = utility.toSentenceCase(keyToSave);
+                    if (!responseByLocation[keyToSave]) {
+                        responseByLocation[keyToSave] = [];
+                        countryStateList.push({title: keyToSave})
+                    }
+
+                    responseByLocation[keyToSave].push({
+                        "index": index,
+                        ...obj
                     })
+                })
+                console.log("responseByLocation====", responseByLocation)
 
-                this.setState({responseData : response.responseData, responseByIndex: responseByIndex,responseByLocation: responseByLocation} )
+                this.setState({
+                    responseData: response.responseData,
+                    originalResponseData: response.responseData,
+                    responseByIndex: responseByIndex,
+                    responseByLocation: responseByLocation,
+                    countryStateList: countryStateList.sort((a, b) => b.title < a.title ? 1 : -1)
+                })
             }
-        }catch(error){
+        } catch (error) {
             console.log(error)
         }
-    
-     }
 
+    }
+
+    handleChangeForCountryState = (event, selectedCountryState) => {
+        let responseData = selectedCountryState ? this.state.responseByLocation[selectedCountryState] : this.state.originalResponseData
+        if (!responseData)
+            return
+        this.setState({responseData})
+    }
 
     render() {
         return (
             <CoulumnComponent state={this.state}
-            getStates={this.getStates}
+                              getStates={this.getStates}
+                              handleChangeForCountryState={this.handleChangeForCountryState}
 
-                              incrementUpVote = {this.incrementUpVote}
-                              incrementDownVote = {this.incrementDownVote}
+                              incrementUpVote={this.incrementUpVote}
+                              incrementDownVote={this.incrementDownVote}
 
-            responseData={this.state.responseData}
-                            />
+                              responseData={this.state.responseData}
+            />
         );
     }
 }
