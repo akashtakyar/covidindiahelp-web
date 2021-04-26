@@ -7,7 +7,8 @@ import {Row,Column} from "simple-flexbox";
 import utility from "../../utility";
 import { makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
-import { FacebookShareButton,FacebookIcon,LinkedinIcon,WhatsappIcon,TwitterIcon} from 'react-share';
+import { FacebookShareButton,FacebookIcon,LinkedinIcon,WhatsappIcon,TwitterIcon,WhatsappShareButton,TwitterShareButton,LinkedinShareButton} from 'react-share';
+import { WhatsApp } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -121,12 +122,25 @@ function DialogBox(props){
 
             <Column className="card-footer-info"> 
             <Row>
-            <FacebookIcon size={20} round={true}>
+            {/* <FacebookIcon size={20} round={true}>
             <FacebookShareButton></FacebookShareButton>
             </FacebookIcon>
             <LinkedinIcon size={20} round={true}></LinkedinIcon>
             <WhatsappIcon size={20} round={true}></WhatsappIcon>
-            <TwitterIcon  size={20} round={true}></TwitterIcon>
+            <TwitterIcon  size={20} round={true}></TwitterIcon> */}
+            <FacebookShareButton  url={process.env.REACT_APP_WEBAPP_URL} quote={props.state.selectedItem.description}>
+                <FacebookIcon  size={20} round={true}></FacebookIcon>
+            </FacebookShareButton>
+            <WhatsappShareButton url={process.env.REACT_APP_WEBAPP_URL} title={props.state.selectedItem.description}>
+                <WhatsappIcon size={20} round={true}></WhatsappIcon>
+            </WhatsappShareButton>
+            <TwitterShareButton url={process.env.REACT_APP_WEBAPP_URL} title={props.state.selectedItem.description}>
+                <TwitterIcon size={20} round={true}></TwitterIcon>
+            </TwitterShareButton>
+            <LinkedinShareButton url={process.env.REACT_APP_WEBAPP_URL} title={props.state.selectedItem.description}>
+            <LinkedinIcon size={20} round={true}></LinkedinIcon>
+            </LinkedinShareButton>
+            
             </Row>
             </Column>
 
