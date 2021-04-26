@@ -9,6 +9,12 @@ class ColumnCard extends BaseComponent {
         this.state = {
             name: "",
             nameError: "",
+            isShowSharePopup:false,
+            popoverAnchor:null,
+            popoverText:'',
+            selectedItem:{},
+            uniqueContact:[]
+
           
         }
     }
@@ -46,17 +52,47 @@ class ColumnCard extends BaseComponent {
         }
 
     }
+    showSharePopup =async() =>{
+        this.setState({isShowSharePopup:!this.state.isShowSharePopup})
+    }
+    handlePopoverOpen = async(item) => {
+        console.log("handlePopoverOpen",item);
+        let uniqueContact=[]
+        uniqueContact=await this.getUniqueContact(item);
+        console.log("handlePopoverOpen===",uniqueContact);
+        await this.setState({isShowSharePopup:true,popoverText:item.description,selectedItem:item,uniqueContact:uniqueContact});
+        console.log("handlePopoverOpen===========",this.state.isShowSharePopup);
+
+      };
+    
+      handlePopoverClose = async() => {
+       await this.setState({popoverAnchor:null,isShowSharePopup:false});
+      };
+      getUniqueContact=async(data)=>{
+          console.log("getUniqueContact",data);
+          if(!data && !data.phoneNumber.length){return []}
+          let uniqueContact=[]
+          data.phoneNumber.map((item)=>{
+              if(!uniqueContact.includes(item)) uniqueContact.push(item)
+          })
+          console.log("getUniqueContact===",uniqueContact);
+          return uniqueContact;
+      }
 
     render() {
         return (
             <ColumnCardComponent
                 responseData={this.props.responseData}
+                originalResponseData={this.props.originalResponseData}
                 state={this.state}
                 sendUpVoteRequest={this.sendUpVoteRequest}
                 sendDownVoteRequest={this.sendDownVoteRequest}
+                handlePopoverClose={this.handlePopoverClose}
+                handlePopoverOpen={this.handlePopoverOpen}
 
                 incrementUpVote = {this.props.incrementUpVote}
                 incrementDownVote = {this.props.incrementDownVote}
+                showSharePopup={this.showSharePopup}
             />
         );
     }
