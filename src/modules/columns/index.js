@@ -87,6 +87,8 @@ class Coloumn extends BaseComponent {
     }
 
     handleChangeForCountryState = (event, selectedCountryState) => {
+        console.log("testing",event.target.value,selectedCountryState);
+        if(!event.target.value && document.getElementById("AllStates")) document.getElementById("AllStates").blur();
         let responseData = selectedCountryState ? this.state.responseByLocation[selectedCountryState] : this.state.originalResponseData
         if (!responseData)
             return
