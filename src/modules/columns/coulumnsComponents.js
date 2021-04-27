@@ -25,29 +25,29 @@ function ColumnComponent(props) {
     const [oxy, setOxy] = useState(true)
     const [bed, setBed] = useState(true)
     const [icu, setIcu] = useState(true)
-    const list = [
-        {
-            label: "Oxygen",
-            filterKey: "oxygen"
-        },
-        {
-            label: "Bed",
-            filterKey: "bed"
-        },
-        {
-            label: "Blood Plasma",
-            filterKey: "plasma"
-        },
-        {
-            label: "Remdesivir/Tocilizumab",
-            filterKey: "remdesivir",
-            filterKey2: "tocilizumab"
-        },
-        {
-            label: "Fabiflu",
-            filterKey: "fabiflu"
-        },
-    ]
+    // const list = [
+    //     {
+    //         label: "Oxygen",
+    //         filterKey: "oxygen"
+    //     },
+    //     {
+    //         label: "Bed",
+    //         filterKey: "bed"
+    //     },
+    //     {
+    //         label: "Blood Plasma",
+    //         filterKey: "plasma"
+    //     },
+    //     {
+    //         label: "Remdesivir/Tocilizumab",
+    //         filterKey: "remdesivir",
+    //         filterKey2: "tocilizumab"
+    //     },
+    //     {
+    //         label: "Fabiflu",
+    //         filterKey: "fabiflu"
+    //     },
+    // ]
 
     return (
         <>
@@ -56,11 +56,14 @@ function ColumnComponent(props) {
             />
             <Row className="wrapOnMedia">
                 {
-                    list.map((col, index) => (
+                    props.state.list.map((col, index) => (
                         <Col id="style-1" className="cardStyle" key={index}>
                             <Row>
                                 <Col span={20}> <span className="oxygen-beds"
-                                                      style={{fontSize: "10px"}}>{col.label}</span></Col>
+                                                      style={{fontSize: "10px"}}>{col.label}</span>
+                                                      </Col>
+                                                      <Col className="left-p" onClick={() => props.handleColumnClose(col)} style={{cursor: 'pointer'}}><img
+                        src="/images/Cancel.svg"/> </Col>
                             </Row>
                             <Row className="coloumn-scroll">
 
