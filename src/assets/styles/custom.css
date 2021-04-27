@@ -259,3 +259,28 @@ input:focus {
 .share-button{
     padding-right: 2px im !important;
 }
+.twitter-tweet{
+    max-width: 400px !important;
+    width: 400px !important;
+}
+@media screen and (max-width: 760px) {
+    .twitter-tweet {
+     width: 70% !important;
+    }
+  }
+
+  @media screen and (max-width: 380px)  {
+    .twitter-tweet {
+     width: 200px !important;
+    }
+}
+  @media screen and (max-width: 370px) {
+        .twitter-tweet {
+         width: 150px !important;
+        }
+  }  
+  @media screen and (max-width: 320px) {
+    .twitter-tweet {
+     width: 100px !important;
+    }
+}  

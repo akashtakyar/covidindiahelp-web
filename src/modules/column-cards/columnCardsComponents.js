@@ -7,6 +7,8 @@ import {Row, Column} from "simple-flexbox";
 import utility from "../../utility";
 import {makeStyles} from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
+import {TwitterTimelineEmbed, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
+
 import {
     FacebookShareButton,
     FacebookIcon,
@@ -96,6 +98,11 @@ function DialogBox(props) {
                     <Column onClick={props.handlePopoverClose} style={{cursor: 'pointer'}}><img
                         src="/images/Cancel.svg"/> </Column>
                 </Row>
+                {props.state.selectedItem && props.state.selectedItem.attachments && props.state.selectedItem.attachments.media_keys.length>0
+                ?  
+                <TwitterTweetEmbed  options={{width: 400}}
+                tweetId={props.state.selectedItem.channelID}/> 
+                :
                 <div className="selected-item ">
                     <div className="p-l-20 p-t-20 p-r-20"> {props.state.selectedItem.description}</div>
                     <div className="p-l-20 p-t-20 p-r-20">Contact :</div>
@@ -106,7 +113,9 @@ function DialogBox(props) {
                    <Column><div className="p-l-20 p-t-20 p-r-20 p-b-10 bottom-text">{moment(props.state.selectedItem.channelCreatedOn).fromNow()}</div></Column>
                     <Column><div className="p-l-20 p-t-20 p-r-20 p-b-10 bottom-text">Source: Twitter</div></Column>
                      </Row>   
-                </div>
+                </div> }
+               
+               
                 <Row className="card-timestamp p-t-20">
                     <Row className="card-vote-buttons" style={{cursor: 'pointer'}}><span className=" working-text"
                                                                                          onClick=
@@ -145,7 +154,7 @@ function DialogBox(props) {
                     </Column>
 
                 </Row>
-            </div>
+                         </div>
         </Dialog>
     );
 }
