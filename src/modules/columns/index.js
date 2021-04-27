@@ -104,7 +104,7 @@ class Coloumn extends BaseComponent {
                 console.log("responseByLocation====", responseByLocation)
 
                 this.setState({
-                    responseData: response.responseData,
+                    responseData: response.responseData.sort((a,b)=>{return b.upVoteCount-a.upVoteCount;}),
                     originalResponseData: response.responseData,
                     responseByIndex: responseByIndex,
                     responseByLocation: responseByLocation,
@@ -118,9 +118,11 @@ class Coloumn extends BaseComponent {
     }
 
     handleChangeForCountryState = (event, selectedCountryState) => {
-        console.log("testing",event.target.value,selectedCountryState);
-        if(!event.target.value && document.getElementById("AllStates")) document.getElementById("AllStates").blur();
-        let responseData = selectedCountryState ? this.state.responseByLocation[selectedCountryState] : this.state.originalResponseData
+        if(event && event.target &&!event.target.value && document.getElementById("AllStates")) 
+        {
+        document.getElementById("AllStates").blur();
+        }
+        let responseData = selectedCountryState ? this.state.responseByLocation[selectedCountryState].sort((a,b)=>{return b.upVoteCount-a.upVoteCount}) : this.state.originalResponseData.sort((a,b)=>{return b.upVoteCount-a.upVoteCount;})
         if (!responseData)
             return
         this.setState({responseData})

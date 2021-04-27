@@ -7,6 +7,8 @@ import {Row, Column} from "simple-flexbox";
 import utility from "../../utility";
 import {makeStyles} from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
+import { TwitterTweetEmbed} from 'react-twitter-embed';
+
 import {
     FacebookShareButton,
     FacebookIcon,
@@ -15,7 +17,9 @@ import {
     TwitterIcon,
     WhatsappShareButton,
     TwitterShareButton,
-    LinkedinShareButton
+    LinkedinShareButton,
+    InstapaperShareButton,
+    InstapaperIcon
 } from 'react-share';
 
 
@@ -30,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
 
 function ColumnCardComponent(props) {
     const classes = useStyles();
-    const id = props.state.isShowSharePopup ? 'simple-popover' : undefined;
     return (
         <>
             {DialogBox(props)}
@@ -96,9 +99,25 @@ function DialogBox(props) {
                     <Column onClick={props.handlePopoverClose} style={{cursor: 'pointer'}}><img
                         src="/images/Cancel.svg"/> </Column>
                 </Row>
+                {props.state.selectedItem && props.state.selectedItem.attachments && props.state.selectedItem.attachments.media_keys.length>0
+                ?  
+                <>
+                {props.state.uniqueContact && props.state.uniqueContact.length ? <div className="p-t-20 p-r-20">Contact :</div> :""}
+                    {props.state.uniqueContact && props.state.uniqueContact.length ? props.state.uniqueContact.map(data => (
+                        <div className=""><a href={`tel:${data}`}>{data}</a></div>
+                    )) : ""}
+                <TwitterTweetEmbed  options={{width: 400}}
+                tweetId={props.state.selectedItem.channelID}/> 
+                  
+                    <Row className="card-timestamp">
+                   <Column><div className="p-t-20 p-r-20 p-b-10 bottom-text">{moment(props.state.selectedItem.channelCreatedOn).fromNow()}</div></Column>
+                    <Column><div className="p-t-20 p-r-20 p-b-10 bottom-text">Source: Twitter</div></Column>
+                     </Row>   
+                </>
+                :
                 <div className="selected-item ">
                     <div className="p-l-20 p-t-20 p-r-20"> {props.state.selectedItem.description}</div>
-                    <div className="p-l-20 p-t-20 p-r-20">Contact :</div>
+                    {props.state.uniqueContact && props.state.uniqueContact.length ? <div className="p-l-20 p-t-20 p-r-20">Contact :</div> :""}
                     {props.state.uniqueContact && props.state.uniqueContact.length ? props.state.uniqueContact.map(data => (
                         <div className="p-l-20 "><a href={`tel:${data}`}>{data}</a></div>
                     )) : ""}
@@ -106,7 +125,9 @@ function DialogBox(props) {
                    <Column><div className="p-l-20 p-t-20 p-r-20 p-b-10 bottom-text">{moment(props.state.selectedItem.channelCreatedOn).fromNow()}</div></Column>
                     <Column><div className="p-l-20 p-t-20 p-r-20 p-b-10 bottom-text">Source: Twitter</div></Column>
                      </Row>   
-                </div>
+                </div> }
+               
+               
                 <Row className="card-timestamp p-t-20">
                     <Row className="card-vote-buttons" style={{cursor: 'pointer'}}><span className=" working-text"
                                                                                          onClick=
@@ -129,23 +150,20 @@ function DialogBox(props) {
 
                     <Column className="card-footer-info">
                         <Row>
-                        <FacebookShareButton style={{paddingRight:"2px"}} url={process.env.REACT_APP_WEBAPP_URL} quote={`${props.state.selectedItem.description} Found at`}>
+            <FacebookShareButton style={{paddingRight:"3px"}} url={process.env.REACT_APP_WEBAPP_URL} quote={`${props.state.selectedItem.description} Found at`}>
                 <FacebookIcon  size={20} round={true}></FacebookIcon>
             </FacebookShareButton>
-            <WhatsappShareButton style={{paddingRight:"2px"}} url={process.env.REACT_APP_WEBAPP_URL} title={`${props.state.selectedItem.description} Found at`}>
+            <WhatsappShareButton style={{paddingRight:"3px"}} url={process.env.REACT_APP_WEBAPP_URL} title={`${props.state.selectedItem.description} Found at`}>
                 <WhatsappIcon size={20} round={true}></WhatsappIcon>
             </WhatsappShareButton>
-            <TwitterShareButton style={{paddingRight:"2px"}} url={process.env.REACT_APP_WEBAPP_URL} title={`${props.state.selectedItem.description} Found at`}>
+            <TwitterShareButton  url={process.env.REACT_APP_WEBAPP_URL} title={`${props.state.selectedItem.description} Found at`}>
                 <TwitterIcon size={20} round={true}></TwitterIcon>
             </TwitterShareButton>
-            <LinkedinShareButton style={{paddingRight:"2px"}}url={process.env.REACT_APP_WEBAPP_URL} summary={`${props.state.selectedItem.description} Found at`}>
-            <LinkedinIcon size={20} round={true}></LinkedinIcon>
-            </LinkedinShareButton>
                         </Row>
                     </Column>
 
                 </Row>
-            </div>
+             </div>
         </Dialog>
     );
 }

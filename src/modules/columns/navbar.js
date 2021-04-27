@@ -40,7 +40,9 @@ function ColumnComponent(props) {
                         />
                     </Column>
                     <Column className="bookmarked" style={{fontSize: "10px", cursor: 'pointer'}}>
-                        <img src="/images/refresh_48px.svg" alt={'Refresh'} width={'24px'} onClick={() => props.onRefresh('')}/>
+                        <img src="/images/refresh_48px.svg" 
+                        style={{filter: 'invert(100%) sepia(0%) saturate(2%) hue-rotate(282deg) brightness(105%) contrast(101%)'}}
+                        alt={'Refresh'} width={'24px'} onClick={() => props.onRefresh('')}/>
                     </Column>
                     </>:
                     ""
