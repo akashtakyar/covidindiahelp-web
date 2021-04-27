@@ -1,12 +1,17 @@
 import React, {useState} from 'react'
 import NavBar from '../common/navbar'
 import Drawer from "../common/drawer";
-// import Backdrop from "../columns/backdrop";
+import Backdrop from "../columns/backdrop";
+import Footer from "../columns/footer";
 import './addinfo.css'
 
 function AddInfoComponent(props) {
 
     console.log("props",props);
+    let backdrop;
+      if(props.state.drawerOpen){
+        backdrop = <Backdrop close={props.backdropClickHandler}/>;
+       }
 
     return (
         <>
@@ -15,9 +20,10 @@ function AddInfoComponent(props) {
         <div width=40
         add info
         <div width=25 */}
-        <NavBar state={props.state} drawerToggleClickHandler={props.drawerToggleClickHandler}/>
+        <NavBar state={props.state} drawerToggleClickHandler={props.drawerToggleClickHandler} state={props.state}/>
 
         <Drawer show={props.state.drawerOpen} handleNavigate={props.handleNavigate}/>
+        {backdrop}
 
         <div className='main'>
             <div className='div1'>
@@ -56,6 +62,7 @@ function AddInfoComponent(props) {
 
             </div>
         </div>
+        <Footer/>
         
         </>
 
