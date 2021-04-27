@@ -23,9 +23,9 @@ function ColumnComponent(props) {
             }}>
             <Column className="navbar-cont">
                 <Row style={{height: "100%", alignItems: 'center', columnGap: '5px'}}>
-                <Column className="drawericon" style={{fontSize: "10px", cursor: 'pointer'}}>
+                {/* <Column className="drawericon" style={{fontSize: "10px", cursor: 'pointer'}}>
                         <img src="/images/drawericon.png" alt={'Refresh'} width={'24px'} onClick={() => props.drawerToggleClickHandler()}/>
-                    </Column>
+                    </Column> */}
                     <Column className="bookmarked" style={{fontSize: "12px", marginLeft: '10px'}}>Covid India
                         Help</Column>
                         {!props.state.isAbout?<>

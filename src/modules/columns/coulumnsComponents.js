@@ -29,9 +29,9 @@ function ColumnComponent(props) {
     const [icu, setIcu] = useState(true)
 
     let backdrop;
-      if(props.state.drawerOpen){
-        backdrop = <Backdrop close={props.backdropClickHandler}/>;
-       }
+    //   if(props.state.drawerOpen){
+    //     backdrop = <Backdrop close={props.backdropClickHandler}/>;
+    //    }
 
        console.log("props",props);
     return (
@@ -43,7 +43,7 @@ function ColumnComponent(props) {
             />
 
             {/* <Drawer show={props.state.drawerOpen} handleNavigate={props.handleNavigate}/> */}
-            { backdrop }
+            {/* { backdrop } */}
 
             <Row className="wrapOnMedia">
                 {

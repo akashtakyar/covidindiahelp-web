@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-function Drawer(props) {
+function DrawerComponent(props) {
     const classes = useStyles();
   const theme = useTheme();
 
@@ -52,4 +52,4 @@ function Drawer(props) {
     );
 }
 
-export default Drawer;
+export default DrawerComponent;

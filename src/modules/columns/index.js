@@ -169,7 +169,7 @@ class Coloumn extends BaseComponent {
     render() {
         return (
             <>
-            {this.state.drawerOpen?<Drawer show={this.props.drawerOpen} handleNavigate={props.handleNavigate}/>:""}
+            {this.state.drawerOpen?<Drawer show={this.state.drawerOpen} handleNavigate={this.handleNavigate}/>:""}
             <CoulumnComponent state={this.state}
                               getStates={this.getStates}
                               handleChangeForCountryState={this.handleChangeForCountryState}
