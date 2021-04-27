@@ -23,7 +23,7 @@ class Routes extends BaseComponent {
                 <Router history={history}>
                     <Switch>
                         <Route exact path={'/'} component={Main}/>
-                        <Route exact path="/add-information" component={AddInfo} />
+                        <Route exact path="/about" component={AddInfo} />
                    
                         <Redirect exact from='*' to="/"/>
                         

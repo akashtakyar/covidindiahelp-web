@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import './column.css'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -23,13 +22,9 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-function ColumnComponent(props) {
+function Drawer(props) {
     const classes = useStyles();
   const theme = useTheme();
-    // let drawerClasses = 'side-drawer'
-    //    if(props.show) {
-    //       drawerClasses = 'side-drawer open'
-    //    }
 
     return (
 
@@ -57,4 +52,4 @@ function ColumnComponent(props) {
     );
 }
 
-export default ColumnComponent;
+export default Drawer;

@@ -1,6 +1,7 @@
 import React from "react";
 import BaseComponent from '../baseComponent'
 import AddInfoComponent from './addInfoComponent'
+import {history} from "../../managers/history";
 
 class AddInfo extends BaseComponent {
     constructor(props) {
@@ -12,6 +13,7 @@ class AddInfo extends BaseComponent {
     componentDidMount() {
     
     }
+
 
     
 

@@ -6,7 +6,7 @@ import ColumnCard from '../column-cards';
 import {CaretDownOutlined, CaretUpOutlined} from '@ant-design/icons';
 import NavBar from './navbar'
 import Footer from "./footer";
-import Drawer from "./drawer";
+import Drawer from "../common/drawer";
 import Backdrop from "./backdrop";
 
 function ColumnComponent(props) {
@@ -33,14 +33,16 @@ function ColumnComponent(props) {
         backdrop = <Backdrop close={props.backdropClickHandler}/>;
        }
 
+       console.log("props",props);
     return (
         <>
             <NavBar handleChangeForCountryState={props.handleChangeForCountryState} onRefresh={props.getStates}
                     countryStateList={props.state.countryStateList} 
                     drawerToggleClickHandler={props.drawerToggleClickHandler}
+                    state={props.state}
             />
 
-            <Drawer show={props.state.drawerOpen} handleNavigate={props.handleNavigate}/>
+            {/* <Drawer show={props.state.drawerOpen} handleNavigate={props.handleNavigate}/> */}
             { backdrop }
 
             <Row className="wrapOnMedia">
