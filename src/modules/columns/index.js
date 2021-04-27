@@ -18,6 +18,30 @@ class Coloumn extends BaseComponent {
             countryStateList: [],
             responseByIndex: {},
             responseByLocation: {},
+            list:[
+                
+                    {
+                        label: "Oxygen",
+                        filterKey: "oxygen"
+                    },
+                    {
+                        label: "Bed",
+                        filterKey: "bed"
+                    },
+                    {
+                        label: "Blood Plasma",
+                        filterKey: "plasma"
+                    },
+                    {
+                        label: "Remdesivir/Tocilizumab",
+                        filterKey: "remdesivir",
+                        filterKey2: "tocilizumab"
+                    },
+                    {
+                        label: "Fabiflu",
+                        filterKey: "fabiflu"
+                    },
+            ]
 
         }
     }
@@ -97,6 +121,13 @@ class Coloumn extends BaseComponent {
         this.setState({responseData})
     }
 
+    handleColumnClose = async(item) => {
+        var array = this.state.list;
+  var index = array.indexOf(item)
+  array.splice(index, 1);
+  this.setState({list: array });
+    }
+
     render() {
         return (
             <CoulumnComponent state={this.state}
@@ -105,6 +136,7 @@ class Coloumn extends BaseComponent {
 
                               incrementUpVote={this.incrementUpVote}
                               incrementDownVote={this.incrementDownVote}
+                              handleColumnClose={this.handleColumnClose}
 
                               responseData={this.state.responseData}
             />
