@@ -13,6 +13,7 @@ class Coloumn extends BaseComponent {
             nameError: "",
             selectedState: "All States",
             selectedTime: "4",
+            drawerOpen: false,
             responseData: [],
             originalResponseData: [],
             countryStateList: [],
@@ -128,6 +129,22 @@ class Coloumn extends BaseComponent {
   this.setState({list: array });
     }
 
+    drawerToggleClickHandler = () => {
+        this.setState({
+          drawerOpen: !this.state.drawerOpen
+        })
+    }
+
+    backdropClickHandler = () => {
+        this.setState({
+          drawerOpen: false
+        })
+      }
+
+      handleNavigate=(text)=>{
+        window.open('/add-information');
+      }
+
     render() {
         return (
             <CoulumnComponent state={this.state}
@@ -137,6 +154,9 @@ class Coloumn extends BaseComponent {
                               incrementUpVote={this.incrementUpVote}
                               incrementDownVote={this.incrementDownVote}
                               handleColumnClose={this.handleColumnClose}
+                              drawerToggleClickHandler={this.drawerToggleClickHandler}
+                              backdropClickHandler={this.backdropClickHandler}
+                              handleNavigate={this.handleNavigate}
 
                               responseData={this.state.responseData}
             />

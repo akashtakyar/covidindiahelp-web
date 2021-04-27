@@ -8,6 +8,7 @@ import {Coloumn} from "./modules";
 import {history} from "./managers/history";
 import BaseComponent from "./modules/baseComponent";
 import Main from './modules/mainComponent';
+import AddInfo from './modules/add-info/index';
 
 class Routes extends BaseComponent {
 
@@ -22,6 +23,7 @@ class Routes extends BaseComponent {
                 <Router history={history}>
                     <Switch>
                         <Route exact path={'/'} component={Main}/>
+                        <Route exact path="/add-information" component={AddInfo} />
                    
                         <Redirect exact from='*' to="/"/>
                         

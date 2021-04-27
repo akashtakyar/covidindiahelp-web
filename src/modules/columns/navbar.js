@@ -23,6 +23,9 @@ function ColumnComponent(props) {
             }}>
             <Column className="navbar-cont">
                 <Row style={{height: "100%", alignItems: 'center', columnGap: '5px'}}>
+                <Column className="bookmarked" style={{fontSize: "10px", cursor: 'pointer'}}>
+                        <img src="/images/refresh_48px.svg" alt={'Refresh'} width={'24px'} onClick={() => props.drawerToggleClickHandler()}/>
+                    </Column>
                     <Column className="bookmarked" style={{fontSize: "12px", marginLeft: '10px'}}>Covid India
                         Help</Column>
                     <Column style={{marginLeft: "12px"}} id={'state-list-container'}>
