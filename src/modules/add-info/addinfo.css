@@ -1,0 +1,36 @@
+.fs-14 {
+    font-size: 50px !important;
+}
+
+.fc-label-black {
+    color: #38404c;
+        font-weight: bold;
+      font-family: Roboto;
+}
+
+.m-t-40 {
+    margin-top: 40px;
+}
+
+.mb-xs {
+    margin-bottom: 5px !important;
+}
+
+.main{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+   
+}
+
+.div1{
+    width:25%;
+}
+
+.div2{
+    width:40%;
+}
+
+.div3{
+    width:25%;
+}

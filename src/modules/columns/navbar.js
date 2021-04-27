@@ -23,8 +23,12 @@ function ColumnComponent(props) {
             }}>
             <Column className="navbar-cont">
                 <Row style={{height: "100%", alignItems: 'center', columnGap: '5px'}}>
+                {/* <Column className="drawericon" style={{fontSize: "10px", cursor: 'pointer'}}>
+                        <img src="/images/drawericon.png" alt={'Refresh'} width={'24px'} onClick={() => props.drawerToggleClickHandler()}/>
+                    </Column> */}
                     <Column className="bookmarked" style={{fontSize: "12px", marginLeft: '10px'}}>Covid India
                         Help</Column>
+                        {!props.state.isAbout?<>
                     <Column style={{marginLeft: "12px"}} id={'state-list-container'}>
                         <Autocomplete
                             id="AllStates"
@@ -40,6 +44,9 @@ function ColumnComponent(props) {
                         style={{filter: 'invert(100%) sepia(0%) saturate(2%) hue-rotate(282deg) brightness(105%) contrast(101%)'}}
                         alt={'Refresh'} width={'24px'} onClick={() => props.onRefresh('')}/>
                     </Column>
+                    </>:
+                    ""
+                        }
                 </Row>
             </Column>
             <Column onClick={() => setshowCredits(!showCredits)} className="navbar-cont">

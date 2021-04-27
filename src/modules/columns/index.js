@@ -1,9 +1,12 @@
 import React from "react";
 import BaseComponent from '../baseComponent'
 import CoulumnComponent from './coulumnsComponents'
+import AddInfoComponent from '../add-info/addInfoComponent'
+import Drawer from '../common/drawer'
 import {states} from "../../services/columns"
 import utility from "../../utility";
 import {stateNamesConstant} from "../../constants";
+import {history} from "../../managers/history";
 
 class Coloumn extends BaseComponent {
     constructor(props) {
@@ -11,8 +14,10 @@ class Coloumn extends BaseComponent {
         this.state = {
             name: "",
             nameError: "",
+            isAbout:false,
             selectedState: "All States",
             selectedTime: "4",
+            drawerOpen: false,
             responseData: [],
             originalResponseData: [],
             countryStateList: [],
@@ -129,8 +134,43 @@ class Coloumn extends BaseComponent {
   this.setState({list: array });
     }
 
+    drawerToggleClickHandler = () => {
+        this.setState({
+          drawerOpen: !this.state.drawerOpen
+        })
+    }
+
+    backdropClickHandler = () => {
+        this.setState({
+          drawerOpen: false
+        })
+      }
+
+      handleNavigate=(index)=>{
+          console.log(index);
+          if(index==0){
+            history.push('/');
+            this.setState({
+                drawerOpen: !this.state.drawerOpen
+              })
+          }
+          else if(index==1){
+
+          }
+          else if(index==2)
+          {
+            this.setState({
+                isAbout: true
+              })
+             history.push('/about'); 
+          }
+    //    history.push('/add-information');
+      }
+
     render() {
         return (
+            <>
+            {this.state.drawerOpen?<Drawer show={this.state.drawerOpen} handleNavigate={this.handleNavigate}/>:""}
             <CoulumnComponent state={this.state}
                               getStates={this.getStates}
                               handleChangeForCountryState={this.handleChangeForCountryState}
@@ -138,9 +178,13 @@ class Coloumn extends BaseComponent {
                               incrementUpVote={this.incrementUpVote}
                               incrementDownVote={this.incrementDownVote}
                               handleColumnClose={this.handleColumnClose}
+                              drawerToggleClickHandler={this.drawerToggleClickHandler}
+                              backdropClickHandler={this.backdropClickHandler}
+                              handleNavigate={this.handleNavigate}
 
                               responseData={this.state.responseData}
             />
+            </>
         );
     }
 }

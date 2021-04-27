@@ -6,6 +6,8 @@ import ColumnCard from '../column-cards';
 import {CaretDownOutlined, CaretUpOutlined} from '@ant-design/icons';
 import NavBar from './navbar'
 import Footer from "./footer";
+import Drawer from "../common/drawer";
+import Backdrop from "./backdrop";
 
 function ColumnComponent(props) {
     const cardStyle = {
@@ -25,35 +27,24 @@ function ColumnComponent(props) {
     const [oxy, setOxy] = useState(true)
     const [bed, setBed] = useState(true)
     const [icu, setIcu] = useState(true)
-    // const list = [
-    //     {
-    //         label: "Oxygen",
-    //         filterKey: "oxygen"
-    //     },
-    //     {
-    //         label: "Bed",
-    //         filterKey: "bed"
-    //     },
-    //     {
-    //         label: "Blood Plasma",
-    //         filterKey: "plasma"
-    //     },
-    //     {
-    //         label: "Remdesivir/Tocilizumab",
-    //         filterKey: "remdesivir",
-    //         filterKey2: "tocilizumab"
-    //     },
-    //     {
-    //         label: "Fabiflu",
-    //         filterKey: "fabiflu"
-    //     },
-    // ]
 
+    let backdrop;
+    //   if(props.state.drawerOpen){
+    //     backdrop = <Backdrop close={props.backdropClickHandler}/>;
+    //    }
+
+       console.log("props",props);
     return (
         <>
             <NavBar handleChangeForCountryState={props.handleChangeForCountryState} onRefresh={props.getStates}
-                    countryStateList={props.state.countryStateList}
+                    countryStateList={props.state.countryStateList} 
+                    drawerToggleClickHandler={props.drawerToggleClickHandler}
+                    state={props.state}
             />
+
+            {/* <Drawer show={props.state.drawerOpen} handleNavigate={props.handleNavigate}/> */}
+            {/* { backdrop } */}
+
             <Row className="wrapOnMedia">
                 {
                     props.state.list.map((col, index) => (
