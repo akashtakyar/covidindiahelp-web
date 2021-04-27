@@ -60,7 +60,7 @@ function ColumnComponent(props) {
                         <Col id="style-1" className="cardStyle" key={index}>
                             <Row>
                                 <Col span={20}> <span className="oxygen-beds"
-                                                      style={{fontSize: "10px"}}>{col.label}</span>
+                                                      style={{fontSize: "11px"}}>{col.label}</span>
                                                       </Col>
                                                       <Col className="left-p" onClick={() => props.handleColumnClose(col)} style={{cursor: 'pointer'}}><img
                         src="/images/Cancel.svg"/> </Col>
