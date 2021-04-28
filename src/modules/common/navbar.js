@@ -16,7 +16,7 @@ function ColumnComponent(props) {
             <Column className="navbar-cont">
                 <Row style={{height: "100%", alignItems: 'center', columnGap: '5px'}}>
                 <Column className="drawericon" style={{fontSize: "10px", cursor: 'pointer'}}>
-                        <img src="/images/drawericon.png" alt={'Refresh'} width={'24px'} onClick={() => props.drawerToggleClickHandler()}/>
+                        <img src="/images/drawer-white.png" alt={'Refresh'} width={'24px'} height={'17px'} onClick={() => props.drawerToggleClickHandler()}/>
                     </Column>
                     
                 </Row>
