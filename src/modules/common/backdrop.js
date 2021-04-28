@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import './column.css'
+import '../columns/column.css'
 
 function ColumnComponent(props) {
 

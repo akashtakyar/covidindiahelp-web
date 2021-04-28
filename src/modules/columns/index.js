@@ -2,7 +2,7 @@ import React from "react";
 import BaseComponent from '../baseComponent'
 import CoulumnComponent from './coulumnsComponents'
 import AddInfoComponent from '../add-info/addInfoComponent'
-import Drawer from '../common/drawer'
+import Header from '../common/index'
 import {states} from "../../services/columns"
 import utility from "../../utility";
 import {stateNamesConstant} from "../../constants";
@@ -134,47 +134,14 @@ class Coloumn extends BaseComponent {
   this.setState({list: array });
     }
 
-    drawerToggleClickHandler = () => {
-        this.setState({
-          drawerOpen: !this.state.drawerOpen
-        })
-    }
-
-    backdropClickHandler = () => {
-        this.setState({
-          drawerOpen: false
-        })
-      }
-
-      handleNavigate=(index)=>{
-          console.log(index);
-          if(index==0){
-            history.push('/');
-            this.setState({
-                drawerOpen: !this.state.drawerOpen
-              })
-          }
-          else if(index==1)
-          {
-              window.open("https://docs.google.com/forms/d/e/1FAIpQLScFjzTeZ2jr3in3uPEKkHGHgAwDxAm98yH4INz8FjXHG-dSfQ/viewform")
-              this.setState({
-                drawerOpen: !this.state.drawerOpen
-              })
-          }
-          else if(index==2)
-          {
-            this.setState({
-                isAbout: true
-              })
-             history.push('/about'); 
-          }
-    //    history.push('/add-information');
-      }
-
     render() {
         return (
             <>
-            {this.state.drawerOpen?<Drawer show={this.state.drawerOpen} handleNavigate={this.handleNavigate}/>:""}
+            <Header 
+            handleChangeForCountryState={this.handleChangeForCountryState} onRefresh={this.getStates}
+            countryStateList={this.state.countryStateList} 
+            state={this.state}
+            />
             <CoulumnComponent state={this.state}
                               getStates={this.getStates}
                               handleChangeForCountryState={this.handleChangeForCountryState}

@@ -3,11 +3,8 @@ import {Row, Col} from 'antd';
 import './column.css'
 import 'antd/dist/antd.css';
 import ColumnCard from '../column-cards';
-import {CaretDownOutlined, CaretUpOutlined} from '@ant-design/icons';
-import NavBar from './navbar'
 import Footer from "./footer";
-import Drawer from "../common/drawer";
-import Backdrop from "./backdrop";
+
 
 function ColumnComponent(props) {
     const cardStyle = {
@@ -28,23 +25,9 @@ function ColumnComponent(props) {
     const [bed, setBed] = useState(true)
     const [icu, setIcu] = useState(true)
 
-    let backdrop;
-      if(props.state.drawerOpen){
-        backdrop = <Backdrop close={props.backdropClickHandler}/>;
-       }
-
        console.log("props",props);
     return (
         <>
-            <NavBar handleChangeForCountryState={props.handleChangeForCountryState} onRefresh={props.getStates}
-                    countryStateList={props.state.countryStateList} 
-                    drawerToggleClickHandler={props.drawerToggleClickHandler}
-                    state={props.state}
-            />
-
-            {/* <Drawer show={props.state.drawerOpen} handleNavigate={props.handleNavigate}/> */}
-            { backdrop }
-
             <Row className="wrapOnMedia">
                 {
                     props.state.list.map((col, index) => (
