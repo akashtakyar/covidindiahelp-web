@@ -246,13 +246,41 @@ input:focus {
     width: 100%;
     margin-top:5px;}
 .working-text{
-    font-size: 13px;
+    font-size: 12px;
     color: rgb(15, 207, 15);
 }   
 .not-working-text{
-    font-size: 13px;
+    font-size: 12px;
     color: rgb(245, 18, 18);
 }   
 .dialog-header{
     justify-content: space-between;
 }
+.share-button{
+    padding-right: 2px im !important;
+}
+.twitter-tweet{
+    max-width: 400px !important;
+    width: 400px !important;
+}
+@media screen and (max-width: 760px) {
+    .twitter-tweet {
+     width: 70% !important;
+    }
+  }
+
+  @media screen and (max-width: 380px)  {
+    .twitter-tweet {
+     width: 200px !important;
+    }
+}
+  @media screen and (max-width: 370px) {
+        .twitter-tweet {
+         width: 150px !important;
+        }
+  }  
+  @media screen and (max-width: 320px) {
+    .twitter-tweet {
+     width: 100px !important;
+    }
+}  

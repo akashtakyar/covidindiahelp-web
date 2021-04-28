@@ -3,9 +3,8 @@ import {Row, Col} from 'antd';
 import './column.css'
 import 'antd/dist/antd.css';
 import ColumnCard from '../column-cards';
-import {CaretDownOutlined, CaretUpOutlined} from '@ant-design/icons';
-import NavBar from './navbar'
 import Footer from "./footer";
+
 
 function ColumnComponent(props) {
     const cardStyle = {
@@ -25,42 +24,20 @@ function ColumnComponent(props) {
     const [oxy, setOxy] = useState(true)
     const [bed, setBed] = useState(true)
     const [icu, setIcu] = useState(true)
-    const list = [
-        {
-            label: "Oxygen",
-            filterKey: "oxygen"
-        },
-        {
-            label: "Bed",
-            filterKey: "bed"
-        },
-        {
-            label: "Blood Plasma",
-            filterKey: "plasma"
-        },
-        {
-            label: "Remdesivir/Tocilizumab",
-            filterKey: "remdesivir",
-            filterKey2: "tocilizumab"
-        },
-        {
-            label: "Fabiflu",
-            filterKey: "fabiflu"
-        },
-    ]
 
+       console.log("props",props);
     return (
         <>
-            <NavBar handleChangeForCountryState={props.handleChangeForCountryState} onRefresh={props.getStates}
-                    countryStateList={props.state.countryStateList}
-            />
             <Row className="wrapOnMedia">
                 {
-                    list.map((col, index) => (
+                    props.state.list.map((col, index) => (
                         <Col id="style-1" className="cardStyle" key={index}>
                             <Row>
                                 <Col span={20}> <span className="oxygen-beds"
-                                                      style={{fontSize: "10px"}}>{col.label}</span></Col>
+                                                      style={{fontSize: "11px"}}>{col.label}</span>
+                                                      </Col>
+                                                      <Col className="left-p" onClick={() => props.handleColumnClose(col)} style={{cursor: 'pointer'}}><img
+                        src="/images/Cancel.svg"/> </Col>
                             </Row>
                             <Row className="coloumn-scroll">
 

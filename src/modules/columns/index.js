@@ -1,9 +1,12 @@
 import React from "react";
 import BaseComponent from '../baseComponent'
 import CoulumnComponent from './coulumnsComponents'
+import AddInfoComponent from '../add-info/addInfoComponent'
+import Header from '../common/index'
 import {states} from "../../services/columns"
 import utility from "../../utility";
 import {stateNamesConstant} from "../../constants";
+import {history} from "../../managers/history";
 
 class Coloumn extends BaseComponent {
     constructor(props) {
@@ -11,13 +14,39 @@ class Coloumn extends BaseComponent {
         this.state = {
             name: "",
             nameError: "",
+            isAbout:false,
             selectedState: "All States",
             selectedTime: "4",
+            drawerOpen: false,
             responseData: [],
             originalResponseData: [],
             countryStateList: [],
             responseByIndex: {},
             responseByLocation: {},
+            list:[
+                
+                    {
+                        label: "Oxygen",
+                        filterKey: "oxygen"
+                    },
+                    {
+                        label: "Bed",
+                        filterKey: "bed"
+                    },
+                    {
+                        label: "Blood Plasma",
+                        filterKey: "plasma"
+                    },
+                    {
+                        label: "Remdesivir/Tocilizumab",
+                        filterKey: "remdesivir",
+                        filterKey2: "tocilizumab"
+                    },
+                    {
+                        label: "Fabiflu",
+                        filterKey: "fabiflu"
+                    },
+            ]
 
         }
     }
@@ -89,24 +118,44 @@ class Coloumn extends BaseComponent {
     }
 
     handleChangeForCountryState = (event, selectedCountryState) => {
-        console.log("selectedCountryState===", selectedCountryState)
+        if(event && event.target &&!event.target.value && document.getElementById("AllStates")) 
+        document.getElementById("AllStates").blur();
+
         let responseData = selectedCountryState ? this.state.responseByLocation[selectedCountryState] : this.state.originalResponseData
         if (!responseData)
             return
         this.setState({responseData})
     }
 
+    handleColumnClose = async(item) => {
+        var array = this.state.list;
+  var index = array.indexOf(item)
+  array.splice(index, 1);
+  this.setState({list: array });
+    }
+
     render() {
         return (
+            <>
+            <Header 
+            handleChangeForCountryState={this.handleChangeForCountryState} onRefresh={this.getStates}
+            countryStateList={this.state.countryStateList} 
+            state={this.state}
+            />
             <CoulumnComponent state={this.state}
                               getStates={this.getStates}
                               handleChangeForCountryState={this.handleChangeForCountryState}
 
                               incrementUpVote={this.incrementUpVote}
                               incrementDownVote={this.incrementDownVote}
+                              handleColumnClose={this.handleColumnClose}
+                              drawerToggleClickHandler={this.drawerToggleClickHandler}
+                              backdropClickHandler={this.backdropClickHandler}
+                              handleNavigate={this.handleNavigate}
 
                               responseData={this.state.responseData}
             />
+            </>
         );
     }
 }

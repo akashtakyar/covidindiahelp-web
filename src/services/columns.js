@@ -11,7 +11,7 @@ export default {
 
 
 export async function states(toadd){
-    let url = `http://www.covidindiahelp.info:3002/getCards?duration=2000000&state=` + toadd;
+    let url = `https://www.covidindiahelp.info:3002/getCards?duration=2000000&state=` + toadd;
     return httpService(httpConstants.METHOD_TYPE.GET, {'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON},{},url)
         .then(response => {
             // console.log("response dasd",response)
@@ -26,7 +26,7 @@ export async function states(toadd){
 
 
 export async function upVote(id){
-    let url = `http://www.covidindiahelp.info:3002/upVote?id=` + id;
+    let url = `https://www.covidindiahelp.info:3002/upVote?id=` + id;
     return httpService(httpConstants.METHOD_TYPE.GET, {'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON},{},url)
         .then(response => {
                 // console.log("response dasd",response)
@@ -42,7 +42,7 @@ export async function upVote(id){
 
 
 export async function downVote(id){
-    let url = `http://www.covidindiahelp.info:3002/downVote?id=` + id;
+    let url = `https://www.covidindiahelp.info:3002/downVote?id=` + id;
     return httpService(httpConstants.METHOD_TYPE.GET, {'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON},{},url)
         .then(response => {
                 // console.log("response dasd",response)

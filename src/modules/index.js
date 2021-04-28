@@ -6,4 +6,5 @@
 
 
 export {default as Coloumn } from "./columns"
+export {default as AddInfo } from "./add-info"
 
