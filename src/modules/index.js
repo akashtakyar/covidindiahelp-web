@@ -7,4 +7,5 @@
 
 export {default as Coloumn } from "./columns"
 export {default as AddInfo } from "./add-info"
+export {default as Category } from "./mobile-responsive/select-category"
 

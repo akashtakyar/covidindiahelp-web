@@ -1,0 +1,38 @@
+.main {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom-style: solid;
+  border-bottom-color: grey;
+  border-bottom-width: 1px;
+}
+
+.m-10 {
+  margin: 5px;
+}
+
+.card-desc-container {
+  padding: 6px !important;
+  padding-bottom: 18px !important;
+  padding-top:30px !important;
+  cursor: pointer;
+  
+}
+
+.mb-10 {
+  
+  display: flex;
+  justify-content: center;
+}
+
+.option{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 30px;
+}
+
+.text-style{
+    font-weight: bold;
+    font-family:Roboto;
+}
