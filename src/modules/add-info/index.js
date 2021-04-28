@@ -49,6 +49,9 @@ class AddInfo extends BaseComponent {
           this.setState({
               isAbout: true
             })
+            this.setState({
+              drawerOpen: !this.state.drawerOpen
+            })
            history.push('/about'); 
         }
     }
