@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
     drawerPaper: {
       width: drawerWidth,
       top:"35px",
-      height:"565px"
     }
   }));
 
