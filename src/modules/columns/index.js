@@ -7,6 +7,7 @@ import {states} from "../../services/columns"
 import utility from "../../utility";
 import {stateNamesConstant} from "../../constants";
 import {history} from "../../managers/history";
+import SelectCategory from "../mobile-view/select-category"
 
 class Coloumn extends BaseComponent {
     constructor(props) {
@@ -23,6 +24,7 @@ class Coloumn extends BaseComponent {
             countryStateList: [],
             responseByIndex: {},
             responseByLocation: {},
+            param:[],
             list:[
                 
                     {
@@ -52,6 +54,11 @@ class Coloumn extends BaseComponent {
     }
 
     componentDidMount() {
+        const route= window.location.pathname;
+        let params=route.split('/')
+        params=params.filter((data)=>{if(data.length>0) return data})
+        this.setState({param:params})
+        console.log("testing route",params);
         this.getStates("")
     }
 
@@ -101,7 +108,7 @@ class Coloumn extends BaseComponent {
                         ...obj
                     })
                 })
-                console.log("responseByLocation====", responseByLocation)
+                console.log("responseByLocation====", responseByIndex)
 
                 this.setState({
                     responseData: response.responseData,
@@ -136,7 +143,7 @@ class Coloumn extends BaseComponent {
 
     render() {
         return (
-            <>
+            <div className="desktop-view">
             <Header 
             handleChangeForCountryState={this.handleChangeForCountryState} onRefresh={this.getStates}
             countryStateList={this.state.countryStateList} 
@@ -145,17 +152,15 @@ class Coloumn extends BaseComponent {
             <CoulumnComponent state={this.state}
                               getStates={this.getStates}
                               handleChangeForCountryState={this.handleChangeForCountryState}
-
                               incrementUpVote={this.incrementUpVote}
                               incrementDownVote={this.incrementDownVote}
                               handleColumnClose={this.handleColumnClose}
                               drawerToggleClickHandler={this.drawerToggleClickHandler}
                               backdropClickHandler={this.backdropClickHandler}
                               handleNavigate={this.handleNavigate}
-
                               responseData={this.state.responseData}
             />
-            </>
+            </div>
         );
     }
 }
