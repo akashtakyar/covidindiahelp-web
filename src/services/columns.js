@@ -6,7 +6,10 @@ import {httpConstants} from "../constants";
 export default {
     states,
     upVote,
-    downVote
+    downVote,
+    getCategories,
+    getFilteredData,
+    getStates
 }
 
 
@@ -54,3 +57,40 @@ export async function downVote(id){
         });
 }
 
+export async function getCategories(req){
+    let url = `https://www.covidindiahelp.info:3001/tags?type=CATEGORY`;
+    return httpService(httpConstants.METHOD_TYPE.GET, {'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON},{},url)
+        .then(response => {
+                // console.log("response dasd",response)
+                return Promise.resolve(response);
+            }
+        ).catch(function (err) {
+            // console.log("err dasd",err)
+            return Promise.reject(err);
+        });
+}
+
+export async function getFilteredData(req){
+    let url = `https://www.covidindiahelp.info:3002/getCards?duration=2000000&state=${req.state}&category=${req.category}`;
+    return httpService(httpConstants.METHOD_TYPE.GET, {'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON},{},url)
+        .then(response => {
+                // console.log("response dasd",response)
+                return Promise.resolve(response);
+            }
+        ).catch(function (err) {
+            // console.log("err dasd",err)
+            return Promise.reject(err);
+        });
+}
+export async function getStates(req){
+    let url = `https://www.covidindiahelp.info:3001/tags?type=STATE`;
+    return httpService(httpConstants.METHOD_TYPE.GET, {'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON},{},url)
+        .then(response => {
+                // console.log("response dasd",response)
+                return Promise.resolve(response);
+            }
+        ).catch(function (err) {
+            // console.log("err dasd",err)
+            return Promise.reject(err);
+        });
+}
