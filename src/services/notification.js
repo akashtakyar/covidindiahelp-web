@@ -9,9 +9,10 @@ export default {
 function getHeaders() {
     return {'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON, 'skip': true}
 }
+
 async function registerDevice(requestData) {
-    // let url = process.env.REACT_APP_NOTIFICATION_SERVICE_URL + httpConstants.API_END_POINT.REGISTER_DEVICE;
-    let url = 'http://localhost:3003' + httpConstants.API_END_POINT.REGISTER_DEVICE;
+    let url = process.env.REACT_APP_NOTIFICATION_SERVICE_URL + httpConstants.API_END_POINT.REGISTER_DEVICE;
+    // let url = 'http://localhost:3004' + httpConstants.API_END_POINT.REGISTER_DEVICE;
     return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
         .then(
             response => {

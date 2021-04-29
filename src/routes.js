@@ -71,11 +71,12 @@ class Routes extends BaseComponent {
     }
 
     async registerDevice(token) {
-        console.log("token====",token)
         if (Utility.isEmpty(this.props.user.deviceId)) {
             let requestData = {};
             requestData['deviceType'] = "web";
             requestData['pushToken'] = token ? token : '';
+            requestData['criteriaCategory'] = 'OXYGEN';
+            requestData['criteriaState'] = 'uttar';
             let [error, deviceResponse] = await Utility.parseResponse(NotificationService.registerDevice(requestData));
             this.props.dispatchAction(error ? eventConstants.REGISTER_DEVICE_FAILURE : eventConstants.REGISTER_DEVICE_SUCCESS,
                 deviceResponse ? deviceResponse.deviceId : null);

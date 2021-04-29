@@ -29,17 +29,15 @@ self.addEventListener('notificationclick', function (event) {
 });
 self.addEventListener("message", (message) => console.log("====", message));
 self.addEventListener("push", (event) => {
-    console.log("event===",event)
-    console.log("event.data===",event.data)
     const {notification} = event.data.json();
-    console.log("notification===",notification)
+    // console.log("notification===",notification)
     let title = notification?.title || 'Push Notification';
     event.waitUntil(
         self.registration.showNotification(title, {
             body: notification?.body || 'This is Demo notification',
             // icon: "./favicon-32.png",
-            icon: "https://spyna.it/icons/favicon.ico",
-            image: "https://spyna.it/icons/favicon.ico",
+            icon: "./favicon.ico",
+            image: "./favicon.ico",
             vibrate: [200, 100, 200],
             data: {
                 dateOfArrival: Date.now(),
