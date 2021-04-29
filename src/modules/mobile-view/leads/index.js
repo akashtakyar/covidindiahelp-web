@@ -18,7 +18,10 @@ class Category extends BaseComponent {
             popoverText:'',
             selectedItem:{},
             uniqueContact:[],
-            responseByIndex:{}
+            responseByIndex:{},
+            selectedSortingAttr:'Sort',
+            originalResponseData:[],
+            responseMessage:false
         }
     }
 
@@ -36,15 +39,15 @@ class Category extends BaseComponent {
         }
         let responseByIndex = {};
         console.log("dataaaa",request);
-        const {responseData,error}=await getFilteredData(request);
-        console.log("getAllLeads",responseData);
+        const {responseData,error,message}=await getFilteredData(request);
+        console.log("getAllLeads",message);
         if(!responseData) return
         responseData.forEach((obj, index) => {
             responseByIndex[obj._id] = {"index": index, ...obj}
         });
         console.log("responseByLocation====", responseByIndex)
-
-        this.setState({allLeads:responseData,responseByIndex})
+        if(message==="Covid Help info fetched successfully"){ this.setState({responseMessage:true})}
+        this.setState({allLeads:responseData,responseByIndex,originalResponseData:responseData})
     }
     backToSelectCategory=async()=>{
         history.push({
@@ -58,7 +61,7 @@ class Category extends BaseComponent {
         try{
             let response = await upVote(data)
             if(response.responseData && Array.isArray(response.responseData) && response.responseData.length){
-                this.setState({allLeads : response.responseData})
+                this.setState({allLeads : response.responseData,originalResponseData:response.responseData})
             }
         }catch(error){
             console.log(error)
@@ -72,7 +75,7 @@ class Category extends BaseComponent {
         try{
             let response = await downVote(data)
             if(response.responseData && Array.isArray(response.responseData) && response.responseData.length){
-                this.setState({allLeads : response.responseData})
+                this.setState({allLeads : response.responseData,originalResponseData:response.responseData})
             }
         }catch(error){
             console.log(error)
@@ -105,7 +108,7 @@ class Category extends BaseComponent {
     incrementUpVote = (id) => {
         let index = this.state.responseByIndex[id].index;
         this.state.allLeads[index].upVoteCount = this.state.allLeads[index].upVoteCount + 1;
-        this.setState({allLeads: this.state.allLeads})
+        this.setState({allLeads: this.state.allLeads,originalResponseData: this.state.allLeads})
     }
 
     incrementDownVote = (id) => {
@@ -114,7 +117,21 @@ class Category extends BaseComponent {
         this.setState({allLeads: this.state.allLeads, originalResponseData: this.state.allLeads})
 
     }
+    onSelectSorting=(event)=>{
+        console.log("this.state.originalResponseData===========",this.state.originalResponseData,"leads====",this.state.allLeads);
+        let dummyData=this.state.originalResponseData;
+        this.setState({selectedSortingAttr:event.target.value});
+        if(event.target.value==="Sort") return
+        if(event.target.value==='working')
+        dummyData=dummyData.sort((a,b)=>{return b.upVoteCount-a.upVoteCount})
+        else{
+            console.log("this.state.originalResponseData",this.state.originalResponseData);
+            dummyData=dummyData.sort((a,b)=>{return b.channelCreatedOn-a.channelCreatedOn})
+        }
+        this.setState({allLeads:dummyData})
 
+
+    }
     
 
   
@@ -131,6 +148,7 @@ class Category extends BaseComponent {
                 incrementDownVote={this.incrementDownVote}
                 sendUpVoteRequest={this.sendUpVoteRequest}
                 sendDownVoteRequest={this.sendDownVoteRequest}
+                onSelectSorting={this.onSelectSorting}
             />
             </>
         );
