@@ -10,6 +10,7 @@ function SelectCategoryComponent(props) {
     <>
       <Header />
       <div className="main">What are you searching in Delhi?</div>
+      <div className="background">
       <div className="option">
       <Card className="m-10">
         <CardContent className="card-desc-container">
@@ -70,7 +71,7 @@ function SelectCategoryComponent(props) {
         </CardContent>
       </Card>
       </div>
-      <div className="option">
+      <div className="options">
       <Card className="m-10">
         <CardContent className="card-desc-container">
           <Typography className="mb-10">
@@ -81,6 +82,7 @@ function SelectCategoryComponent(props) {
           </Typography>
         </CardContent>
       </Card>
+      </div>
       </div>
     </>
   );

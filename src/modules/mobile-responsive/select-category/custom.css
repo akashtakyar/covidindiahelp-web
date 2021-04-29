@@ -13,6 +13,7 @@
 }
 
 .card-desc-container {
+  border: 1px solid grey;
   padding: 6px !important;
   padding-bottom: 18px !important;
   padding-top:30px !important;
@@ -30,6 +31,13 @@
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 30px;
+}
+
+.options{
+  margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 30px;
+    padding-bottom: 30px;
 }
 
 .text-style{

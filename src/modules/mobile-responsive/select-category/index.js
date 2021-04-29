@@ -7,7 +7,30 @@ class Category extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
-
+            list:[
+                
+                {
+                    label: "Oxygen",
+                    filterKey: "oxygen"
+                },
+                {
+                    label: "Bed",
+                    filterKey: "bed"
+                },
+                {
+                    label: "Blood Plasma",
+                    filterKey: "plasma"
+                },
+                {
+                    label: "Remdesivir/Tocilizumab",
+                    filterKey: "remdesivir",
+                    filterKey2: "tocilizumab"
+                },
+                {
+                    label: "Fabiflu",
+                    filterKey: "fabiflu"
+                },
+        ]
         }
     }
 
@@ -18,7 +41,9 @@ class Category extends BaseComponent {
   
     render() {
         return (
-            <SelectCategoryComponent/>
+            <SelectCategoryComponent
+                state={this.state}
+            />
         );
     }
 }
