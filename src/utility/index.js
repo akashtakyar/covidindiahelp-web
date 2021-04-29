@@ -58,10 +58,16 @@ const utility = {
     getDateFormat,
     changeDateFormat,
     getAggregatedPercWercQueryObject,
-    toSentenceCase
+    toSentenceCase,
+    parseResponse,
 };
 export default utility;
 
+function parseResponse(promise) {
+    return promise.then(data => {
+        return [null, data];
+    }).catch(err => [err]);
+};
 
 export const dispatchAction = (type, data) => {
     return dispatch => dispatch({type, data});

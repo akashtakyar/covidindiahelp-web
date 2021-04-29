@@ -19,7 +19,10 @@ export const httpConstants = {
     DEVICE_TYPE: {
         WEB: 'web'
     },
-    API_END_POINT: {}
+    API_END_POINT: {
+        REGISTER_DEVICE: '/device',
+
+    }
 };
 
 export const stateNamesConstant = {
@@ -59,3 +62,12 @@ export const stateNamesConstant = {
     uttar: "Uttar Pradesh",
     bengal: "West Bengal"
 }
+
+export const eventConstants = {
+    REGISTER_DEVICE_SUCCESS: "REGISTER_DEVICE_SUCCESS",
+    REGISTER_DEVICE_FAILURE: "REGISTER_DEVICE_FAILURE",
+}
+
+export const cookiesConstants = {
+    DEVICE_ID: 'deviceId',
+};

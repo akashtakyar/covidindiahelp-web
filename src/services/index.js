@@ -4,3 +4,4 @@
 //export all services from index file -
 
 // export * from './user'
+export {default as NotificationService} from './notification'
