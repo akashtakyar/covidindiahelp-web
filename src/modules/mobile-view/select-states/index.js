@@ -103,7 +103,7 @@ class Coloumn extends BaseComponent {
 
     render() {
         return (
-            <>
+            <div className="mobile-view">
             <Header isInfo={false}></Header>
             <StateComponent state={this.state}
                               getStates={this.getStates}
@@ -112,7 +112,7 @@ class Coloumn extends BaseComponent {
                               handleSearchLocationInput={this.handleSearchLocationInput}
                               onSelectLocation={this.onSelectLocation}
             />
-            </>
+            </div>
         );
     }
 }
