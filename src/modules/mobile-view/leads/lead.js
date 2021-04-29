@@ -115,10 +115,12 @@ function LeadsComponent(props) {
                     )
                     ) :
                     <div
-                        className="loading">{props?.originalResponseData?.length < 1 && 'Loading...' || 'No leads available. Search for other cities.'}</div>}
+                        className="loading">{!props.state.responseMessage && props.state.originalResponseData.length===0 ? "Loading": 'No leads available. Search for other cities.'}</div>}
+                        
         </> 
 
     );
+   
 }
 
 function DialogBox(props) {

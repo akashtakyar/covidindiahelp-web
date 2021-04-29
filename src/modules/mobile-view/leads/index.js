@@ -20,7 +20,8 @@ class Category extends BaseComponent {
             uniqueContact:[],
             responseByIndex:{},
             selectedSortingAttr:'Sort',
-            originalResponseData:[]
+            originalResponseData:[],
+            responseMessage:false
         }
     }
 
@@ -38,14 +39,14 @@ class Category extends BaseComponent {
         }
         let responseByIndex = {};
         console.log("dataaaa",request);
-        const {responseData,error}=await getFilteredData(request);
-        console.log("getAllLeads",responseData);
+        const {responseData,error,message}=await getFilteredData(request);
+        console.log("getAllLeads",message);
         if(!responseData) return
         responseData.forEach((obj, index) => {
             responseByIndex[obj._id] = {"index": index, ...obj}
         });
         console.log("responseByLocation====", responseByIndex)
-
+        if(message==="Covid Help info fetched successfully"){ this.setState({responseMessage:true})}
         this.setState({allLeads:responseData,responseByIndex,originalResponseData:responseData})
     }
     backToSelectCategory=async()=>{
