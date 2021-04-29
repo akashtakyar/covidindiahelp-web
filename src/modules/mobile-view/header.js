@@ -40,7 +40,7 @@ console.log("testinhggg",props.isHeader);
                          <>
                          <img onClick={()=>{window.open("https://forms.gle/5LhpNqX1vCYb671P7")}}
                          className='header-icons' src="/images/add.svg"></img>
-                         <img className='header-icons' src="/images/share.svg"></img>
+                         {/* <img className='header-icons' src="/images/share.svg"></img> */}
                          </> :
                          <img className='header-icons' src="/images/info.svg" onClick={() => setshowCredits(!showCredits)} />
                         }
