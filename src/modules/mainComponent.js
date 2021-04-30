@@ -1,12 +1,5 @@
 import React from "react";
-// import { Route, Switch } from "react-router-dom";
-
-// Import material modules
-import {
-    Container
-} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Navbar from "../common/components/Navbar";
 import { Coloumn } from ".";
 import MobileView from '../modules/mobile-view/select-states'
 
@@ -32,22 +25,19 @@ const useStyles = makeStyles({
         marginRight: 10
     },
     dropdown:{
-     '.& MuiSelect-outlined.MuiSelect-outlined':{     
+     '.& MuiSelect-outlined.MuiSelect-outlined':{
      paddingRight: '82px'
      }
     },
   });
 
-  
+
 function Main() {
     const classes = useStyles();
-
     return (
-
         <div disableGutters={true} style={{width:"100% !important"}} className={classes.root}>
-            {/* <Navbar classes={classes} /> */}
             <Coloumn className="desktop-view" />
-            <MobileView className="mobile-view"></MobileView>
+            <MobileView className="mobile-view"/>
         </div>
     );
 }

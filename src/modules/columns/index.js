@@ -15,7 +15,7 @@ class Coloumn extends BaseComponent {
         this.state = {
             name: "",
             nameError: "",
-            isAbout:false,
+            isAbout: false,
             selectedState: "All States",
             selectedTime: "4",
             drawerOpen: false,
@@ -24,41 +24,40 @@ class Coloumn extends BaseComponent {
             countryStateList: [],
             responseByIndex: {},
             responseByLocation: {},
-            param:[],
-            list:[
-                
-                    {
-                        label: "Oxygen",
-                        filterKey: "oxygen"
-                    },
-                    {
-                        label: "Bed",
-                        filterKey: "bed"
-                    },
-                    {
-                        label: "Blood Plasma",
-                        filterKey: "plasma"
-                    },
-                    {
-                        label: "Remdesivir/Tocilizumab",
-                        filterKey: "remdesivir",
-                        filterKey2: "tocilizumab"
-                    },
-                    {
-                        label: "Fabiflu",
-                        filterKey: "fabiflu"
-                    },
+            param: [],
+            list: [
+
+                {
+                    label: "Oxygen",
+                    filterKey: "oxygen"
+                },
+                {
+                    label: "Bed",
+                    filterKey: "bed"
+                },
+                {
+                    label: "Blood Plasma",
+                    filterKey: "plasma"
+                },
+                {
+                    label: "Remdesivir/Tocilizumab",
+                    filterKey: "remdesivir",
+                    filterKey2: "tocilizumab"
+                },
+                {
+                    label: "Fabiflu",
+                    filterKey: "fabiflu"
+                },
             ]
 
         }
     }
 
     componentDidMount() {
-        const route= window.location.pathname;
-        let params=route.split('/')
-        params=params.filter((data)=>{if(data.length>0) return data})
-        this.setState({param:params})
-        console.log("testing route",params);
+        const route = window.location.pathname;
+        let params = route.split('/')
+        params = params.filter(data => data.length > 0)
+        this.setState({param: params})
         this.getStates("")
     }
 
@@ -108,7 +107,6 @@ class Coloumn extends BaseComponent {
                         ...obj
                     })
                 })
-                console.log("responseByLocation====", responseByIndex)
 
                 this.setState({
                     responseData: response.responseData,
@@ -125,8 +123,8 @@ class Coloumn extends BaseComponent {
     }
 
     handleChangeForCountryState = (event, selectedCountryState) => {
-        if(event && event.target &&!event.target.value && document.getElementById("AllStates")) 
-        document.getElementById("AllStates").blur();
+        if (event && event.target && !event.target.value && document.getElementById("AllStates"))
+            document.getElementById("AllStates").blur();
 
         let responseData = selectedCountryState ? this.state.responseByLocation[selectedCountryState] : this.state.originalResponseData
         if (!responseData)
@@ -134,32 +132,32 @@ class Coloumn extends BaseComponent {
         this.setState({responseData})
     }
 
-    handleColumnClose = async(item) => {
+    handleColumnClose = async (item) => {
         var array = this.state.list;
-  var index = array.indexOf(item)
-  array.splice(index, 1);
-  this.setState({list: array });
+        var index = array.indexOf(item)
+        array.splice(index, 1);
+        this.setState({list: array});
     }
 
     render() {
         return (
             <div className="desktop-view">
-            <Header 
-            handleChangeForCountryState={this.handleChangeForCountryState} onRefresh={this.getStates}
-            countryStateList={this.state.countryStateList} 
-            state={this.state}
-            />
-            <CoulumnComponent state={this.state}
-                              getStates={this.getStates}
-                              handleChangeForCountryState={this.handleChangeForCountryState}
-                              incrementUpVote={this.incrementUpVote}
-                              incrementDownVote={this.incrementDownVote}
-                              handleColumnClose={this.handleColumnClose}
-                              drawerToggleClickHandler={this.drawerToggleClickHandler}
-                              backdropClickHandler={this.backdropClickHandler}
-                              handleNavigate={this.handleNavigate}
-                              responseData={this.state.responseData}
-            />
+                <Header
+                    handleChangeForCountryState={this.handleChangeForCountryState} onRefresh={this.getStates}
+                    countryStateList={this.state.countryStateList}
+                    state={this.state}
+                />
+                <CoulumnComponent state={this.state}
+                                  getStates={this.getStates}
+                                  handleChangeForCountryState={this.handleChangeForCountryState}
+                                  incrementUpVote={this.incrementUpVote}
+                                  incrementDownVote={this.incrementDownVote}
+                                  handleColumnClose={this.handleColumnClose}
+                                  drawerToggleClickHandler={this.drawerToggleClickHandler}
+                                  backdropClickHandler={this.backdropClickHandler}
+                                  handleNavigate={this.handleNavigate}
+                                  responseData={this.state.responseData}
+                />
             </div>
         );
     }

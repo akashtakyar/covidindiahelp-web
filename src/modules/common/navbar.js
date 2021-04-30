@@ -6,10 +6,8 @@ import InfoIcon from '@material-ui/icons/Info';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {Column, Row} from "simple-flexbox";
-const stateNames = {andhra: "Andhra Pradesh",arunachal: "Arunachal Pradesh",assam: "Assam",bihar: "Bihar",chandigarh: "Chandigarh",chhattisgarh: "Chhattisgarh",dadra: "Dadra and Nagar Haveli",daman: "Daman and Diu",delhi: "Delhi",goa: "Goa",gujarat: "Gujarat",haryana: "Haryana",himachal: "Himachal",jammu: "Jammu",jharkhand: "Jharkhand",karnataka: "Karnataka",kerala: "Kerala",lakshadweep: "Lakshadweep",madhya: "Madhya Pradesh",maharashtra: "Maharashtra",manipur: "Manipur",meghalaya: "Meghalaya",mizoram: "Mizoram",nagaland: "Nagaland",odisha: "Odisha",puducherry: "Puducherry",punjab: "Punjab",rajasthan: "Rajasthan",sikkim: "Sikkim",tamil: "Tamil Nadu",telangana: "Telangana",tripura: "Tripura",uttarakhand: "Uttarakhand",uttar: "Uttar Pradesh",bengal: "West Bengal"}
 
 function NavbarComponent(props) {
-console.log("testinhggg",props.isHeader);
     const [showCredits, setshowCredits] = useState(false)
     return (
         <Row
@@ -40,7 +38,7 @@ console.log("testinhggg",props.isHeader);
                         />
                     </Column>
                     <Column className="bookmarked" style={{fontSize: "10px", cursor: 'pointer'}}>
-                        <img src="/images/refresh_48px.svg" 
+                        <img src="/images/refresh_48px.svg"
                         style={{filter: 'invert(100%) sepia(0%) saturate(2%) hue-rotate(282deg) brightness(105%) contrast(101%)'}}
                         alt={'Refresh'} width={'24px'} onClick={() => props.onRefresh('')}/>
                     </Column>

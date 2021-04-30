@@ -6,7 +6,6 @@ import InfoIcon from '@material-ui/icons/Info';
 import {Column, Row} from "simple-flexbox";
 
 function NavbarComponent(props) {
-console.log("testinhggg",props.isHeader);
     const [showCredits, setshowCredits] = useState(false)
     return (
         <Row
@@ -18,14 +17,14 @@ console.log("testinhggg",props.isHeader);
                 alignItems: 'center',
                 justifyContent: "space-between"
             }}>
-             <Column>   
+             <Column>
             <Column className="navbar-cont">
                 <Row style={{height: "100%", alignItems: 'center', columnGap: '5px'}}>
                 <Column className="drawericon" style={{fontSize: "10px", cursor: 'pointer'}}>
                         <img src="/images/hands.svg" alt={'Covid Help'} />
                     </Column>
                     <Column className="bookmarked" style={{fontSize: "12px", marginLeft: '10px'}}>Covid India
-                        Help</Column>                      
+                        Help</Column>
                 </Row>
             </Column>
             </Column>
@@ -48,7 +47,7 @@ console.log("testinhggg",props.isHeader);
                 <Credits show={showCredits} setShow={setshowCredits}/>
             </Column>
             </Column>
-            
+
         </Row>
     );
 }

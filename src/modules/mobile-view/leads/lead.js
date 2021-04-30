@@ -7,8 +7,8 @@ import {Row, Column} from "simple-flexbox";
 import utility from "../../../utility";
 import {makeStyles} from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
-import { TwitterTweetEmbed} from 'react-twitter-embed';
-import { stateNamesConstant } from '../../../constants';
+import {TwitterTweetEmbed} from 'react-twitter-embed';
+import {stateNamesConstant} from '../../../constants';
 
 
 import {
@@ -35,21 +35,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function LeadsComponent(props) {
-    const classes = useStyles();
     return (
-      <>
+        <>
             {DialogBox(props)}
             <Row className="selected-param">
                 <Column>
-                <div className="selected">
+                    <div className="selected">
                     <span onClick={props.backToSelectCategory}>
-                    <img style={{width:"25px",fill: "invert(44%) sepia(97%) saturate(3395%) hue-rotate(187deg) brightness(101%) contrast(109%)"}} 
-                    src="/images/BackButton.svg"></img>   
-                    {stateNamesConstant[props.state.selectedState]}
+                    <img style={{
+                        width: "25px",
+                        fill: "invert(44%) sepia(97%) saturate(3395%) hue-rotate(187deg) brightness(101%) contrast(109%)"
+                    }}
+                         src="/images/BackButton.svg"/>
+                        {stateNamesConstant[props.selectedState]}
                     </span>
-                    &nbsp;/ {utility.toSentenceCase(props.state.selectedCategory)}
-                   
-                </div>
+                        &nbsp;/ {utility.toSentenceCase(props.selectedCategory)}
+
+                    </div>
                 </Column>
                 {/* <Column className="set-alert"><span><img classname="alert-image" src="/images/alert.svg"></img>Set Alert</span></Column> */}
             </Row>
@@ -94,7 +96,7 @@ function LeadsComponent(props) {
                     ) :
                     <div
                         className="loading">{props?.originalResponseData?.length < 1 && 'Loading...' || 'No leads available. Search for other cities.'}</div>}
-        </> 
+        </>
 
     );
 }
@@ -115,35 +117,47 @@ function DialogBox(props) {
                     <Column onClick={props.handlePopoverClose} style={{cursor: 'pointer'}}><img
                         src="/images/Cancel.svg"/> </Column>
                 </Row>
-                {props.state.selectedItem && props.state.selectedItem.attachments && props.state.selectedItem.attachments.media_keys.length>0
-                ?  
-                <>
-                {props.state.uniqueContact && props.state.uniqueContact.length ? <div className="p-t-20 p-r-20">Contact :</div> :""}
-                    {props.state.uniqueContact && props.state.uniqueContact.length ? props.state.uniqueContact.map(data => (
-                        <div className=""><a href={`tel:${data}`}>{data}</a></div>
-                    )) : ""}
-                <TwitterTweetEmbed  options={{width: 400}}
-                tweetId={props.state.selectedItem.channelID}/> 
-                  
-                    <Row className="card-timestamp">
-                   <Column><div className="p-t-20 p-r-20 p-b-10 bottom-text">{moment(props.state.selectedItem.channelCreatedOn).fromNow()}</div></Column>
-                    <Column><div className="p-t-20 p-r-20 p-b-10 bottom-text">Source: Twitter</div></Column>
-                     </Row>   
-                </>
-                :
-                <div className="selected-item ">
-                    <div className="p-l-20 p-t-20 p-r-20"> {props.state.selectedItem.description}</div>
-                    {props.state.uniqueContact && props.state.uniqueContact.length ? <div className="p-l-20 p-t-20 p-r-20">Contact :</div> :""}
-                    {props.state.uniqueContact && props.state.uniqueContact.length ? props.state.uniqueContact.map(data => (
-                        <div className="p-l-20 "><a href={`tel:${data}`}>{data}</a></div>
-                    )) : ""}
-                    <Row className="card-timestamp">
-                   <Column><div className="p-l-20 p-t-20 p-r-20 p-b-10 bottom-text">{moment(props.state.selectedItem.channelCreatedOn).fromNow()}</div></Column>
-                    <Column><div className="p-l-20 p-t-20 p-r-20 p-b-10 bottom-text">Source: Twitter</div></Column>
-                     </Row>   
-                </div> }
-               
-               
+                {props.state.selectedItem && props.state.selectedItem.attachments && props.state.selectedItem.attachments.media_keys.length > 0
+                    ?
+                    <>
+                        {props.state.uniqueContact && props.state.uniqueContact.length ?
+                            <div className="p-t-20 p-r-20">Contact :</div> : ""}
+                        {props.state.uniqueContact && props.state.uniqueContact.length ? props.state.uniqueContact.map(data => (
+                            <div className=""><a href={`tel:${data}`}>{data}</a></div>
+                        )) : ""}
+                        <TwitterTweetEmbed options={{width: 400}}
+                                           tweetId={props.state.selectedItem.channelID}/>
+
+                        <Row className="card-timestamp">
+                            <Column>
+                                <div
+                                    className="p-t-20 p-r-20 p-b-10 bottom-text">{moment(props.state.selectedItem.channelCreatedOn).fromNow()}</div>
+                            </Column>
+                            <Column>
+                                <div className="p-t-20 p-r-20 p-b-10 bottom-text">Source: Twitter</div>
+                            </Column>
+                        </Row>
+                    </>
+                    :
+                    <div className="selected-item ">
+                        <div className="p-l-20 p-t-20 p-r-20"> {props.state.selectedItem.description}</div>
+                        {props.state.uniqueContact && props.state.uniqueContact.length ?
+                            <div className="p-l-20 p-t-20 p-r-20">Contact :</div> : ""}
+                        {props.state.uniqueContact && props.state.uniqueContact.length ? props.state.uniqueContact.map(data => (
+                            <div className="p-l-20 "><a href={`tel:${data}`}>{data}</a></div>
+                        )) : ""}
+                        <Row className="card-timestamp">
+                            <Column>
+                                <div
+                                    className="p-l-20 p-t-20 p-r-20 p-b-10 bottom-text">{moment(props.state.selectedItem.channelCreatedOn).fromNow()}</div>
+                            </Column>
+                            <Column>
+                                <div className="p-l-20 p-t-20 p-r-20 p-b-10 bottom-text">Source: Twitter</div>
+                            </Column>
+                        </Row>
+                    </div>}
+
+
                 <Row className="card-timestamp p-t-20">
                     <Row className="card-vote-buttons" style={{cursor: 'pointer'}}><span className=" working-text"
                                                                                          onClick=
@@ -166,20 +180,23 @@ function DialogBox(props) {
 
                     <Column className="card-footer-info">
                         <Row>
-            <FacebookShareButton style={{paddingRight:"3px"}} url={process.env.REACT_APP_WEBAPP_URL} quote={`${props.state.selectedItem.description} Found at`}>
-                <FacebookIcon  size={20} round={true}></FacebookIcon>
-            </FacebookShareButton>
-            <WhatsappShareButton style={{paddingRight:"3px"}} url={process.env.REACT_APP_WEBAPP_URL} title={`${props.state.selectedItem.description} Found at`}>
-                <WhatsappIcon size={20} round={true}></WhatsappIcon>
-            </WhatsappShareButton>
-            <TwitterShareButton  url={process.env.REACT_APP_WEBAPP_URL} title={`${props.state.selectedItem.description} Found at`}>
-                <TwitterIcon size={20} round={true}></TwitterIcon>
-            </TwitterShareButton>
+                            <FacebookShareButton style={{paddingRight: "3px"}} url={process.env.REACT_APP_WEBAPP_URL}
+                                                 quote={`${props.state.selectedItem.description} Found at`}>
+                                <FacebookIcon size={20} round={true}></FacebookIcon>
+                            </FacebookShareButton>
+                            <WhatsappShareButton style={{paddingRight: "3px"}} url={process.env.REACT_APP_WEBAPP_URL}
+                                                 title={`${props.state.selectedItem.description} Found at`}>
+                                <WhatsappIcon size={20} round={true}></WhatsappIcon>
+                            </WhatsappShareButton>
+                            <TwitterShareButton url={process.env.REACT_APP_WEBAPP_URL}
+                                                title={`${props.state.selectedItem.description} Found at`}>
+                                <TwitterIcon size={20} round={true}></TwitterIcon>
+                            </TwitterShareButton>
                         </Row>
                     </Column>
 
                 </Row>
-             </div>
+            </div>
         </Dialog>
     );
 }

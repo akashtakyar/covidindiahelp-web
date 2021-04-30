@@ -9,7 +9,7 @@ export default {
     downVote,
     getCategories,
     getFilteredData,
-    getStates
+    getStates: getTags
 }
 
 
@@ -82,8 +82,8 @@ export async function getFilteredData(req){
             return Promise.reject(err);
         });
 }
-export async function getStates(req){
-    let url = `https://www.covidindiahelp.info:3001/tags?type=STATE`;
+export async function getTags(){
+    let url = `https://www.covidindiahelp.info:3001/tags`;
     return httpService(httpConstants.METHOD_TYPE.GET, {'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON},{},url)
         .then(response => {
                 // console.log("response dasd",response)

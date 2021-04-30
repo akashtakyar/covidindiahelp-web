@@ -4,7 +4,6 @@ import swal from "sweetalert";
 import Cookies from "universal-cookie";
 import React from "react";
 import ToastService from 'react-material-toast';
-import aws from "aws-sdk";
 
 const toast = ToastService.new({
     place: 'topRight',
@@ -35,8 +34,6 @@ const utility = {
     isEmpty,
     isMenuActive,
     isPasswordValid,
-    getSignedUrl,
-    uploadFileToS3,
     showUnderDevelopment,
     epochToDate,
     getDateAfterOneYear,
@@ -442,51 +439,6 @@ function generateRandomAlphaNumericString(length) {
 function generateCompanyLogoKey() {
     var currentTimeStamp = (new Date().getTime()).toString();
     return currentTimeStamp + "_" + generateRandomAlphaNumericString(13);
-}
-
-function uploadFileToS3(fileObject, fileName, mimeType, isPublic = false) {
-    let config = {
-        accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
-        secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY
-    }
-    aws.config.update(config);
-    console.log("config", config);
-    console.log("fileObject", fileObject);
-    const S3 = new aws.S3();
-    const params = {
-        Body: fileObject,
-        Bucket: process.env.REACT_APP_AWS_S3_BUCKET_NAME,
-        ContentType: mimeType,
-        Key: fileName
-    };
-    if (isPublic)
-        params.ACL = 'public-read';
-
-    return new Promise(function (resolve, reject) {
-        S3.upload(params, function (err, uploadData) {
-            if (err)
-                reject(err);
-            resolve(uploadData);
-        });
-    });
-}
-
-function getSignedUrl(fileName) {
-    if (!fileName)
-        return "";
-    aws.config.update({
-        accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
-        secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY
-    });
-    aws.config.region = process.env.REACT_APP_AWS_S3_BUCKET_REGION;
-    const s3 = new aws.S3();
-    const params = {
-        Bucket: process.env.REACT_APP_AWS_S3_BUCKET_NAME,
-        Key: fileName ? fileName : '',
-        Expires: 600000,
-    };
-    let signedUrl = s3.getSignedUrl('getObject', params);
-    return signedUrl;
 }
 
 function showUnderDevelopment() {

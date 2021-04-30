@@ -1,107 +1,100 @@
 import React from "react";
 import BaseComponent from '../../baseComponent'
 import LeadsComponent from './lead'
-import {getFilteredData,downVote,upVote} from "../../../services/columns"
-import  Header  from "../header";
+import {getFilteredData, downVote, upVote} from "../../../services/columns"
 import {history} from '../../../managers/history'
-
+import {genericConstants} from "../../../constants";
 
 
 class Category extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
-            allLeads:[],
-            selectedState:'',
-            selectedCategory:'',
-            isShowSharePopup:false,
-            popoverText:'',
-            selectedItem:{},
-            uniqueContact:[],
-            responseByIndex:{}
+            allLeads: [],
+            selectedState: props.selectedState,
+            selectedCategory: props.selectedCategory,
+            isShowSharePopup: false,
+            popoverText: '',
+            selectedItem: {},
+            uniqueContact: [],
+            responseByIndex: {}
         }
     }
 
     async componentDidMount() {
-    console.log("tstvaxb,  x, ",this.props.location.state.name);
-    await this.setState({selectedState:this.props.location.state.name,selectedCategory:this.props.location.state.category});
-    await this.getAllLeads();
-
+        await this.getAllLeads();
     }
 
-    getAllLeads=async()=>{
-        let request={
-            state:this.state.selectedState.toLowerCase(),
-            category:this.state.selectedCategory.toUpperCase()
+    getAllLeads = async () => {
+        let request = {
+            state: this.props.selectedState.toLowerCase(),
+            category: this.props.selectedCategory.toUpperCase()
         }
         let responseByIndex = {};
-        console.log("dataaaa",request);
-        const {responseData,error}=await getFilteredData(request);
-        console.log("getAllLeads",responseData);
-        if(!responseData) return
+        const {responseData, error} = await getFilteredData(request);
+        if (!responseData) return
         responseData.forEach((obj, index) => {
             responseByIndex[obj._id] = {"index": index, ...obj}
         });
-        console.log("responseByLocation====", responseByIndex)
 
-        this.setState({allLeads:responseData,responseByIndex})
+        this.setState({allLeads: responseData, responseByIndex})
     }
-    backToSelectCategory=async()=>{
-        history.push({
-           pathname: `/state/${this.state.selectedState}/category`,
-           state:{name:this.state.selectedState}
-        })
+    backToSelectCategory = async () => {
+        this.props.toggleState("selectedComponent", genericConstants.WEB_COMPONENT_TYPE.CATEGORY)
+        history.push(`/${this.props.selectedState}`)
     }
-    sendUpVoteRequest = async(id) => {
+
+    sendUpVoteRequest = async (id) => {
         let data = `${id}`
-
-        try{
+        try {
             let response = await upVote(data)
-            if(response.responseData && Array.isArray(response.responseData) && response.responseData.length){
-                this.setState({allLeads : response.responseData})
+            if (response.responseData && Array.isArray(response.responseData) && response.responseData.length) {
+                this.setState({allLeads: response.responseData})
             }
-        }catch(error){
+        } catch (error) {
             console.log(error)
         }
-
     }
 
-    sendDownVoteRequest = async(id) => {
+    sendDownVoteRequest = async (id) => {
         let data = `${id}`
-
-        try{
+        try {
             let response = await downVote(data)
-            if(response.responseData && Array.isArray(response.responseData) && response.responseData.length){
-                this.setState({allLeads : response.responseData})
+            if (response.responseData && Array.isArray(response.responseData) && response.responseData.length) {
+                this.setState({allLeads: response.responseData})
             }
-        }catch(error){
+        } catch (error) {
             console.log(error)
         }
 
     }
-    handlePopoverOpen = async(item) => {
-        console.log("handlePopoverOpen",item);
-        let uniqueContact=[]
-        uniqueContact=await this.getUniqueContact(item);
-        console.log("handlePopoverOpen unique===",uniqueContact);
-        await this.setState({isShowSharePopup:true,popoverText:item.description,selectedItem:item,uniqueContact:uniqueContact});
-        console.log("handlePopoverOpen===========",this.state.isShowSharePopup);
+    handlePopoverOpen = async (item) => {
+        let uniqueContact = []
+        uniqueContact = await this.getUniqueContact(item);
+        await this.setState({
+            isShowSharePopup: true,
+            popoverText: item.description,
+            selectedItem: item,
+            uniqueContact: uniqueContact
+        });
+    };
 
-      };
-    
-    handlePopoverClose = async() => {
-       await this.setState({popoverAnchor:null,isShowSharePopup:false});
-      };
-      getUniqueContact=async(data)=>{
-          if(!data && !data.phoneNumber.length){return []}
-          let uniqueContact=[]
-          data.phoneNumber.map((item)=>{
-            item=item.trim()
-              if(!uniqueContact.includes(item) && item.length>=10) uniqueContact.push(item)
-          })
-          console.log("getUniqueContact===",uniqueContact);
-          return uniqueContact;
-      }
+    handlePopoverClose = async () => {
+        await this.setState({popoverAnchor: null, isShowSharePopup: false});
+    };
+
+    getUniqueContact = async (data) => {
+        if (!data && !data.phoneNumber.length) {
+            return []
+        }
+        let uniqueContact = []
+        data.phoneNumber.map((item) => {
+            item = item.trim()
+            if (!uniqueContact.includes(item) && item.length >= 10) uniqueContact.push(item)
+        })
+        return uniqueContact;
+    }
+
     incrementUpVote = (id) => {
         let index = this.state.responseByIndex[id].index;
         this.state.allLeads[index].upVoteCount = this.state.allLeads[index].upVoteCount + 1;
@@ -112,18 +105,15 @@ class Category extends BaseComponent {
         let index = this.state.responseByIndex[id].index;
         this.state.allLeads[index].downVoteCount = this.state.allLeads[index].downVoteCount + 1;
         this.setState({allLeads: this.state.allLeads, originalResponseData: this.state.allLeads})
-
     }
 
-    
 
-  
     render() {
         return (
-            <>
-            <Header isInfo={true}></Header>
             <LeadsComponent
                 state={this.state}
+                selectedState={this.props.selectedState}
+                selectedCategory={this.props.selectedCategory}
                 backToSelectCategory={this.backToSelectCategory}
                 handlePopoverOpen={this.handlePopoverOpen}
                 handlePopoverClose={this.handlePopoverClose}
@@ -132,7 +122,6 @@ class Category extends BaseComponent {
                 sendUpVoteRequest={this.sendUpVoteRequest}
                 sendDownVoteRequest={this.sendDownVoteRequest}
             />
-            </>
         );
     }
 }

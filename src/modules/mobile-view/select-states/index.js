@@ -1,117 +1,146 @@
 import React from "react";
 import BaseComponent from '../../baseComponent'
 import StateComponent from './selectStates'
-import {states,getStates} from "../../../services/columns"
-import utility from "../../../utility";
-import {stateNamesConstant} from "../../../constants";
-import { Category } from "@material-ui/icons";
-import CategoryComponent from "../select-category"
+import LeadsComponent from '../leads'
+import Category from '../select-category';
+import {getTags} from "../../../services/columns"
 import {history} from "../../../managers/history";
 import Header from "../header";
+import {genericConstants} from "../../../constants";
 
 class Coloumn extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
-            selectedState: "All States",
+            selectedComponent: this.getSelectedComponent(),
+            selectedCategory: this.getSelectedCategory(),
+            selectedState: this.getSelectedState(),
             countryStateList: [],
+            categoryList: [],
             responseByLocation: {},
-            allLocations:[],
-            isStateSelected:false   
-        
+            allLocations: [],
+            responseData: [],
+            originalResponseData: [],
+            isStateSelected: false
         }
+    }
+
+    getSelectedComponent = () => {
+        let pathArray = window.location.pathname.split('/')
+        pathArray = pathArray.filter(item => !!item)
+        switch (pathArray.length) {
+            case 0:
+                return genericConstants.WEB_COMPONENT_TYPE.STATE;
+            case 1:
+                return genericConstants.WEB_COMPONENT_TYPE.CATEGORY;
+            case 2:
+                return genericConstants.WEB_COMPONENT_TYPE.CARDS;
+        }
+        return genericConstants.WEB_COMPONENT_TYPE.STATE;
+    }
+
+    getSelectedCategory = () => {
+        let pathArray = window.location.pathname.split('/')
+        pathArray = pathArray.filter(item => !!item)
+        return pathArray.length > 1 ? pathArray[1] : ''
+    }
+
+    getSelectedState = () => {
+        let pathArray = window.location.pathname.split('/')
+        pathArray = pathArray.filter(item => !!item)
+        return pathArray.length > 0 ? pathArray[0] : 'All States'
     }
 
     componentDidMount() {
-       const route= window.location.pathname;
-       console.log("route====",route);
-        this.getStates("")
+        this.getStates()
     }
 
-    getStates = async (stateValue) => {
-        this.setState({responseData: [], originalResponseData: []})
-
+    getStates = async () => {
         try {
-            let response = await getStates()
-            if (response.responseData && Array.isArray(response.responseData) && response.responseData.length) {
+            const response = await getTags()
+            if (!response || !response.responseData || !Array.isArray(response.responseData)) {
 
-                // let countryStateList = [];
-                // response.responseData.forEach((obj, index) => {
-                //     responseByIndex[obj._id] = {"index": index, ...obj}
-
-                //     if (obj.state)
-                //         keyToSave = obj.state;
-                //     else if (obj.district)
-                //         keyToSave = obj.district;
-
-                //     // Make it Sentense case
-                //     keyToSave = stateNamesConstant[keyToSave] ? stateNamesConstant[keyToSave] : utility.toSentenceCase(keyToSave);
-                //     if (!responseByLocation[keyToSave]) {
-                //         responseByLocation[keyToSave] = [];
-                //         countryStateList.push({title: keyToSave})
-                //     }
-
-                //     responseByLocation[keyToSave].push({
-                //         "index": index,
-                //         ...obj
-                //     })
-                // })
-                // console.log("responseByLocation====", responseByLocation)
-
-                this.setState({
-                    countryStateList: response.responseData,
-                    allLocations:response.responseData
-                })
-                console.log("countryStateList====", this.state.countryStateList)
-
+                return;
             }
+            const statesArray = await response.responseData.filter((obj) => obj.type === "STATE");
+            const categoryArray = await response.responseData.filter((obj) => obj.type === "CATEGORY");
+            this.setState({
+                countryStateList: statesArray,
+                allLocations: statesArray,
+                categoryList: categoryArray
+            })
         } catch (error) {
             console.log(error)
         }
-
     }
 
     handleChangeForCountryState = (event, selectedCountryState) => {
-        if(event && event.target &&!event.target.value && document.getElementById("AllStates")) 
-        document.getElementById("AllStates").blur();
+        if (event && event.target && !event.target.value && document.getElementById("AllStates"))
+            document.getElementById("AllStates").blur();
 
         let responseData = selectedCountryState ? this.state.responseByLocation[selectedCountryState] : this.state.originalResponseData
         if (!responseData)
             return
         this.setState({responseData})
     }
-    handleSearchLocationInput=(value)=>{
-        let locations=this.state.allLocations;
-        if(value.length){
-        locations=locations.filter(item=>{
-             if(item.name.toLowerCase().includes(value.toLowerCase()))
-              return item
-            })
-        }
-        this.setState({countryStateList:locations})
+
+    handleSearchLocationInput = (value) => {
+        let locations = this.state.allLocations;
+        if (value.length)
+            locations = locations.filter(item => item.name.toLowerCase().includes(value.toLowerCase()))
+        this.setState({countryStateList: locations})
     }
-    onSelectLocation=(value)=>{
-        this.setState({isStateSelected:true,selectedState:value})
-        history.push({
-            pathname:`/state/${value}/category`,
-            state:{name:value}
+
+    toggleState = (key, value) => {
+        this.setState({[key]: value})
+    }
+
+    onSelectLocation = (value) => {
+        this.setState({
+            isStateSelected: true,
+            selectedState: value,
+            selectedComponent: genericConstants.WEB_COMPONENT_TYPE.CATEGORY
         })
-        // pathname: '/secondpage',
-        // search: '?query=abc',
-        // state: { detail: 'some_value' }
+        history.push({
+            pathname: `/${value}`,
+            state: {name: value}
+        })
+    }
+
+    MobileComponent = () => {
+        switch (this.state.selectedComponent) {
+            case genericConstants.WEB_COMPONENT_TYPE.STATE:
+                return (
+                    <StateComponent
+                        state={this.state}
+                        getStates={this.getStates}
+                        countryStateList={this.state.countryStateList}
+                        handleChangeForCountryState={this.handleChangeForCountryState}
+                        handleSearchLocationInput={this.handleSearchLocationInput}
+                        onSelectLocation={this.onSelectLocation}
+                    />)
+            case genericConstants.WEB_COMPONENT_TYPE.CATEGORY:
+                return (
+                    <Category
+                        toggleState={this.toggleState}
+                        selectedState={this.state.selectedState}
+                        categoryList={this.state.categoryList}
+                    />)
+            case genericConstants.WEB_COMPONENT_TYPE.CARDS:
+                return (
+                    <LeadsComponent
+                        toggleState={this.toggleState}
+                        selectedState={this.state.selectedState}
+                        selectedCategory={this.state.selectedCategory}
+                    />)
+        }
     }
 
     render() {
         return (
             <div className="mobile-view">
-            <Header isInfo={false}></Header>
-            <StateComponent state={this.state}
-                              getStates={this.getStates}
-                              countryStateList={this.state.countryStateList}
-                              handleChangeForCountryState={this.handleChangeForCountryState}
-                              handleSearchLocationInput={this.handleSearchLocationInput}
-                              onSelectLocation={this.onSelectLocation}
-            />
+                <Header isInfo={this.state.selectedComponent === genericConstants.WEB_COMPONENT_TYPE.CARDS}/>
+                {this.MobileComponent()}
             </div>
         );
     }

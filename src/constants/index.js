@@ -59,3 +59,11 @@ export const stateNamesConstant = {
     uttar: "Uttar Pradesh",
     bengal: "West Bengal"
 }
+
+export const genericConstants = {
+    WEB_COMPONENT_TYPE: {
+        STATE: "STATE",
+        CATEGORY: "CATEGORY",
+        CARDS: "CARDS",
+    }
+}
