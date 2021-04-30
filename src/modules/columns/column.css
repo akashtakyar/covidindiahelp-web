@@ -1,20 +1,152 @@
 .oxygen-beds {
-    color: #18265C;
+    color: #18265c;
     font-family: Roboto;
     font-size: 20px;
     letter-spacing: 1px;
     line-height: 31px;
     text-align: left;
-    padding-top: 15px;
-    padding-left : 12px
-  }
+    font-weight: 700;
+    padding-left: 12px;
+}
 
-
-  .bookmarked {
-    color: #FFFFFF;
+.bookmarked {
+    color: #ffffff;
     font-family: Roboto;
     font-size: 16px;
     letter-spacing: 0.62px;
     line-height: 19px;
     text-align: left;
+}
+
+.drawericon {
+    color: #ffffff;
+    font-family: Roboto;
+    font-size: 16px;
+    letter-spacing: 0.62px;
+    line-height: 19px;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.ant-select-selector {
+    height: 25px !important;
+    font-size: 10px;
+}
+
+.navbar-cont {
+    height: 100%;
+    align-items: center;
+     justify-content: center;
+    display: flex !important;
+}
+
+#style-1::-webkit-scrollbar-track {
+    background-color: #fafafa;
+}
+
+#style-1::-webkit-scrollbar {
+    width: 8px;
+    background-color: #fafafa;
+}
+
+#style-1::-webkit-scrollbar-thumb {
+    background-color: #cccccc;
+}
+
+.left-p{
+    padding-left: 20px;
+}
+
+.backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 100;
+    top: 0;
+    right: 0;
   }
+
+.cardStyle {
+    /*min-width: 200px;*/
+    max-width: 20%;
+    flex: 0 0 20%;
+    border-right: 1px solid #D5D5D5;
+    height: 90.5vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+}
+
+
+@media (max-width: 768px) {
+
+    .cardStyle {
+        min-width: 100% !important;
+        border-right: 1px solid #D5D5D5;
+        overflow-x: hidden;
+        height: 60vh;
+
+    }
+
+    .wrapOnMedia {
+        flex-wrap: wrap;
+        margin: 0 10px 0 10px;
+    }
+
+    .coloumn-scroll {
+        overflow-y: scroll;
+        max-height: 55vh;
+    }
+
+    .disclaimer-text {
+        font-size: 10px;
+        color: #ffffff;
+        padding-left: 12px;
+        align-items: center;
+        background-color: #474951;
+        margin-left: 0;
+        margin-right: 0;
+        position: absolute;
+        top: 93.6vh !important;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        width: 100%;
+    }
+
+}
+
+#state-list-container > div > div {
+    background: #ffffff;
+}
+
+#state-list-container > div > div > label {
+    top: -12px;
+    bottom: 0;
+    font-size: 12px;
+    margin-bottom: 0;
+}
+
+#state-list-container > div > div > div {
+    padding: 0;
+}
+
+#state-list-container > div > div > div > input {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.disclaimer-text {
+    font-size: 10px;
+    color: #ffffff;
+    padding-left: 12px;
+    align-items: center;
+    background-color: #474951;
+    margin-left: 0;
+    margin-right: 0;
+    position: fixed;
+    top: 96vh;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+}

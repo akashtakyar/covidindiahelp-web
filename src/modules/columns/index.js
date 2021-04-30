@@ -1,8 +1,13 @@
 import React from "react";
 import BaseComponent from '../baseComponent'
 import CoulumnComponent from './coulumnsComponents'
-import Utils from "../../utility";
+import AddInfoComponent from '../add-info/addInfoComponent'
+import Header from '../common/index'
 import {states} from "../../services/columns"
+import utility from "../../utility";
+import {stateNamesConstant} from "../../constants";
+import {history} from "../../managers/history";
+import SelectCategory from "../mobile-view/select-category"
 
 class Coloumn extends BaseComponent {
     constructor(props) {
@@ -10,42 +15,150 @@ class Coloumn extends BaseComponent {
         this.state = {
             name: "",
             nameError: "",
-            selectedState: "Delhi",
+            isAbout: false,
+            selectedState: "All States",
             selectedTime: "4",
-            responseData : []
-          
+            drawerOpen: false,
+            responseData: [],
+            originalResponseData: [],
+            countryStateList: [],
+            responseByIndex: {},
+            responseByLocation: {},
+            param: [],
+            list: [
+
+                {
+                    label: "Oxygen",
+                    filterKey: "oxygen"
+                },
+                {
+                    label: "Bed",
+                    filterKey: "bed"
+                },
+                {
+                    label: "Blood Plasma",
+                    filterKey: "plasma"
+                },
+                {
+                    label: "Remdesivir/Tocilizumab",
+                    filterKey: "remdesivir",
+                    filterKey2: "tocilizumab"
+                },
+                {
+                    label: "Fabiflu",
+                    filterKey: "fabiflu"
+                },
+            ]
+
         }
     }
 
-     componentDidMount() {
-        this.getStates("delhi")
-
-        console.log("===================compdiodi mount")
-          
+    componentDidMount() {
+        const route = window.location.pathname;
+        let params = route.split('/')
+        params = params.filter(data => data.length > 0)
+        this.setState({param: params})
+        this.getStates("")
     }
-   
-     getStates = async(stateValue) => {
-         let data = `${stateValue}`
-         
-        try{
+
+    incrementUpVote = (id) => {
+        let index = this.state.responseByIndex[id].index;
+        this.state.responseData[index].upVoteCount = this.state.responseData[index].upVoteCount + 1;
+        this.setState({responseData: this.state.responseData, originalResponseData: this.state.responseData})
+    }
+
+    incrementDownVote = (id) => {
+        let index = this.state.responseByIndex[id].index;
+        this.state.responseData[index].downVoteCount = this.state.responseData[index].downVoteCount + 1;
+        this.setState({responseData: this.state.responseData, originalResponseData: this.state.responseData})
+
+    }
+
+    getStates = async (stateValue) => {
+        let data = `${stateValue}`
+        this.setState({responseData: [], originalResponseData: []})
+
+        try {
             let response = await states(data)
-            console.log("state respons",response)
-            if(response.responseData && Array.isArray(response.responseData) && response.responseData.length){
-                this.setState({responseData : response.responseData})
+            if (response.responseData && Array.isArray(response.responseData) && response.responseData.length) {
+
+                let responseByIndex = {};
+                let responseByLocation = {};
+                let countryStateList = [];
+                let keyToSave = "";
+
+                response.responseData.forEach((obj, index) => {
+                    responseByIndex[obj._id] = {"index": index, ...obj}
+
+                    if (obj.state)
+                        keyToSave = obj.state;
+                    else if (obj.district)
+                        keyToSave = obj.district;
+
+                    // Make it Sentense case
+                    keyToSave = stateNamesConstant[keyToSave] ? stateNamesConstant[keyToSave] : utility.toSentenceCase(keyToSave);
+                    if (!responseByLocation[keyToSave]) {
+                        responseByLocation[keyToSave] = [];
+                        countryStateList.push({title: keyToSave})
+                    }
+
+                    responseByLocation[keyToSave].push({
+                        "index": index,
+                        ...obj
+                    })
+                })
+
+                this.setState({
+                    responseData: response.responseData,
+                    originalResponseData: response.responseData,
+                    responseByIndex: responseByIndex,
+                    responseByLocation: responseByLocation,
+                    countryStateList: countryStateList.sort((a, b) => b.title < a.title ? 1 : -1)
+                })
             }
-        }catch(error){
+        } catch (error) {
             console.log(error)
         }
-    
-     }
-  
+
+    }
+
+    handleChangeForCountryState = (event, selectedCountryState) => {
+        if (event && event.target && !event.target.value && document.getElementById("AllStates"))
+            document.getElementById("AllStates").blur();
+
+        let responseData = selectedCountryState ? this.state.responseByLocation[selectedCountryState] : this.state.originalResponseData
+        if (!responseData)
+            return
+        this.setState({responseData})
+    }
+
+    handleColumnClose = async (item) => {
+        var array = this.state.list;
+        var index = array.indexOf(item)
+        array.splice(index, 1);
+        this.setState({list: array});
+    }
 
     render() {
         return (
-            <CoulumnComponent state={this.state}
-            getStates={this.getStates}
-            responseData={this.state.responseData}
-                            />
+            <div className="desktop-view">
+                <Header
+                    handleChangeForCountryState={this.handleChangeForCountryState} onRefresh={this.getStates}
+                    countryStateList={this.state.countryStateList}
+                    state={this.state}
+                />
+                <CoulumnComponent state={this.state}
+                                  getStates={this.getStates}
+                                  handleChangeForCountryState={this.handleChangeForCountryState}
+                                  incrementUpVote={this.incrementUpVote}
+                                  incrementDownVote={this.incrementDownVote}
+                                  handleColumnClose={this.handleColumnClose}
+                                  drawerToggleClickHandler={this.drawerToggleClickHandler}
+                                  backdropClickHandler={this.backdropClickHandler}
+                                  handleNavigate={this.handleNavigate}
+                                  responseData={this.state.responseData}
+                />
+            </div>
         );
     }
 }
