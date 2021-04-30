@@ -18,9 +18,9 @@ class Category extends BaseComponent {
             selectedItem: {},
             uniqueContact: [],
             responseByIndex: {},
-            selectedSortingAttr:'Sort',
-            originalResponseData:[],
-            responseMessage:false
+            selectedSortingAttr: 'Sort',
+            originalResponseData: [],
+            responseMessage: false
         }
     }
 
@@ -34,13 +34,15 @@ class Category extends BaseComponent {
             category: this.props.selectedCategory.toUpperCase()
         }
         let responseByIndex = {};
-        const {responseData,error,message}=await getFilteredData(request);
-        if(!responseData) return
+        const {responseData, error, message} = await getFilteredData(request);
+        if (!responseData) return
         responseData.forEach((obj, index) => {
             responseByIndex[obj._id] = {"index": index, ...obj}
         });
-        if(message==="Covid Help info fetched successfully"){ this.setState({responseMessage:true})}
-        this.setState({allLeads:responseData,responseByIndex,originalResponseData:responseData})
+        if (message === "Covid Help info fetched successfully") {
+            this.setState({responseMessage: true})
+        }
+        this.setState({allLeads: responseData, responseByIndex, originalResponseData: responseData})
     }
     backToSelectCategory = async () => {
         this.props.toggleState("selectedComponent", genericConstants.WEB_COMPONENT_TYPE.CATEGORY)
@@ -51,8 +53,8 @@ class Category extends BaseComponent {
         let data = `${id}`
         try {
             let response = await upVote(data)
-            if(response.responseData && Array.isArray(response.responseData) && response.responseData.length){
-                this.setState({allLeads : response.responseData,originalResponseData:response.responseData})
+            if (response.responseData && Array.isArray(response.responseData) && response.responseData.length) {
+                this.setState({allLeads: response.responseData, originalResponseData: response.responseData})
             }
         } catch (error) {
             console.log(error)
@@ -63,8 +65,8 @@ class Category extends BaseComponent {
         let data = `${id}`
         try {
             let response = await downVote(data)
-            if(response.responseData && Array.isArray(response.responseData) && response.responseData.length){
-                this.setState({allLeads : response.responseData,originalResponseData:response.responseData})
+            if (response.responseData && Array.isArray(response.responseData) && response.responseData.length) {
+                this.setState({allLeads: response.responseData, originalResponseData: response.responseData})
             }
         } catch (error) {
             console.log(error)
@@ -101,7 +103,7 @@ class Category extends BaseComponent {
     incrementUpVote = (id) => {
         let index = this.state.responseByIndex[id].index;
         this.state.allLeads[index].upVoteCount = this.state.allLeads[index].upVoteCount + 1;
-        this.setState({allLeads: this.state.allLeads,originalResponseData: this.state.allLeads})
+        this.setState({allLeads: this.state.allLeads, originalResponseData: this.state.allLeads})
     }
 
     incrementDownVote = (id) => {
@@ -109,18 +111,22 @@ class Category extends BaseComponent {
         this.state.allLeads[index].downVoteCount = this.state.allLeads[index].downVoteCount + 1;
         this.setState({allLeads: this.state.allLeads, originalResponseData: this.state.allLeads})
     }
-    onSelectSorting=(event)=>{
-        console.log("this.state.originalResponseData===========",this.state.originalResponseData,"leads====",this.state.allLeads);
-        let dummyData=this.state.originalResponseData;
-        this.setState({selectedSortingAttr:event.target.value});
-        if(event.target.value==="Sort") return
-        if(event.target.value==='working')
-        dummyData=dummyData.sort((a,b)=>{return b.upVoteCount-a.upVoteCount})
-        else{
-            console.log("this.state.originalResponseData",this.state.originalResponseData);
-            dummyData=dummyData.sort((a,b)=>{return b.channelCreatedOn-a.channelCreatedOn})
+    onSelectSorting = (event) => {
+        console.log("this.state.originalResponseData===========", this.state.originalResponseData, "leads====", this.state.allLeads);
+        let dummyData = this.state.originalResponseData;
+        this.setState({selectedSortingAttr: event.target.value});
+        if (event.target.value === "Sort") return
+        if (event.target.value === 'working')
+            dummyData = dummyData.sort((a, b) => {
+                return b.upVoteCount - a.upVoteCount
+            })
+        else {
+            console.log("this.state.originalResponseData", this.state.originalResponseData);
+            dummyData = dummyData.sort((a, b) => {
+                return b.channelCreatedOn - a.channelCreatedOn
+            })
         }
-        this.setState({allLeads:dummyData})
+        this.setState({allLeads: dummyData})
     }
 
     render() {
