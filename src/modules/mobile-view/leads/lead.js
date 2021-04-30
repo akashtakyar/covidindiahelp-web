@@ -7,8 +7,11 @@ import {Row, Column} from "simple-flexbox";
 import utility from "../../../utility";
 import {makeStyles} from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
-import {TwitterTweetEmbed} from 'react-twitter-embed';
-import {stateNamesConstant} from '../../../constants';
+import { TwitterTweetEmbed} from 'react-twitter-embed';
+import { stateNamesConstant } from '../../../constants';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 
 
 import {
@@ -31,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: '400px',
         border: "none",
         background: "white"
+    },
+    select:{
+        fontSize:"12px"
     }
 }));
 
@@ -55,6 +61,22 @@ function LeadsComponent(props) {
                 </Column>
                 {/* <Column className="set-alert"><span><img classname="alert-image" src="/images/alert.svg"></img>Set Alert</span></Column> */}
             </Row>
+             <Row style={{padding:"15px 5px 15px 5px"}}>
+            <Column style={{width:"60%"}}>
+            {/* <InputLabel id="demo-simple-select-label">Sort By:-</InputLabel> */}
+                <Select
+                className={classes.select}
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={props.state.selectedSortingAttr}
+                onChange={props.onSelectSorting}
+                >
+                 <MenuItem value={"Sort"}>Sort By:-</MenuItem>
+                <MenuItem value={"recent"}>Recent</MenuItem>
+                <MenuItem value={"working"}>Working</MenuItem>
+                </Select>
+                </Column>
+             </Row>
             {
                 props.state.allLeads.length > 0 ?
                     props.state.allLeads && props.state.allLeads.map((ite, index) => (
@@ -95,10 +117,12 @@ function LeadsComponent(props) {
                     )
                     ) :
                     <div
-                        className="loading">{props?.originalResponseData?.length < 1 && 'Loading...' || 'No leads available. Search for other cities.'}</div>}
+                        className="loading">{!props.state.responseMessage && props.state.originalResponseData.length===0 ? "Loading": 'No leads available. Search for other cities.'}</div>}
+
         </>
 
     );
+
 }
 
 function DialogBox(props) {
