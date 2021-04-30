@@ -327,7 +327,7 @@ input:focus {
 }
 
 .selected-param {
-    padding: 15px 15px 15px 5px;
+    padding: 10px;
     justify-content: space-between;
     box-shadow: 0 0.5px 1px 0 rgba(0, 0, 0, 0.2);
 }
@@ -336,6 +336,7 @@ input:focus {
     color: #0091ff;
     font-size: 18px;
     font-weight: 700;
+    margin: 5px 10px;
 }
 
 .set-alert {

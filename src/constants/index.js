@@ -19,7 +19,10 @@ export const httpConstants = {
     DEVICE_TYPE: {
         WEB: 'web'
     },
-    API_END_POINT: {}
+    API_END_POINT: {
+        REGISTER_DEVICE: '/device',
+
+    }
 };
 
 export const stateNamesConstant = {
@@ -57,8 +60,17 @@ export const stateNamesConstant = {
     tripura: "Tripura",
     uttarakhand: "Uttarakhand",
     uttar: "Uttar Pradesh",
-    bengal: "West Bengal"
+    west: "West Bengal"
 }
+
+export const eventConstants = {
+    REGISTER_DEVICE_SUCCESS: "REGISTER_DEVICE_SUCCESS",
+    REGISTER_DEVICE_FAILURE: "REGISTER_DEVICE_FAILURE",
+}
+
+export const cookiesConstants = {
+    DEVICE_ID: 'deviceId',
+};
 
 export const genericConstants = {
     WEB_COMPONENT_TYPE: {
@@ -66,4 +78,14 @@ export const genericConstants = {
         CATEGORY: "CATEGORY",
         CARDS: "CARDS",
     }
+}
+export const firebaseConfig = {
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_DATABASE_URL,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID
 }

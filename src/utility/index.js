@@ -1,7 +1,6 @@
 import "react-s-alert/dist/s-alert-default.css";
 import {history} from "../managers/history";
 import swal from "sweetalert";
-import Cookies from "universal-cookie";
 import React from "react";
 import ToastService from 'react-material-toast';
 
@@ -11,7 +10,6 @@ const toast = ToastService.new({
     maxCount: 2
 });
 let moment = require('moment');
-const cookies = new Cookies();
 const utility = {
     getHeader,
     apiFailureToast,
@@ -45,7 +43,6 @@ const utility = {
     getTimeFromNow,
     epocToPrettyTime,
     epocToPrettyTimeForFuture,
-    getLeaderBoardAggregatedQuery,
     getTopSenderAggregatedQuery,
     getTimeDifference,
     getYearsList,
@@ -54,11 +51,16 @@ const utility = {
     secondsToTime,
     getDateFormat,
     changeDateFormat,
-    getAggregatedPercWercQueryObject,
-    toSentenceCase
+    toSentenceCase,
+    parseResponse,
 };
 export default utility;
 
+function parseResponse(promise) {
+    return promise.then(data => {
+        return [null, data];
+    }).catch(err => [err]);
+};
 
 export const dispatchAction = (type, data) => {
     return dispatch => dispatch({type, data});
@@ -179,7 +181,7 @@ function generateGUID() {
 function basicAlert(message) {
     swal({
         title: message,
-        icon: '/images/alert-icon.png',
+        icon: '/images/alert.svg',
     })
 }
 
@@ -528,47 +530,6 @@ function epocToPrettyTimeForFuture(seconds) {
 }
 
 
-function getLeaderBoardAggregatedQuery(propsOfComponent, skip = 0, limit = 0, matchObj = {}) {
-    if (!propsOfComponent || !propsOfComponent.user || !propsOfComponent.user.userDetails || !propsOfComponent.user.userDetails.company)
-        return null;
-    let queryObj = [];
-
-    //Match Object for the conditions-
-    let feedType = [];
-    feedType.push({'entityData.feedType': 'ADD_RECOGNITION'});
-    feedType.push({'entityData.feedType': 'ADD_NOMINATION'});
-    matchObj['$or'] = feedType;
-    matchObj['entityData.company.id'] = propsOfComponent.user.userDetails.company.id;
-
-    //addField Object for the conditions-
-    let addFieldObj = {
-        'recipient': {
-            '$arrayToObject': {
-                '$map': {
-                    'input': '$entityData.recipients',
-                    'as': 'recipients',
-                    'in': {'k': 'userDetails', 'v': '$$recipients'}
-                }
-            }
-        }
-    };
-
-    //Group object for grouping-
-    let groupObj = {};
-    groupObj._id = "$entityData.recipients._id";
-    groupObj.PERCBalance = {"$sum": "$entityData.PERCValue"};
-    groupObj.firstName = {"$first": "$entityData.recipients.name"};
-
-    queryObj.push({"$match": matchObj});
-    // queryObj.push({"$addFields": addFieldObj});
-    queryObj.push({"$group": groupObj});
-    queryObj.push({"$sort": {'PERCBalance': -1}});
-    queryObj.push({"$limit": limit});
-    queryObj.push({"$skip": skip});
-
-    return queryObj;
-}
-
 function getTopSenderAggregatedQuery(propsOfComponent, skip = 0, limit = 0, matchObj = {}) {
     if (!propsOfComponent || !propsOfComponent.user || !propsOfComponent.user.userDetails || !propsOfComponent.user.userDetails.company)
         return null;
@@ -607,23 +568,7 @@ function secondsToTime(milliseconds) {
     let date = new Date(milliseconds)
     var duration = moment.duration(milliseconds, 'milliseconds');
     return (duration.hours() + ":" + duration.minutes() + ":" + duration.seconds())
-    let dateObject = moment(date, 'hh:mm:ss').fromNow();
-    return dateObject
-
-    // let hours = Math.floor(secs / (60 * 60));
-    //
-    // let divisor_for_minutes = secs % (60 * 60);
-    // let minutes = Math.floor(divisor_for_minutes / 60);
-    //
-    // let divisor_for_seconds = divisor_for_minutes % 60;
-    // let seconds = Math.ceil(divisor_for_seconds);
-    //
-    // let obj = {
-    //     "h": hours,
-    //     "m": minutes,
-    //     "s": seconds
-    // };
-    // return obj;
+    return moment(date, 'hh:mm:ss').fromNow()
 }
 
 function getTimestampFromDate(year, month, date = 0) {
@@ -659,30 +604,4 @@ function changeDateFormat(date, newFormat) {
 function toSentenceCase(stringToChange)
 {
     return stringToChange.toLowerCase().replace(/(^\s*\w|[\.\!\?]\s*\w)/g,function(c){return c.toUpperCase()});
-}
-function getAggregatedPercWercQueryObject(start, end, skip, id) {
-    console.log(start, end, skip, id);
-    return [
-        {
-            "$match": {
-                "$and": [
-                    {
-                        "date": {
-                            "$gte": start.toString()
-                        }
-                    },
-                    {
-                        "date": {
-                            "$lte": end.toString()
-                        }
-                    }
-                ],
-                "companyId": id.toString()
-            }
-
-        },
-        {
-            "$skip": skip
-        }
-    ];
 }
