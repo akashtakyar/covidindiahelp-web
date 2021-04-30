@@ -45,7 +45,6 @@ class Category extends BaseComponent {
         this.setState({allLeads: responseData, responseByIndex, originalResponseData: responseData})
     }
     backToSelectCategory = async () => {
-        console.log("echehh");
         this.props.toggleState("selectedComponent", genericConstants.WEB_COMPONENT_TYPE.CATEGORY)
         history.push(`/${this.props.selectedState}`)
     }
