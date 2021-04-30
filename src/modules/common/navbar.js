@@ -6,6 +6,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {Column, Row} from "simple-flexbox";
+import {stateNamesConstant} from '../../constants'
 
 function NavbarComponent(props) {
     const [showCredits, setshowCredits] = useState(false)
@@ -35,6 +36,16 @@ function NavbarComponent(props) {
                             style={{width: 160, zIndex: 100000}}
                             onInputChange={(event, value) => props.handleChangeForCountryState(event, value)}
                             renderInput={(params) => <TextField {...params} label="All States" variant="outlined"/>}
+                        />
+                    </Column>
+                    <Column style={{marginLeft: "12px"}} id={'state-list-container'}>
+                        <Autocomplete
+                            id="AllCategories"
+                            options={props.state.categoryList}
+                            getOptionLabel={(option) => option.name}
+                            style={{width: 160, zIndex: 100000}}
+                            onInputChange={(event, value) => props.handleChangeForCategory(event, value)}
+                            renderInput={(params) => <TextField {...params} label="All Categories" variant="outlined"/>}
                         />
                     </Column>
                     <Column className="bookmarked" style={{fontSize: "10px", cursor: 'pointer'}}>

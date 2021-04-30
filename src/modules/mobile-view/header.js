@@ -15,7 +15,9 @@ function NavbarComponent(props) {
                 marginLeft: '0px',
                 marginRight: '0px',
                 alignItems: 'center',
-                justifyContent: "space-between"
+                justifyContent: "space-between",
+                position:"sticky",
+                top:0
             }}>
             <Column>
                 <Column className="navbar-cont">

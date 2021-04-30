@@ -11,6 +11,8 @@ import { TwitterTweetEmbed } from "react-twitter-embed";
 import { stateNamesConstant } from "../../../constants";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import {isIOS, isIOS13, isIPad13,isPod13} from 'react-device-detect';
+
 
 import {
   FacebookShareButton,
@@ -42,8 +44,9 @@ function LeadsComponent(props) {
       <Row className="selected-param">
         <Column style={{width:'100%'}}>
           <Row justifyContent="space-between" alignItems="center" style={{width:'100%'}}>
-            <span onClick={props.backToSelectCategory}>
+            <span >
               <img
+              onClick={props.backToSelectCategory}
                 style={{
                   width: "35px",
                   fill:
@@ -52,16 +55,18 @@ function LeadsComponent(props) {
                 src="/images/BackButton.svg"
               />
             </span>
+            {!isIOS && !isIOS13 && !isIPad13 && !isPod13 ?
             <PushAlertComponent selectedCategory={props.selectedCategory} selectedState={props.selectedState}/>
+            : ""}
           </Row>
           <span className="selected">
             {`${
               stateNamesConstant[props.selectedState]
-            } / ${utility.toSentenceCase(props.selectedCategory)}`}
+            }/${utility.toSentenceCase(props.selectedCategory)}`}
           </span>
         </Column>
       </Row>
-      <Row style={{ padding: "15px 5px 15px 5px" }}>
+      <Row style={{ padding: "15px 5px 15px 15px" }} className="sort-by">
         <Column style={{ width: "60%" }}>
           <Select
             className={classes.select}
@@ -81,7 +86,7 @@ function LeadsComponent(props) {
         props.state.allLeads.map((ite, index) => (
           <>
             <Card className="m-10" className="lead-card" key={index}>
-              <CardContent className="card-desc-container">
+              <CardContent className="lead-container">
                 <Typography className="mb-10" variant="body2"></Typography>
                 <Typography
                   className="card-desc"

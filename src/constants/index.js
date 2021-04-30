@@ -67,10 +67,11 @@ export const eventConstants = {
     REGISTER_DEVICE_SUCCESS: "REGISTER_DEVICE_SUCCESS",
     REGISTER_DEVICE_FAILURE: "REGISTER_DEVICE_FAILURE",
 }
-
 export const cookiesConstants = {
+    DISCLAIMER: 'DISCLAIMER',
     DEVICE_ID: 'deviceId',
 };
+
 
 export const genericConstants = {
     WEB_COMPONENT_TYPE: {
