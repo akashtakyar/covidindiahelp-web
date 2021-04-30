@@ -48,8 +48,9 @@
 }
 .card-desc-container {
   padding: 6px !important;
-  padding-bottom: 6px !important;
   cursor: pointer;
+  font-weight: 600;
+  color: #474951;
 }
 
 .loading

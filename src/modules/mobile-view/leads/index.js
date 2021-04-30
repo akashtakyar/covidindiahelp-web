@@ -18,7 +18,7 @@ class Category extends BaseComponent {
             selectedItem: {},
             uniqueContact: [],
             responseByIndex: {},
-            selectedSortingAttr: 'Sort',
+            selectedSortingAttr: 'recent',
             originalResponseData: [],
             responseMessage: false
         }
@@ -112,7 +112,6 @@ class Category extends BaseComponent {
         this.setState({allLeads: this.state.allLeads, originalResponseData: this.state.allLeads})
     }
     onSelectSorting = (event) => {
-        console.log("this.state.originalResponseData===========", this.state.originalResponseData, "leads====", this.state.allLeads);
         let dummyData = this.state.originalResponseData;
         this.setState({selectedSortingAttr: event.target.value});
         if (event.target.value === "Sort") return

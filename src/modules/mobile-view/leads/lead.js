@@ -10,21 +10,16 @@ import Dialog from '@material-ui/core/Dialog';
 import {TwitterTweetEmbed} from 'react-twitter-embed';
 import {stateNamesConstant} from '../../../constants';
 import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 
 
 import {
     FacebookShareButton,
     FacebookIcon,
-    LinkedinIcon,
     WhatsappIcon,
     TwitterIcon,
     WhatsappShareButton,
     TwitterShareButton,
-    LinkedinShareButton,
-    InstapaperShareButton,
-    InstapaperIcon
 } from 'react-share';
 
 
@@ -51,6 +46,7 @@ function LeadsComponent(props) {
                     <span onClick={props.backToSelectCategory}>
                     <img style={{
                         width: "25px",
+                        margin: '5px',
                         fill: "invert(44%) sepia(97%) saturate(3395%) hue-rotate(187deg) brightness(101%) contrast(109%)"
                     }}
                          src="/images/BackButton.svg"/>
@@ -72,9 +68,9 @@ function LeadsComponent(props) {
                         value={props.state.selectedSortingAttr}
                         onChange={props.onSelectSorting}
                     >
-                        <MenuItem value={"Sort"}>Sort By:-</MenuItem>
-                        <MenuItem value={"recent"}>Recent</MenuItem>
-                        <MenuItem value={"working"}>Working</MenuItem>
+                        <MenuItem value={"Sort"}>Sort By -</MenuItem>
+                        <MenuItem value={"recent"}>Sort By - Recent</MenuItem>
+                        <MenuItem value={"working"}>Sort By - Working</MenuItem>
                     </Select>
                 </Column>
             </Row>
@@ -118,7 +114,7 @@ function LeadsComponent(props) {
                     )
                     ) :
                     <div
-                        className="loading">{!props.state.responseMessage && props.state.originalResponseData.length === 0 ? "Loading" : 'No leads available. Search for other cities.'}</div>}
+                        className="loading">{!props.state.responseMessage && props.state.originalResponseData.length === 0 ? "Loading..." : 'No leads available. Search for other cities.'}</div>}
 
         </>
 
