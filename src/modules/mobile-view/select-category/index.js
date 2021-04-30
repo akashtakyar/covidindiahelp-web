@@ -1,51 +1,29 @@
 import React from "react";
 import BaseComponent from '../../baseComponent'
 import SelectCategoryComponent from './selectCategoryComponent'
-import {getCategories} from "../../../services/columns"
 import {history} from '../../../managers/history'
-
-
+import {genericConstants} from "../../../constants";
 
 class Category extends BaseComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            categoryList:[],
-            selectedState:''
+    onSelectCategory = (value) => {
+        if (this.props.toggleState) {
+            this.props.toggleState("selectedComponent", genericConstants.WEB_COMPONENT_TYPE.CARDS)
+            this.props.toggleState("selectedCategory", value.includes('/') ? value.split('/')[0] : value)
         }
+        history.push(`/${this.props.selectedState}/${value.includes('/') ? value.split('/')[0].toLowerCase() : value.toLowerCase()}`)
     }
 
-    async componentDidMount() {
-    console.log("tstvaxb,  x, ",this.props.location.state.name);
-    this.setState({selectedState:this.props.location.state.name});
-    this.getAllCategories();
-
+    onBackToSelectState = () => {
+        if (this.props.toggleState)
+            this.props.toggleState("selectedComponent", genericConstants.WEB_COMPONENT_TYPE.STATE)
+        history.push('/')
     }
 
-    getAllCategories=async()=>{
-        const {responseData,error}=await  getCategories();
-        console.log("categories",responseData);
-        if(!responseData) return
-        this.setState({categoryList:responseData})
-    }
-    onSelectCategory=async(value)=>{
-        history.push({
-            pathname:`/state/${this.state.selectedState}/category/${value}`,
-            state:{name:this.state.selectedState,
-                    category:value}
-        })
-    }
-    onBackToSelectState=async()=>{
-        history.push({
-            pathname: `/state`,
-            state:{name:this.state.selectedState}
-         })
-    }
-  
     render() {
         return (
             <SelectCategoryComponent
-                state={this.state}
+                selectedState={this.props.selectedState}
+                categoryList={this.props.categoryList}
                 onSelectCategory={this.onSelectCategory}
                 onBackToSelectState={this.onBackToSelectState}
             />

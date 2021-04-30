@@ -6,7 +6,7 @@ import { stateNamesConstant } from '../../../constants';
 function SelectStates(props) {
     return (
         <>
-            <Row>
+            <Row className="search-location-row">
                 <Column className="search-row">
                     <span><img className="search-image p-r-10" src="/images/search.svg"></img>   
                 <input placeholder="Search Location" className="search-location" onChange={(event)=>{props.handleSearchLocationInput(event.target.value)}}></input>

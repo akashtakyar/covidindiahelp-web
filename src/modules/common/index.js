@@ -62,6 +62,7 @@ class HeaderComponent extends BaseComponent {
                      countryStateList={this.props.countryStateList} 
                      state={this.props.state}
                      isHeader={this.state.isHeader}
+                     handleChangeForCategory={this.props.handleChangeForCategory}
             ></Navbar>
             <Drawer handleNavigate={this.handleNavigate} show={this.state.drawerOpen}/>
             {this.state.drawerOpen?

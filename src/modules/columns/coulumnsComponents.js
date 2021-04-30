@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {Row, Col} from 'antd';
 import './column.css'
 import 'antd/dist/antd.css';
@@ -7,25 +7,7 @@ import Footer from "./footer";
 
 
 function ColumnComponent(props) {
-    const cardStyle = {
-        minWidth: '250px',
-        maxWidth: '20%',
-        flex: '0 0 20%',
-        borderRight: "1px solid #D5D5D5",
-        height: '95vh',
-        overflowY: 'scroll',
-        overflowX: 'hidden'
-    }
-    const [blood, setBlood] = useState(true)
-    const [medicine, setMedicine] = useState(true)
-    const [rem, setrem] = useState(true)
-    const [toc, setToc] = useState(true)
-    const [ven, setVen] = useState(true)
-    const [oxy, setOxy] = useState(true)
-    const [bed, setBed] = useState(true)
-    const [icu, setIcu] = useState(true)
 
-       console.log("props",props);
     return (
         <>
             <Row className="wrapOnMedia">

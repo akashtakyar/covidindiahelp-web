@@ -1,146 +1,140 @@
 import React from "react";
 import BaseComponent from '../../baseComponent'
 import LeadsComponent from './lead'
-import {getFilteredData,downVote,upVote} from "../../../services/columns"
-import  Header  from "../header";
+import {getFilteredData, downVote, upVote} from "../../../services/columns"
 import {history} from '../../../managers/history'
-
+import {genericConstants} from "../../../constants";
 
 
 class Category extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
-            allLeads:[],
-            selectedState:'',
-            selectedCategory:'',
-            isShowSharePopup:false,
-            popoverText:'',
-            selectedItem:{},
-            uniqueContact:[],
-            responseByIndex:{},
-            selectedSortingAttr:'Sort',
-            originalResponseData:[],
-            responseMessage:false
+            allLeads: [],
+            selectedState: props.selectedState,
+            selectedCategory: props.selectedCategory,
+            isShowSharePopup: false,
+            popoverText: '',
+            selectedItem: {},
+            uniqueContact: [],
+            responseByIndex: {},
+            selectedSortingAttr: 'recent',
+            originalResponseData: [],
+            responseMessage: false
         }
     }
 
     async componentDidMount() {
-    console.log("tstvaxb,  x, ",this.props.location.state.name);
-    await this.setState({selectedState:this.props.location.state.name,selectedCategory:this.props.location.state.category});
-    await this.getAllLeads();
-
+        await this.getAllLeads();
     }
 
-    getAllLeads=async()=>{
-        let request={
-            state:this.state.selectedState.toLowerCase(),
-            category:this.state.selectedCategory.toUpperCase()
+    getAllLeads = async () => {
+        let request = {
+            state: this.props.selectedState.toLowerCase(),
+            category: this.props.selectedCategory.toUpperCase()
         }
         let responseByIndex = {};
-        console.log("dataaaa",request);
-        const {responseData,error,message}=await getFilteredData(request);
-        console.log("getAllLeads",message);
-        if(!responseData) return
+        const {responseData, error, message} = await getFilteredData(request);
+        if (!responseData) return
         responseData.forEach((obj, index) => {
             responseByIndex[obj._id] = {"index": index, ...obj}
         });
-        console.log("responseByLocation====", responseByIndex)
-        if(message==="Covid Help info fetched successfully"){ this.setState({responseMessage:true})}
-        this.setState({allLeads:responseData,responseByIndex,originalResponseData:responseData})
+        if (message === "Covid Help info fetched successfully") {
+            this.setState({responseMessage: true})
+        }
+        this.setState({allLeads: responseData, responseByIndex, originalResponseData: responseData})
     }
-    backToSelectCategory=async()=>{
-        history.push({
-           pathname: `/state/${this.state.selectedState}/category`,
-           state:{name:this.state.selectedState}
-        })
+    backToSelectCategory = async () => {
+        console.log("echehh");
+        this.props.toggleState("selectedComponent", genericConstants.WEB_COMPONENT_TYPE.CATEGORY)
+        history.push(`/${this.props.selectedState}`)
     }
-    sendUpVoteRequest = async(id) => {
-        let data = `${id}`
 
-        try{
+    sendUpVoteRequest = async (id) => {
+        let data = `${id}`
+        try {
             let response = await upVote(data)
-            if(response.responseData && Array.isArray(response.responseData) && response.responseData.length){
-                this.setState({allLeads : response.responseData,originalResponseData:response.responseData})
+            if (response.responseData && Array.isArray(response.responseData) && response.responseData.length) {
+                this.setState({allLeads: response.responseData, originalResponseData: response.responseData})
             }
-        }catch(error){
+        } catch (error) {
             console.log(error)
         }
-
     }
 
-    sendDownVoteRequest = async(id) => {
+    sendDownVoteRequest = async (id) => {
         let data = `${id}`
-
-        try{
+        try {
             let response = await downVote(data)
-            if(response.responseData && Array.isArray(response.responseData) && response.responseData.length){
-                this.setState({allLeads : response.responseData,originalResponseData:response.responseData})
+            if (response.responseData && Array.isArray(response.responseData) && response.responseData.length) {
+                this.setState({allLeads: response.responseData, originalResponseData: response.responseData})
             }
-        }catch(error){
+        } catch (error) {
             console.log(error)
         }
 
     }
-    handlePopoverOpen = async(item) => {
-        console.log("handlePopoverOpen",item);
-        let uniqueContact=[]
-        uniqueContact=await this.getUniqueContact(item);
-        console.log("handlePopoverOpen unique===",uniqueContact);
-        await this.setState({isShowSharePopup:true,popoverText:item.description,selectedItem:item,uniqueContact:uniqueContact});
-        console.log("handlePopoverOpen===========",this.state.isShowSharePopup);
+    handlePopoverOpen = async (item) => {
+        let uniqueContact = []
+        uniqueContact = await this.getUniqueContact(item);
+        await this.setState({
+            isShowSharePopup: true,
+            popoverText: item.description,
+            selectedItem: item,
+            uniqueContact: uniqueContact
+        });
+    };
 
-      };
-    
-    handlePopoverClose = async() => {
-       await this.setState({popoverAnchor:null,isShowSharePopup:false});
-      };
-      getUniqueContact=async(data)=>{
-          if(!data && !data.phoneNumber.length){return []}
-          let uniqueContact=[]
-          data.phoneNumber.map((item)=>{
-            item=item.trim()
-              if(!uniqueContact.includes(item) && item.length>=10) uniqueContact.push(item)
-          })
-          console.log("getUniqueContact===",uniqueContact);
-          return uniqueContact;
-      }
+    handlePopoverClose = async () => {
+        await this.setState({popoverAnchor: null, isShowSharePopup: false});
+    };
+
+    getUniqueContact = async (data) => {
+        if (!data && !data.phoneNumber.length) {
+            return []
+        }
+        let uniqueContact = []
+        data.phoneNumber.map((item) => {
+            item = item.trim()
+            if (!uniqueContact.includes(item) && item.length >= 10) uniqueContact.push(item)
+        })
+        return uniqueContact;
+    }
+
     incrementUpVote = (id) => {
         let index = this.state.responseByIndex[id].index;
         this.state.allLeads[index].upVoteCount = this.state.allLeads[index].upVoteCount + 1;
-        this.setState({allLeads: this.state.allLeads,originalResponseData: this.state.allLeads})
+        this.setState({allLeads: this.state.allLeads, originalResponseData: this.state.allLeads})
     }
 
     incrementDownVote = (id) => {
         let index = this.state.responseByIndex[id].index;
         this.state.allLeads[index].downVoteCount = this.state.allLeads[index].downVoteCount + 1;
         this.setState({allLeads: this.state.allLeads, originalResponseData: this.state.allLeads})
-
     }
-    onSelectSorting=(event)=>{
-        console.log("this.state.originalResponseData===========",this.state.originalResponseData,"leads====",this.state.allLeads);
-        let dummyData=this.state.originalResponseData;
-        this.setState({selectedSortingAttr:event.target.value});
-        if(event.target.value==="Sort") return
-        if(event.target.value==='working')
-        dummyData=dummyData.sort((a,b)=>{return b.upVoteCount-a.upVoteCount})
-        else{
-            console.log("this.state.originalResponseData",this.state.originalResponseData);
-            dummyData=dummyData.sort((a,b)=>{return b.channelCreatedOn-a.channelCreatedOn})
+    onSelectSorting = (event) => {
+        let dummyData = this.state.originalResponseData;
+        this.setState({selectedSortingAttr: event.target.value});
+        if (event.target.value === "Sort") return
+        if (event.target.value === 'working')
+            dummyData = dummyData.sort((a, b) => {
+                return b.upVoteCount - a.upVoteCount
+            })
+        else {
+            console.log("this.state.originalResponseData", this.state.originalResponseData);
+            dummyData = dummyData.sort((a, b) => {
+                return b.channelCreatedOn - a.channelCreatedOn
+            })
         }
-        this.setState({allLeads:dummyData})
-
-
+        this.setState({allLeads: dummyData})
     }
-    
 
-  
     render() {
         return (
-            <>
-            <Header isInfo={true}></Header>
             <LeadsComponent
                 state={this.state}
+                selectedState={this.props.selectedState}
+                selectedCategory={this.props.selectedCategory}
                 backToSelectCategory={this.backToSelectCategory}
                 handlePopoverOpen={this.handlePopoverOpen}
                 handlePopoverClose={this.handlePopoverClose}
@@ -150,7 +144,6 @@ class Category extends BaseComponent {
                 sendDownVoteRequest={this.sendDownVoteRequest}
                 onSelectSorting={this.onSelectSorting}
             />
-            </>
         );
     }
 }

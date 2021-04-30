@@ -12,7 +12,7 @@ export const sessionManager = {
     removeDataFromCookies,
 };
 
-function setDataInCookies(data, key) {
+function setDataInCookies(key, data) {
     cookies.set(key, JSON.stringify(data), {path: '/'});
 }
 

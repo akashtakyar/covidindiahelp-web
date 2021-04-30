@@ -21,7 +21,7 @@
 }
 
 .card-desc {
-  font-size: 10px !important;
+  font-size: 11px !important;
 }
 .card-timestamp {
   font-size: 9px !important;
@@ -48,8 +48,9 @@
 }
 .card-desc-container {
   padding: 6px !important;
-  padding-bottom: 6px !important;
   cursor: pointer;
+  font-weight: 600;
+  color: #474951;
 }
 
 .loading
@@ -70,7 +71,7 @@
 
 @media (max-width: 768px) {
   .card-desc {
-    font-size: 12px !important;
+    font-size: 13px !important;
   }
 
   .card-vote-buttons {
