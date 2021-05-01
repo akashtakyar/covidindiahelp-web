@@ -53,15 +53,22 @@ function LeadsComponent(props) {
           >
             <span>
               <img
+                alt="back"
                 onClick={props.backToSelectCategory}
                 style={{
                   width: "35px",
+                  height: "30px",
                   fill:
                     "invert(44%) sepia(97%) saturate(3395%) hue-rotate(187deg) brightness(101%) contrast(109%)",
                 }}
                 src="/images/BackButton.svg"
               />
             </span>
+            <span className="selected">
+            {`${
+              stateNamesConstant[props.selectedState]
+            }/${utility.toSentenceCase(props.selectedCategory)}`}
+          </span>
             {!isIOS && !isIOS13 && !isIPad13 && !isPod13 ? (
               <PushAlertComponent
                 selectedCategory={props.selectedCategory}
@@ -71,11 +78,6 @@ function LeadsComponent(props) {
               ""
             )}
           </Row>
-          <span className="selected">
-            {`${
-              stateNamesConstant[props.selectedState]
-            }/${utility.toSentenceCase(props.selectedCategory)}`}
-          </span>
         </Column>
       </Row>
       <Row style={{ padding: "15px 5px 15px 15px" }} className="sort-by">
@@ -176,7 +178,7 @@ function notWorkingDialog(props) {
             onClick={props.handlePopoverClose}
             style={{ cursor: "pointer" }}
           >
-            <img src="/images/Cancel.svg" />{" "}
+            <img alt="cancel" src="/images/Cancel.svg" />{" "}
           </Column>
         </Row>
         <div className="p-sm-1 selected-item " style={{ cursor: "pointer" }}>
@@ -212,6 +214,13 @@ function notWorkingDialog(props) {
               }}>
               <ListItemText primary={"Answered but out of stock"} />
             </ListItem>
+            <ListItem button key={""}
+            onClick={() => {
+                props.incrementDownVote(props.state.id);
+                props.sendDownVoteRequest(props.state.id, "Fake");
+              }}>
+              <ListItemText primary={"Fake"} />
+            </ListItem>
           </List>
         </div>
       </div>
@@ -240,15 +249,14 @@ function DialogBox(props) {
           </Column>
         </Row>
         {props.state.selectedItem &&
-        props.state.selectedItem.attachments &&
-        props.state.selectedItem.attachments.media_keys.length > 0 ? (
+        typeof props.state.selectedItem.attachments === 'object' ? (
           <>
-            {props.state.uniqueContact && props.state.uniqueContact.length ? (
+            {props.state.uniqueContact && props.state.uniqueContact.length > 0 ? (
               <div className="p-t-20 p-r-20">Contact :</div>
             ) : (
               ""
             )}
-            {props.state.uniqueContact && props.state.uniqueContact.length
+            {props.state.uniqueContact && props.state.uniqueContact.length > 0
               ? props.state.uniqueContact.map((data) => (
                   <div className="">
                     <a href={`tel:${data}`}>{data}</a>
@@ -279,12 +287,12 @@ function DialogBox(props) {
               {" "}
               {props.state.selectedItem.description}
             </div>
-            {props.state.uniqueContact && props.state.uniqueContact.length ? (
+            {props.state.uniqueContact && props.state.uniqueContact.length > 0 ? (
               <div className="p-l-20 p-t-20 p-r-20">Contact :</div>
             ) : (
               ""
             )}
-            {props.state.uniqueContact && props.state.uniqueContact.length
+            {props.state.uniqueContact && props.state.uniqueContact.length > 0
               ? props.state.uniqueContact.map((data) => (
                   <div className="p-l-20 ">
                     <a href={`tel:${data}`}>{data}</a>
