@@ -334,9 +334,27 @@ input:focus {
 
 .selected {
     color: #0091ff;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
-    margin: 5px 10px;
+    margin: 5px;
+}
+
+.category-header {
+    box-shadow: 0 0.5px 1px 0 rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    color: #474951;
+    padding: 0 20px 20px 20px;
+    align-items: center;
+    font-size: 14px;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.selection{
+    color: #474951;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 5px;
 }
 
 .set-alert {
@@ -350,13 +368,8 @@ input:focus {
 }
 
 .category-header {
-    box-shadow: 0 0.5px 1px 0 rgba(0, 0, 0, 0.2);
-    background-color: #ffffff;
     color: #474951;
-    padding: 0 20px 20px 20px;
-    align-items: center;
     font-size: 14px;
-    justify-content: center;
     font-weight: 600;
 }
 
@@ -425,7 +438,10 @@ input:focus {
    .selected{
        text-align: center;
        position: relative;
-       bottom: 30px;
+   }
+   .selection{
+    text-align: center;
+    position: relative;
    }
    .selected-param{
        height: 55px;

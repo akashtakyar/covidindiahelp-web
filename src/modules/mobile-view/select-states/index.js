@@ -13,6 +13,7 @@ class Coloumn extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
+            closeItem:false,
             selectedComponent: this.getSelectedComponent(),
             selectedCategory: this.getSelectedCategory(),
             selectedState: this.getSelectedState(),
@@ -51,6 +52,7 @@ class Coloumn extends BaseComponent {
         pathArray = pathArray.filter(item => !!item)
         return pathArray.length > 0 ? pathArray[0] : 'All States'
     }
+      
 
     componentDidMount() {
         this.getStates()
@@ -140,7 +142,9 @@ class Coloumn extends BaseComponent {
     render() {
         return (
             <div className="mobile-view">
-                <Header isInfo={this.state.selectedComponent === genericConstants.WEB_COMPONENT_TYPE.CARDS}/>
+                <Header isInfo={this.state.selectedComponent === genericConstants.WEB_COMPONENT_TYPE.CARDS}
+        
+                />
                 {this.MobileComponent()}
                 <Footer></Footer>
             </div>

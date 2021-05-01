@@ -62,6 +62,11 @@ function LeadsComponent(props) {
                 src="/images/BackButton.svg"
               />
             </span>
+            <span className="selected">
+            {`${
+              stateNamesConstant[props.selectedState]
+            }/${utility.toSentenceCase(props.selectedCategory)}`}
+          </span>
             {!isIOS && !isIOS13 && !isIPad13 && !isPod13 ? (
               <PushAlertComponent
                 selectedCategory={props.selectedCategory}
@@ -71,11 +76,7 @@ function LeadsComponent(props) {
               ""
             )}
           </Row>
-          <span className="selected">
-            {`${
-              stateNamesConstant[props.selectedState]
-            }/${utility.toSentenceCase(props.selectedCategory)}`}
-          </span>
+          
         </Column>
       </Row>
       <Row style={{ padding: "15px 5px 15px 15px" }} className="sort-by">

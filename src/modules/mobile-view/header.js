@@ -7,6 +7,7 @@ import {Column, Row} from "simple-flexbox";
 
 function NavbarComponent(props) {
     const [showCredits, setshowCredits] = useState(false)
+
     return (
         <Row
             style={{
@@ -45,6 +46,7 @@ function NavbarComponent(props) {
                         }
                     </Row>
                     <Credits show={showCredits} setShow={setshowCredits}/>
+              
                 </Column>
             </Column>
 
