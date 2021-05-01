@@ -249,7 +249,10 @@ function DialogBox(props) {
           </Column>
         </Row>
         {props.state.selectedItem &&
-        typeof props.state.selectedItem.attachments === 'object' ? (
+        typeof props.state.selectedItem.attachments === 'object' &&
+        typeof props.state.selectedItem.attachments.media_keys === 'object'
+        && props.state.selectedItem.attachments.media_keys.length
+            ? (
           <>
             {props.state.uniqueContact && props.state.uniqueContact.length > 0 ? (
               <div className="p-t-20 p-r-20">Contact :</div>

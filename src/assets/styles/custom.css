@@ -334,7 +334,7 @@ input:focus {
 
 .selected {
     color: #0091ff;
-    font-size: 12px;
+    font-size: 18px;
     font-weight: 700;
     margin: 5px 10px;
 }
@@ -425,7 +425,7 @@ input:focus {
    .selected{
        text-align: center;
        position: relative;
-       bottom: 30px;
+       /*bottom: 30px;*/
    }
    .selected-param{
        height: 55px;
