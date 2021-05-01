@@ -14,6 +14,8 @@ class Category extends BaseComponent {
             selectedState: props.selectedState,
             selectedCategory: props.selectedCategory,
             isShowSharePopup: false,
+            isShowNotWorkingPopup:false,
+            id:'',
             popoverText: '',
             selectedItem: {},
             uniqueContact: [],
@@ -49,10 +51,10 @@ class Category extends BaseComponent {
         history.push(`/${this.props.selectedState}`)
     }
 
-    sendUpVoteRequest = async (id) => {
+    sendUpVoteRequest = async (id,desription) => {
         let data = `${id}`
         try {
-            let response = await upVote(data)
+            let response = await upVote(data,desription)
             if (response.responseData && Array.isArray(response.responseData) && response.responseData.length) {
                 this.setState({allLeads: response.responseData, originalResponseData: response.responseData})
             }
@@ -61,16 +63,17 @@ class Category extends BaseComponent {
         }
     }
 
-    sendDownVoteRequest = async (id) => {
+    sendDownVoteRequest = async (id,desription) => {
         let data = `${id}`
         try {
-            let response = await downVote(data)
+            let response = await downVote(data,desription)
             if (response.responseData && Array.isArray(response.responseData) && response.responseData.length) {
                 this.setState({allLeads: response.responseData, originalResponseData: response.responseData})
             }
         } catch (error) {
             console.log(error)
         }
+        this.handlePopoverClose();
 
     }
     
@@ -86,7 +89,7 @@ class Category extends BaseComponent {
     };
 
     handlePopoverClose = async () => {
-        await this.setState({popoverAnchor: null, isShowSharePopup: false});
+        await this.setState({popoverAnchor: null, isShowSharePopup: false,isShowNotWorkingPopup:false});
     };
 
     getUniqueContact = async (data) => {
@@ -131,6 +134,10 @@ class Category extends BaseComponent {
         this.setState({allLeads: dummyData})
     }
 
+    handleNotWorkingPopoverOpen=async(id)=>{
+        await this.setState({isShowNotWorkingPopup:true,id:id});
+    };
+
     render() {
         return (
             <LeadsComponent
@@ -145,6 +152,7 @@ class Category extends BaseComponent {
                 sendUpVoteRequest={this.sendUpVoteRequest}
                 sendDownVoteRequest={this.sendDownVoteRequest}
                 onSelectSorting={this.onSelectSorting}
+                handleNotWorkingPopoverOpen={this.handleNotWorkingPopoverOpen}
             />
         );
     }
