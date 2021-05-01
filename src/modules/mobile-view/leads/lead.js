@@ -75,7 +75,7 @@ function LeadsComponent(props) {
             value={props.state.selectedSortingAttr}
             onChange={props.onSelectSorting}
           >
-            <MenuItem value={"Sort"}>Sort By -</MenuItem>
+            <MenuItem value={"Sort"} disabled>Sort By -</MenuItem>
             <MenuItem value={"recent"}>Sort By - Recent</MenuItem>
             <MenuItem value={"working"}>Sort By - Working</MenuItem>
           </Select>
@@ -115,8 +115,8 @@ function LeadsComponent(props) {
                       className="card-vote-buttons  underline-text"
                       style={{ cursor: "pointer" }}
                       onClick={() => {
-                        props.incrementDownVote(ite._id);
-                        props.sendDownVoteRequest(ite._id);
+                        // props.incrementDownVote(ite._id);
+                        // props.sendDownVoteRequest(ite._id);
                       }}
                     >
                       Not working:&nbsp;{ite.downVoteCount}
@@ -141,6 +141,7 @@ function LeadsComponent(props) {
             : "No leads available. Search for other cities."}
         </div>
       )}
+      <div className="hidden-div">.</div>
     </>
   );
 }

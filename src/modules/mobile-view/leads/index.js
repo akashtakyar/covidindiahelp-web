@@ -73,6 +73,7 @@ class Category extends BaseComponent {
         }
 
     }
+    
     handlePopoverOpen = async (item) => {
         let uniqueContact = []
         uniqueContact = await this.getUniqueContact(item);
@@ -111,6 +112,8 @@ class Category extends BaseComponent {
         this.state.allLeads[index].downVoteCount = this.state.allLeads[index].downVoteCount + 1;
         this.setState({allLeads: this.state.allLeads, originalResponseData: this.state.allLeads})
     }
+
+
     onSelectSorting = (event) => {
         let dummyData = this.state.originalResponseData;
         this.setState({selectedSortingAttr: event.target.value});
