@@ -6,13 +6,15 @@ import moment from "moment";
 import { Row, Column } from "simple-flexbox";
 import utility from "../../../utility";
 import { makeStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 import Dialog from "@material-ui/core/Dialog";
 import { TwitterTweetEmbed } from "react-twitter-embed";
 import { stateNamesConstant } from "../../../constants";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import {isIOS, isIOS13, isIPad13,isPod13} from 'react-device-detect';
-
+import { isIOS, isIOS13, isIPad13, isPod13 } from "react-device-detect";
 
 import {
   FacebookShareButton,
@@ -41,12 +43,17 @@ function LeadsComponent(props) {
   return (
     <>
       {DialogBox(props)}
+      {notWorkingDialog(props)}
       <Row className="selected-param">
-        <Column style={{width:'100%'}}>
-          <Row justifyContent="space-between" alignItems="center" style={{width:'100%'}}>
-            <span >
+        <Column style={{ width: "100%" }}>
+          <Row
+            justifyContent="space-between"
+            alignItems="center"
+            style={{ width: "100%" }}
+          >
+            <span>
               <img
-              onClick={props.backToSelectCategory}
+                onClick={props.backToSelectCategory}
                 style={{
                   width: "35px",
                   fill:
@@ -55,9 +62,14 @@ function LeadsComponent(props) {
                 src="/images/BackButton.svg"
               />
             </span>
-            {!isIOS && !isIOS13 && !isIPad13 && !isPod13 ?
-            <PushAlertComponent selectedCategory={props.selectedCategory} selectedState={props.selectedState}/>
-            : ""}
+            {!isIOS && !isIOS13 && !isIPad13 && !isPod13 ? (
+              <PushAlertComponent
+                selectedCategory={props.selectedCategory}
+                selectedState={props.selectedState}
+              />
+            ) : (
+              ""
+            )}
           </Row>
           <span className="selected">
             {`${
@@ -75,7 +87,9 @@ function LeadsComponent(props) {
             value={props.state.selectedSortingAttr}
             onChange={props.onSelectSorting}
           >
-            <MenuItem value={"Sort"}>Sort By -</MenuItem>
+            <MenuItem value={"Sort"} disabled>
+              Sort By -
+            </MenuItem>
             <MenuItem value={"recent"}>Sort By - Recent</MenuItem>
             <MenuItem value={"working"}>Sort By - Working</MenuItem>
           </Select>
@@ -115,8 +129,7 @@ function LeadsComponent(props) {
                       className="card-vote-buttons  underline-text"
                       style={{ cursor: "pointer" }}
                       onClick={() => {
-                        props.incrementDownVote(ite._id);
-                        props.sendDownVoteRequest(ite._id);
+                        props.handleNotWorkingPopoverOpen(ite._id);
                       }}
                     >
                       Not working:&nbsp;{ite.downVoteCount}
@@ -141,7 +154,68 @@ function LeadsComponent(props) {
             : "No leads available. Search for other cities."}
         </div>
       )}
+      <div className="hidden-div">.</div>
     </>
+  );
+}
+
+function notWorkingDialog(props) {
+  return (
+    <Dialog
+      open={props.state.isShowNotWorkingPopup}
+      close={props.handlePopoverClose}
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
+    >
+      <div className="dialog-box">
+        <Row className="dialog-header">
+          <Column>
+            <div className="p-b-10">Not Working Reasons</div>
+          </Column>
+          <Column
+            onClick={props.handlePopoverClose}
+            style={{ cursor: "pointer" }}
+          >
+            <img src="/images/Cancel.svg" />{" "}
+          </Column>
+        </Row>
+        <div className="p-sm-1 selected-item " style={{ cursor: "pointer" }}>
+          <List>
+            <ListItem
+              button
+              key={""}
+              onClick={() => {
+                props.incrementDownVote(props.state.id);
+                props.sendDownVoteRequest(props.state.id, "Wrong phone number");
+              }}
+            >
+              <ListItemText primary={"Wrong phone number"} />
+            </ListItem>
+            <ListItem button key={""}
+            onClick={() => {
+                props.incrementDownVote(props.state.id);
+                props.sendDownVoteRequest(props.state.id, "No answer");
+              }}>
+              <ListItemText primary={"No answer"} />
+            </ListItem>
+            <ListItem button key={""}
+            onClick={() => {
+                props.incrementDownVote(props.state.id);
+                props.sendDownVoteRequest(props.state.id, "Switched off/Out of coverage");
+              }}>
+              <ListItemText primary={"Switched off/Out of coverage"} />
+            </ListItem>
+            <ListItem button key={""}
+            onClick={() => {
+                props.incrementDownVote(props.state.id);
+                props.sendDownVoteRequest(props.state.id, "Answered but out of stock");
+              }}>
+              <ListItemText primary={"Answered but out of stock"} />
+            </ListItem>
+          </List>
+        </div>
+      </div>
+    </Dialog>
   );
 }
 
@@ -239,7 +313,7 @@ function DialogBox(props) {
               onClick={() => {
                 props.incrementUpVote(props.state.selectedItem._id);
 
-                props.sendUpVoteRequest(props.state.selectedItem._id);
+                props.sendUpVoteRequest(props.state.selectedItem._id,"");
               }}
             >
               <img
@@ -254,7 +328,7 @@ function DialogBox(props) {
               style={{ cursor: "pointer" }}
               onClick={() => {
                 props.incrementDownVote(props.state.selectedItem._id);
-                props.sendDownVoteRequest(props.state.selectedItem._id);
+                props.sendDownVoteRequest(props.state.selectedItem._id,"");
               }}
             >
               <img

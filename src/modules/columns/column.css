@@ -78,6 +78,11 @@
 
 }
 
+.hidden-div
+{
+    color: white;
+    padding-bottom: 30px;
+}
 
 @media (max-width: 768px) {
 
@@ -153,6 +158,6 @@
 
 @media (max-width: 768px) {
     .disclaimer-text{
-        top: 85vh  !important;
+        top: 92vh  !important;
     }
 }

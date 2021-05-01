@@ -53,8 +53,8 @@ function Main() {
     return (
         <div style={{width: "100% !important"}} className={classes.root}>
             <Disclaimer></Disclaimer>
-            {/* <MobileView className="mobile-view"/> */}
-            {width > 480 ? <Coloumn className="desktop-view"/> : <MobileView className="mobile-view"/>}
+            <MobileView className="mobile-view"/>
+            {/* {width > 480 ? <Coloumn className="desktop-view"/> : <MobileView className="mobile-view"/>} */}
         </div>
     );
 }

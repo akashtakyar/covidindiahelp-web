@@ -9,7 +9,7 @@ function SelectStates(props) {
             <Row className="search-location-row">
                 <Column className="search-row">
                     <span><img className="search-image p-r-10" src="/images/search.svg"></img>   
-                <input placeholder="Search Location" className="search-location" onChange={(event)=>{props.handleSearchLocationInput(event.target.value)}}></input>
+                <input placeholder="Search Location" className="search-location" onChange={(event)=>{props.handleSearchLocationInput(event.target.value.trim())}}></input>
                 </span>
                 </Column>
             </Row>
@@ -25,6 +25,7 @@ function SelectStates(props) {
             ))
             
          : ""}
+         <div className="hidden-div">.</div>
         </>
     );
 }

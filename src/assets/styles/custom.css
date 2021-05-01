@@ -377,11 +377,11 @@ input:focus {
 }
 
 .desktop-view {
-    display: block;
+    display: none;
 }
 
 .mobile-view {
-    display: none;
+    display: block;
 }
 
 @media screen and (max-width: 480px) {
@@ -411,6 +411,7 @@ input:focus {
        border-top: none;
    }
    .select-category{
+       max-width: 500px;
     width: 60%;
     margin: 10px auto;
    }

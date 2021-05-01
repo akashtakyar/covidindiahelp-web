@@ -28,6 +28,7 @@ function SelectCategoryComponent(props) {
                         </CardContent>
                     </Card>
                 </div>)) : ""}
+                <div className="hidden-div">.</div>
         </>
     );
 }

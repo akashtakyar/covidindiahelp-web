@@ -53,6 +53,12 @@
   color: #474951;
 }
 
+.hidden-div
+{
+    color: white;
+    padding-bottom: 30px;
+}
+
 .loading
 {
   font-size: 11px;
