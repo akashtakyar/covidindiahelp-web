@@ -15,7 +15,7 @@ function SelectCategoryComponent(props) {
             </Row>
             {props.categoryList ? props.categoryList.map(data => (
                 <div className="option">
-                    <Card className="m-10" onClick={() => {
+                    <Card className="m-10 select-category" onClick={() => {
                         props.onSelectCategory(data.name)
                     }}>
                         <CardContent className="card-desc-container">
@@ -28,6 +28,7 @@ function SelectCategoryComponent(props) {
                         </CardContent>
                     </Card>
                 </div>)) : ""}
+                <div className="hidden-div">.</div>
         </>
     );
 }

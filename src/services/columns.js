@@ -28,9 +28,13 @@ export async function states(toadd){
 
 
 
-export async function upVote(id){
-    let url = `https://www.covidindiahelp.info:3002/upVote?id=` + id;
-    return httpService(httpConstants.METHOD_TYPE.GET, {'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON},{},url)
+export async function upVote(id,description){
+    let url = `https://www.covidindiahelp.info:3002/upVote`;
+    let data={
+        "id":id,
+        "description":description
+    };
+    return httpService(httpConstants.METHOD_TYPE.POST, {'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON},data,url)
         .then(response => {
                 // console.log("response dasd",response)
                 return Promise.resolve(response);
@@ -44,9 +48,13 @@ export async function upVote(id){
 
 
 
-export async function downVote(id){
-    let url = `https://www.covidindiahelp.info:3002/downVote?id=` + id;
-    return httpService(httpConstants.METHOD_TYPE.GET, {'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON},{},url)
+export async function downVote(id,description){
+    let url = `https://www.covidindiahelp.info:3002/downVote`;
+    let data={
+        "id":id,
+        "description":description
+    };
+    return httpService(httpConstants.METHOD_TYPE.POST, {'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON},data,url)
         .then(response => {
                 // console.log("response dasd",response)
                 return Promise.resolve(response);

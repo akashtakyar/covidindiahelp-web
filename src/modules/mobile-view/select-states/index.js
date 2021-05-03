@@ -7,6 +7,7 @@ import {getTags} from "../../../services/columns"
 import {history} from "../../../managers/history";
 import Header from "../header";
 import {genericConstants} from "../../../constants";
+import Footer from '../../columns/footer'
 
 class Coloumn extends BaseComponent {
     constructor(props) {
@@ -142,6 +143,7 @@ class Coloumn extends BaseComponent {
             <div className="mobile-view">
                 <Header isInfo={this.state.selectedComponent === genericConstants.WEB_COMPONENT_TYPE.CARDS}/>
                 {this.MobileComponent()}
+                <Footer></Footer>
             </div>
         );
     }

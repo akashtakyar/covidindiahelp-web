@@ -2,6 +2,7 @@ import React, {useLayoutEffect, useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {Coloumn} from ".";
 import MobileView from '../modules/mobile-view/select-states'
+import Disclaimer from './disclaimer'
 
 const useStyles = makeStyles({
     root: {
@@ -51,7 +52,9 @@ function Main() {
     const classes = useStyles();
     return (
         <div style={{width: "100% !important"}} className={classes.root}>
-            {width > 480 ? <Coloumn className="desktop-view"/> : <MobileView className="mobile-view"/>}
+            <Disclaimer></Disclaimer>
+            <MobileView className="mobile-view"/>
+            {/* {width > 480 ? <Coloumn className="desktop-view"/> : <MobileView className="mobile-view"/>} */}
         </div>
     );
 }

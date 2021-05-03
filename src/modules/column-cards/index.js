@@ -59,9 +59,7 @@ class ColumnCard extends BaseComponent {
         console.log("handlePopoverOpen",item);
         let uniqueContact=[]
         uniqueContact=await this.getUniqueContact(item);
-        console.log("handlePopoverOpen unique===",uniqueContact);
         await this.setState({isShowSharePopup:true,popoverText:item.description,selectedItem:item,uniqueContact:uniqueContact});
-        console.log("handlePopoverOpen===========",this.state.isShowSharePopup);
 
       };
     
