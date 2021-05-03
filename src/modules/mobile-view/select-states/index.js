@@ -94,6 +94,7 @@ class Coloumn extends BaseComponent {
 
     toggleState = (key, value) => {
         this.setState({[key]: value})
+        console.log("login===123")
     }
 
     onSelectLocation = (value) => {
