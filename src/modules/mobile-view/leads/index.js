@@ -14,8 +14,8 @@ class Category extends BaseComponent {
             selectedState: props.selectedState,
             selectedCategory: props.selectedCategory,
             isShowSharePopup: false,
-            isShowNotWorkingPopup:false,
-            id:'',
+            isShowNotWorkingPopup: false,
+            id: '',
             popoverText: '',
             selectedItem: {},
             uniqueContact: [],
@@ -51,10 +51,10 @@ class Category extends BaseComponent {
         history.push(`/${this.props.selectedState}`)
     }
 
-    sendUpVoteRequest = async (id,desription) => {
+    sendUpVoteRequest = async (id, desription) => {
         let data = `${id}`
         try {
-            let response = await upVote(data,desription)
+            let response = await upVote(data, desription)
             if (response.responseData && Array.isArray(response.responseData) && response.responseData.length) {
                 this.setState({allLeads: response.responseData, originalResponseData: response.responseData})
             }
@@ -63,21 +63,24 @@ class Category extends BaseComponent {
         }
     }
 
-    sendDownVoteRequest = async (id,desription) => {
+    sendDownVoteRequest = async (id, desription) => {
         let data = `${id}`
         try {
-            let response = await downVote(data,desription)
+            let response = await downVote(data, desription)
             if (response.responseData && Array.isArray(response.responseData) && response.responseData.length) {
                 this.setState({allLeads: response.responseData, originalResponseData: response.responseData})
             }
+            this.incrementDownVote(id, response?.responseData?.comments || [])
+
         } catch (error) {
             console.log(error)
         }
-        this.handlePopoverClose();
+        this.handlePopoverClose(this.state.isShowSharePopup);
 
     }
-    
+
     handlePopoverOpen = async (item) => {
+        console.log("item=handlePopoverOpen==", item)
         let uniqueContact = []
         uniqueContact = await this.getUniqueContact(item);
         await this.setState({
@@ -88,8 +91,9 @@ class Category extends BaseComponent {
         });
     };
 
-    handlePopoverClose = async () => {
-        await this.setState({popoverAnchor: null, isShowSharePopup: false,isShowNotWorkingPopup:false});
+    handlePopoverClose = async (isShowSharePopup = false) => {
+        console.log("isShowSharePopup===", isShowSharePopup)
+        await this.setState({popoverAnchor: null, isShowSharePopup: isShowSharePopup, isShowNotWorkingPopup: false});
     };
 
     getUniqueContact = async (data) => {
@@ -110,9 +114,10 @@ class Category extends BaseComponent {
         this.setState({allLeads: this.state.allLeads, originalResponseData: this.state.allLeads})
     }
 
-    incrementDownVote = (id) => {
+    incrementDownVote = (id, comments = []) => {
         let index = this.state.responseByIndex[id].index;
         this.state.allLeads[index].downVoteCount = this.state.allLeads[index].downVoteCount + 1;
+        this.state.allLeads[index].comments = comments;
         this.setState({allLeads: this.state.allLeads, originalResponseData: this.state.allLeads})
     }
 
@@ -134,8 +139,8 @@ class Category extends BaseComponent {
         this.setState({allLeads: dummyData})
     }
 
-    handleNotWorkingPopoverOpen=async(id)=>{
-        await this.setState({isShowNotWorkingPopup:true,id:id});
+    handleNotWorkingPopoverOpen = async (id) => {
+        await this.setState({isShowNotWorkingPopup: true, id: id});
     };
 
     render() {

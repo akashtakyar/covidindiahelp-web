@@ -21,7 +21,7 @@
 }
 
 .card-desc {
-  font-size: 11px !important;
+  font-size: 12px !important;
 }
 .card-timestamp {
   font-size: 9px !important;
@@ -32,7 +32,7 @@
   justify-content: space-between;
 }
 .card-vote-buttons {
-  font-size: 9px !important;
+  font-size: 11px !important;
   color: #8a88fd;
   text-align: left;
 }
@@ -42,7 +42,7 @@
 }
 
 .card-footer-info {
-  font-size: 9px !important;
+  font-size: 11px !important;
   color: #757575;
   text-align: right;
 }
@@ -81,7 +81,7 @@
   }
 
   .card-vote-buttons {
-    font-size: 11px !important;
+    font-size: 12px !important;
   }
   .loading
   {
