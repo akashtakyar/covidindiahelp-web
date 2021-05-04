@@ -11,6 +11,7 @@ import "firebase/messaging";
 import "firebase/messaging";
 import firebase from "firebase";
 import {firebaseConfig} from "./constants";
+import LeadDetails from "./modules/leadDetails";
 
 class Routes extends BaseComponent {
     componentDidMount() {
@@ -25,6 +26,7 @@ class Routes extends BaseComponent {
                         <Route exact path={'/'} component={Main}/>
                         <Route exact path={'/:state'} component={Main}/>
                         <Route exact path={'/:state/:category'} component={Main}/>
+                        <Route exact path="/details/:id" component={Main}/>
                         <Route exact path="/about" component={AddInfo}/>
                         <Redirect exact from='*' to="/"/>
                     </Switch>

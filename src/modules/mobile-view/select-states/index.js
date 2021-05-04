@@ -8,6 +8,7 @@ import {history} from "../../../managers/history";
 import Header from "../header";
 import {genericConstants} from "../../../constants";
 import Footer from '../../columns/footer'
+import LeadDetails from "../../leadDetails";
 
 class Coloumn extends BaseComponent {
     constructor(props) {
@@ -139,10 +140,14 @@ class Coloumn extends BaseComponent {
     }
 
     render() {
-        return (
+        let pathArray = window.location.pathname.split('/')
+
+            return (
             <div className="mobile-view">
                 <Header isInfo={this.state.selectedComponent === genericConstants.WEB_COMPONENT_TYPE.CARDS}/>
-                {this.MobileComponent()}
+                {pathArray.length ===3 && pathArray[pathArray.length-2] === 'details'?
+                    <LeadDetails/>
+                    :this.MobileComponent()}
                 <Footer></Footer>
             </div>
         );

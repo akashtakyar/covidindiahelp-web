@@ -11,7 +11,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Dialog from "@material-ui/core/Dialog";
 import {TwitterTweetEmbed} from "react-twitter-embed";
-import {stateNamesConstant} from "../../../constants";
+import {stateNamesConstant, voteTypeConstants} from "../../../constants";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import {isIOS, isIOS13, isIPad13, isPod13} from "react-device-detect";
@@ -40,10 +40,11 @@ const useStyles = makeStyles((theme) => ({
 
 function LeadsComponent(props) {
     const classes = useStyles();
+    let latestComment =null
     return (
         <>
             {DialogBox(props)}
-            {notWorkingDialog(props)}
+            {NotWorkingDialog(props)}
             <Row className="selected-param">
                 <Column style={{width: "100%"}}>
                     <Row
@@ -99,33 +100,36 @@ function LeadsComponent(props) {
             </Row>
             {props.state.allLeads.length > 0 ? (
                 props.state.allLeads &&
-                props.state.allLeads.map((ite, index) => (
-                    <>
-                        <Card className="m-10" className="lead-card" key={index}>
-                            <CardContent className="lead-container">
-                                <Typography className="mb-10" variant="body2"></Typography>
-                                <Typography
-                                    className="card-desc"
-                                    variant="body2"
-                                    onClick={() => props.handlePopoverOpen(ite)}
-                                >
-                                    {ite.description}
-                                </Typography>
-                                {ite.comments.length > 0 && <>
-                                    <hr style={{marginBottom: '5px'}}/>
-                                    <Typography
-                                        className="card-desc pt-1"
-                                        variant="body2"
-                                    >
-                                        <span
-                                            className="bottom-text">{moment(ite.comments?.[ite.comments.length - 1].addedOn).fromNow()}</span> {" "}{ite.comments?.[ite.comments.length - 1].description}
-                                    </Typography></>}
+                props.state.allLeads.map((ite, index) => {
+                    latestComment =utility.getLatestDownVoteComment(ite.comments)
 
-                                <Row className="card-timestamp">
-                                    <Row
-                                        className="card-vote-buttons"
-                                        style={{cursor: "pointer"}}
+                    return(
+                        <>
+                            <Card className="m-10" className="lead-card" key={index}>
+                                <CardContent className="lead-container">
+                                    <Typography className="mb-10" variant="body2"></Typography>
+                                    <Typography
+                                        className="card-desc"
+                                        variant="body2"
+                                        onClick={() => props.handlePopoverOpen(ite)}
                                     >
+                                        {ite.description}
+                                    </Typography>
+                                    {ite.comments.length > 0 && <>
+                                        <hr style={{marginBottom: '5px'}}/>
+                                        <Typography
+                                            className="card-desc pt-1"
+                                            variant="body2"
+                                        >
+                                        <span
+                                            className="bottom-text">{latestComment?.addedOn && moment(latestComment?.addedOn).fromNow()}</span> {" "}{latestComment?.description || ''}
+                                        </Typography></>}
+
+                                    <Row className="card-timestamp">
+                                        <Row
+                                            className="card-vote-buttons"
+                                            style={{cursor: "pointer"}}
+                                        >
                     <span
                         className="underline-text"
                         onClick={() => {
@@ -135,28 +139,29 @@ function LeadsComponent(props) {
                     >
                       Working:&nbsp;{ite.upVoteCount}
                     </span>
-                                        &nbsp;&nbsp;
-                                        <span
-                                            className="card-vote-buttons  underline-text"
-                                            style={{cursor: "pointer"}}
-                                            onClick={() => {
-                                                props.handleNotWorkingPopoverOpen(ite._id);
-                                            }}
-                                        >
+                                            &nbsp;&nbsp;
+                                            <span
+                                                className="card-vote-buttons  underline-text"
+                                                style={{cursor: "pointer"}}
+                                                onClick={() => {
+                                                    props.handleNotWorkingPopoverOpen(ite._id);
+                                                }}
+                                            >
                       Not working:&nbsp;{ite.downVoteCount}
                     </span>
+                                        </Row>
+                                        &nbsp;
+                                        <Column className="card-footer-info">
+                                            {utility.toSentenceCase(ite.state)}{" "}
+                                            {utility.toSentenceCase(ite.district)}{" "}
+                                            {ite.comments.length < 1 && moment(ite.channelCreatedOn).fromNow()}
+                                        </Column>
                                     </Row>
-                                    &nbsp;
-                                    <Column className="card-footer-info">
-                                        {utility.toSentenceCase(ite.state)}{" "}
-                                        {utility.toSentenceCase(ite.district)}{" "}
-                                        {ite.comments.length < 1 && moment(ite.channelCreatedOn).fromNow()}
-                                    </Column>
-                                </Row>
-                            </CardContent>
-                        </Card>
-                    </>
-                ))
+                                </CardContent>
+                            </Card>
+                        </>
+                    )
+                })
             ) : (
                 <div className="loading">
                     {!props.state.responseMessage &&
@@ -170,7 +175,7 @@ function LeadsComponent(props) {
     );
 }
 
-function notWorkingDialog(props) {
+export function NotWorkingDialog(props) {
     return (
         <Dialog
             open={props.state.isShowNotWorkingPopup}
@@ -184,7 +189,7 @@ function notWorkingDialog(props) {
                         <div className="p-b-10">Not Working Reasons</div>
                     </Column>
                     <Column
-                        onClick={props.handlePopoverClose}
+                        onClick={()=>props.handlePopoverClose()}
                         style={{cursor: "pointer"}}
                     >
                         <img alt="cancel" src="/images/Cancel.svg"/>{" "}
@@ -196,7 +201,7 @@ function notWorkingDialog(props) {
                             button
                             key={""}
                             onClick={() => {
-                                props.incrementDownVote(props.state.id);
+                                // props.incrementDownVote(props.state.id);
                                 props.sendDownVoteRequest(props.state.id, "Wrong phone number");
                             }}
                         >
@@ -204,28 +209,28 @@ function notWorkingDialog(props) {
                         </ListItem>
                         <ListItem button key={""}
                                   onClick={() => {
-                                      props.incrementDownVote(props.state.id);
+                                      // props.incrementDownVote(props.state.id);
                                       props.sendDownVoteRequest(props.state.id, "No answer");
                                   }}>
                             <ListItemText primary={"No answer"}/>
                         </ListItem>
                         <ListItem button key={""}
                                   onClick={() => {
-                                      props.incrementDownVote(props.state.id);
+                                      // props.incrementDownVote(props.state.id);
                                       props.sendDownVoteRequest(props.state.id, "Switched off/Out of coverage");
                                   }}>
                             <ListItemText primary={"Switched off/Out of coverage"}/>
                         </ListItem>
                         <ListItem button key={""}
                                   onClick={() => {
-                                      props.incrementDownVote(props.state.id);
+                                      // props.incrementDownVote(props.state.id);
                                       props.sendDownVoteRequest(props.state.id, "Answered but out of stock");
                                   }}>
                             <ListItemText primary={"Answered but out of stock"}/>
                         </ListItem>
                         <ListItem button key={""}
                                   onClick={() => {
-                                      props.incrementDownVote(props.state.id);
+                                      // props.incrementDownVote(props.state.id);
                                       props.sendDownVoteRequest(props.state.id, "Fake");
                                   }}>
                             <ListItemText primary={"Fake"}/>
@@ -284,6 +289,7 @@ function DialogBox(props) {
                                 <Column>
                                     <div className="p-t-20 p-r-20 p-b-10 bottom-text">
                                         {props.state.selectedItem?.comments?.length > 0 && props.state.selectedItem.comments.map((comment, index) =>
+                                            comment.type === voteTypeConstants.DOWN_VOTE &&
                                             <Typography className="card-desc pt-1"
                                                         variant="body2">
                                                 <span
@@ -322,6 +328,7 @@ function DialogBox(props) {
                                 <Column>
                                     <div className="p-l-20 p-t-20 p-r-20 p-b-10 bottom-text">
                                         {props.state.selectedItem?.comments?.length > 0 && props.state.selectedItem.comments.map((comment, index) =>
+                                            comment.type === voteTypeConstants.DOWN_VOTE &&
                                             <Typography className="card-desc pt-1"
                                                         variant="body2">
                                                 <span

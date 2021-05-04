@@ -3,6 +3,7 @@ import {history} from "../managers/history";
 import swal from "sweetalert";
 import React from "react";
 import ToastService from 'react-material-toast';
+import {voteTypeConstants} from "../constants";
 
 const toast = ToastService.new({
     place: 'topRight',
@@ -53,8 +54,17 @@ const utility = {
     changeDateFormat,
     toSentenceCase,
     parseResponse,
+    getLatestDownVoteComment
 };
 export default utility;
+
+function getLatestDownVoteComment(list) {
+    if (!list || list.length < 1)
+        return ''
+    list = list.filter(obj => obj.type === voteTypeConstants.DOWN_VOTE).sort((a, b) => a.addedOn > b.addedOn ? 1 : -1)
+    return list[list.length - 1]
+
+}
 
 function parseResponse(promise) {
     return promise.then(data => {
@@ -601,7 +611,8 @@ function changeDateFormat(date, newFormat) {
     return moment(date, currentFormat).format(newFormat)
 }
 
-function toSentenceCase(stringToChange)
-{
-    return stringToChange.toLowerCase().replace(/(^\s*\w|[\.\!\?]\s*\w)/g,function(c){return c.toUpperCase()});
+function toSentenceCase(stringToChange) {
+    return stringToChange.toLowerCase().replace(/(^\s*\w|[\.\!\?]\s*\w)/g, function (c) {
+        return c.toUpperCase()
+    });
 }

@@ -25,8 +25,7 @@ function NavbarComponent(props) {
                         <Column className="drawericon" style={{fontSize: "10px", cursor: 'pointer'}}>
                             <img src="/images/hands.svg" alt={'Covid Help'}/>
                         </Column>
-                        <Column className="bookmarked" style={{fontSize: "12px", marginLeft: '10px'}}>Covid India
-                            Help</Column>
+                        <Column className="bookmarked" style={{fontSize: "12px", marginLeft: '10px'}}>Mission Humane</Column>
                     </Row>
                 </Column>
             </Column>
