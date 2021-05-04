@@ -90,3 +90,8 @@ export const firebaseConfig = {
     appId: process.env.REACT_APP_APP_ID,
     measurementId: process.env.REACT_APP_MEASUREMENT_ID
 }
+
+export const voteTypeConstants = {
+    UP_VOTE:'UP_VOTE',
+    DOWN_VOTE:'DOWN_VOTE'
+}
