@@ -4,10 +4,14 @@ import "./custom.css";
 import { Row, Column } from "simple-flexbox";
 import { stateNamesConstant } from '../../../constants';
 
-const CategoryHeader = styled(Row)`
+const Header = styled(Row)`
     position: sticky;
     top: 35px;
-`
+`;
+
+const HeaderText = styled(Column)`
+    flex-wrap: wrap;
+`;
 
 const CategoryList = styled.div`
     display: flex;
@@ -63,37 +67,36 @@ const FindResourceText = styled.div`
     }
 `
 
-function SelectCategoryComponent(props) {
-    console.log("props.categoryList", props.categoryList)
-    return (
-        <>
-            <CategoryHeader flex="1" className="category-header">
-                <Column horizontal="left" className="back" onClick={props.onBackToSelectState}><span>
-                    <img src="/images/BackButtonBlack.svg" alt="covid19" /></span></Column>
-                <Column flex="1" horizontal="center" style={{ marginLeft: -35 }}>
-                    What are you searching in {stateNamesConstant[props.selectedState]}?
-                </Column>
-            </CategoryHeader>
-            <CategoryList>
-                {props.categoryList ? props.categoryList.map(({ name, _id }, idx) => (
-                    <CategoryContainer key={_id} onClick={() => props.onSelectCategory(name)}>
-                        <CategoryHeaderText>{name.toUpperCase()}</CategoryHeaderText>
-                        <CategoryIconContainer>
-                            <img src={`/images/${name.toLowerCase().replace('/', '-')}.svg`} height="60" width="60" alt={name.toLowerCase()} />
-                        </CategoryIconContainer>
-                        <FindResourceText>
-                            <div>
-                                Find Resource
-                            </div>
-                            {" > "}
-                        </FindResourceText>
-                    </CategoryContainer>
-                )) : null}
-            </CategoryList>
+const SelectCategoryComponent = (props) =>
+(
+    <>
+        <Header flex="1" justifyContent="space-between" className="category-header">
+            <Column className="back cursor-pointer" onClick={props.onBackToSelectState} >
+                <img src="/images/BackButtonBlack.svg" alt="back" />
+            </Column>
+            <HeaderText horizontal="center">
+                What are you searching in {stateNamesConstant[props.selectedState]}?
+            </HeaderText>
+            <Column />
+        </Header>
+        <CategoryList>
+            {props.categoryList ? props.categoryList.map(({ name }, idx) => (
+                <CategoryContainer key={idx} onClick={() => props.onSelectCategory(name)}>
+                    <CategoryHeaderText>{name.toUpperCase()}</CategoryHeaderText>
+                    <CategoryIconContainer>
+                        <img src={`/images/${name.toLowerCase().replace('/', '-')}.svg`} height="60" width="60" alt={name.toLowerCase()} />
+                    </CategoryIconContainer>
+                    <FindResourceText>
+                        <div>
+                            Find Resource
+                        </div>
+                        {" > "}
+                    </FindResourceText>
+                </CategoryContainer>
+            )) : null}
+        </CategoryList>
+    </>
+);
 
-            <div className="hidden-div">.</div>
-        </>
-    );
-}
 
 export default SelectCategoryComponent;
