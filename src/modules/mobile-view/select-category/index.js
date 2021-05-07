@@ -1,8 +1,8 @@
 import React from "react";
 import BaseComponent from '../../baseComponent'
 import SelectCategoryComponent from './selectCategoryComponent'
-import {history} from '../../../managers/history'
-import {genericConstants} from "../../../constants";
+import { history } from '../../../managers/history'
+import { genericConstants } from "../../../constants";
 
 class Category extends BaseComponent {
     onSelectCategory = (value) => {
@@ -14,6 +14,7 @@ class Category extends BaseComponent {
     }
 
     onBackToSelectState = () => {
+        console.log("onBackToSelectState clicked")
         if (this.props.toggleState)
             this.props.toggleState("selectedComponent", genericConstants.WEB_COMPONENT_TYPE.STATE)
         history.push('/')
