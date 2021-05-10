@@ -1,7 +1,7 @@
 import React from 'react';
 import BaseComponent from "../baseComponent";
 import LeadDetailsComponent from "./leadDetailsComponent";
-import {downVote, getCardDetails, upVote} from "../../services/columns";
+import {downVote, getCardDetails, upVote, getVolunteerCard} from "../../services/columns";
 
 
 class LeadDetails extends BaseComponent {
@@ -18,6 +18,7 @@ class LeadDetails extends BaseComponent {
         let pathArray = window.location.pathname.split('/')
         if (pathArray.length === 3)
             await this.getLeadDetails(pathArray[pathArray.length - 1]);
+        else await this.getVolunteerDetails();
     }
 
     getLeadDetails = async (id) => {
@@ -27,6 +28,19 @@ class LeadDetails extends BaseComponent {
                 return;
             let uniqueContact = await this.getUniqueContact(response.responseData)
             this.setState({uniqueContact, leadDetails: response.responseData})
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    getVolunteerDetails = async () => {
+        try {
+            let response = await getVolunteerCard()
+            if (!response || !response.responseData || Object.keys(response.responseData).length < 1)
+                return;
+            let uniqueContact = await this.getUniqueContact(response.responseData[0])
+            this.setState({uniqueContact, leadDetails: response.responseData[0]})
 
         } catch (error) {
             console.log(error)
@@ -81,7 +95,7 @@ class LeadDetails extends BaseComponent {
 
     render() {
         return (<>
-            <LeadDetailsComponent state={this.state}
+            <LeadDetailsComponent state={this.state} isVolunteerView={this.props.isVolunteerView}
                                   handleNotWorkingPopoverOpen={this.handleNotWorkingPopoverOpen}
                                   sendUpVoteRequest={this.sendUpVoteRequest}
                                   sendDownVoteRequest={this.sendDownVoteRequest}
