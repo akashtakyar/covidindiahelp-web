@@ -370,6 +370,9 @@ input:focus {
 .alert-image {
   width: 18px;
 }
+.fc-grey {
+  color: #474951;
+}
 
 .category-header {
   box-shadow: 0 0.5px 1px 0 rgba(0, 0, 0, 0.2);
@@ -469,12 +472,17 @@ input:focus {
 }
 
 .disclaimer-text-top {
-  top: calc(100vh - 25px) !important;
+  top: calc(100vh - 50px) !important;
+  bottom: 0;
+  font-size: 12px;
 }
 
 @media screen and (max-width: 600px) {
   .disclaimer-text-top {
-    top: calc(100vh - 55px) !important;
-    height: 55px im !important;
+    top: 87vh !important;
+    font-size: 10px;
+    bottom: 0;
+    position: fixed;
+    padding: 5px;
   }
 }

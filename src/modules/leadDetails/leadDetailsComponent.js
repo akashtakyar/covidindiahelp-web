@@ -15,22 +15,26 @@ import {
 import {NotWorkingDialog} from "../mobile-view/leads/lead";
 import {voteTypeConstants} from "../../constants";
 
-const volunteerDec = {
-    SUPPLY: 'Please call the number and find out if this information is working or not working; after finishing the call, click on the Working or Not Working link. Refresh to see a new request.',
-    NEED: 'Please go through the list of resources on https://app.missionhumane.org/{state}/{category} and find a relevant source for this following request. If you have found some help, please reach out to them and provide them the information.'
-}
 const LeadDetailsComponent = (props) => {
     const {isVolunteerView} = props;
     const {leadDetails} = props.state;
     return (
         <div>
-            <div className="dialog-box" style={{maxWidth: '80%', margin: 'auto'}}>
+            <div className="dialog-box" style={{maxWidth: '90%', margin: 'auto', paddingBottom: '14vh'}}>
                 {isVolunteerView && <div className="p-b-10">
                     <b>{leadDetails?.type === "SUPPLY" ? "HELP UPDATE THE INFORMATION" : "HELP BY FINDING INFORMATION"}</b>
-                    <p className="p-t-20">{leadDetails?.type && volunteerDec[leadDetails?.type]}</p>
+                    {leadDetails?.type === 'SUPPLY' ?
+                        <p className="p-t-20 fc-grey">Please call the number and find out if this information is working
+                            or not
+                            working; after finishing the call, click on the Working or Not Working link. Refresh to see
+                            a new request.</p> :
+                        <p className="p-t-20 fc-grey">Please go through the list of resources on <a
+                            href={`https://app.missionhumane.org/${leadDetails?.state}/${leadDetails?.category?.toLowerCase()}`}> app.missionhumane.org/{leadDetails?.state}/{leadDetails?.category?.toLowerCase()}</a> and
+                            find a relevant source for this following request. If you have found some help, please reach
+                            out to them and provide them the information.</p>}
                 </div>}
                 <Row className="dialog-header">
-                    <div className="p-b-10">Details</div>
+                    <b className="p-b-10">Details</b>
                 </Row>
                 {props.state?.leadDetails &&
                 typeof props.state?.leadDetails.attachments === 'object' &&

@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
 import '../columns/column.css'
 import Credits from '../columns/credits';
-import InfoIcon from '@material-ui/icons/Info';
+import {history} from '../../managers/history'
 
 import {Column, Row} from "simple-flexbox";
+import {genericConstants} from "../../constants";
 
 function NavbarComponent(props) {
     const [showCredits, setshowCredits] = useState(false)
@@ -16,16 +17,20 @@ function NavbarComponent(props) {
                 marginRight: '0px',
                 alignItems: 'center',
                 justifyContent: "space-between",
-                position:"sticky",
-                top:0
+                position: "sticky",
+                top: 0
             }}>
             <Column>
-                <Column className="navbar-cont">
+                <Column className="navbar-cont cursor-pointer" onClick={() => {
+                    history.push('/')
+                    if (props.toggleState) props.toggleState('selectedComponent', genericConstants.WEB_COMPONENT_TYPE.STATE)
+                }}>
                     <Row style={{height: "100%", alignItems: 'center', columnGap: '5px'}}>
                         <Column className="drawericon" style={{fontSize: "10px", cursor: 'pointer'}}>
                             <img src="/images/hands.svg" alt={'Covid Help'}/>
                         </Column>
-                        <Column className="bookmarked" style={{fontSize: "12px", marginLeft: '10px'}}>Mission Humane</Column>
+                        <Column className="bookmarked" style={{fontSize: "12px", marginLeft: '10px'}}>Mission
+                            Humane</Column>
                     </Row>
                 </Column>
             </Column>

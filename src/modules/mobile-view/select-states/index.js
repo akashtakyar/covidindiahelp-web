@@ -95,7 +95,6 @@ class Coloumn extends BaseComponent {
 
     toggleState = (key, value) => {
         this.setState({[key]: value})
-        console.log("login===123")
     }
 
     onSelectLocation = (value) => {
@@ -145,7 +144,7 @@ class Coloumn extends BaseComponent {
         let isVolunteerView = pathArray.length === 2 && pathArray[pathArray.length - 1] === 'volunteer'
         return (
             <div className="mobile-view">
-                <Header isInfo={this.state.selectedComponent === genericConstants.WEB_COMPONENT_TYPE.CARDS}/>
+                <Header isInfo={this.state.selectedComponent === genericConstants.WEB_COMPONENT_TYPE.CARDS} toggleState={this.toggleState}/>
                 {isDetailView || isVolunteerView ?
                     <LeadDetails isVolunteerView={isVolunteerView}/> : this.MobileComponent()}
                 <Footer isVolunteerView={isVolunteerView}/>
