@@ -16,24 +16,7 @@ function Credits({show,setShow}) {
 
             <br/>
             <br/>
-            <li>Akash Takyar</li>
-            <li>Kapil Saxena</li>
-            <li>Prashant Raghav</li>
-            <li>Ayush Kulshrestha</li>
-            <li>Anurag Kumar</li>
-            <li>Chandrika</li>
-            <li>Rituraj</li>
-            <li>Nishant Garg</li>
-            <li>Gaurav Chauhan</li>
-            <li>Sristi Rajput</li>
-            <li>Dhanya Mary Biju</li>
-            <li>Sharad Gupta</li>
-            <li>Shivansh Mehendiratta</li>
-            <li>Jayesh Gadewar</li>
-                <li>Srinjoy Chowdhary</li>
-                <li>Sunny Kumar</li>
-            <br/>
-            For any further queries please contact at covidindiahelp.info@gmail.com<br/><br/>v0.1 - beta
+                For any further queries please contact at <a href="mailto: covidindiahelp.info@gmail.com">covidindiahelp.info@gmail.com</a> or join us on <a href="https://join.slack.com/t/covidindiahelpinfo/shared_invite/zt-q26daxgw-vZDRD3hpSAi2DkLYJuGzDw">slack</a>.
             </p>
         </div>:""}
        </>

@@ -186,7 +186,7 @@ export function NotWorkingDialog(props) {
             <div className="dialog-box">
                 <Row className="dialog-header">
                     <Column>
-                        <div className="p-b-10">Not Working Reasons</div>
+                        <div className="p-b-10">Choose a reason:</div>
                     </Column>
                     <Column
                         onClick={()=>props.handlePopoverClose()}
@@ -197,15 +197,20 @@ export function NotWorkingDialog(props) {
                 </Row>
                 <div className="p-sm-1 selected-item " style={{cursor: "pointer"}}>
                     <List>
-                        <ListItem
-                            button
-                            key={""}
-                            onClick={() => {
-                                // props.incrementDownVote(props.state.id);
-                                props.sendDownVoteRequest(props.state.id, "Wrong phone number");
-                            }}
-                        >
-                            <ListItemText primary={"Wrong phone number"}/>
+
+                        <ListItem button key={""}
+                                  onClick={() => {
+                                      // props.incrementDownVote(props.state.id);
+                                      props.sendDownVoteRequest(props.state.id, "Answered but out of stock");
+                                  }}>
+                            <ListItemText primary={"Answered but out of stock"}/>
+                        </ListItem>
+                        <ListItem button key={""}
+                                  onClick={() => {
+                                      // props.incrementDownVote(props.state.id);
+                                      props.sendDownVoteRequest(props.state.id, "Fake");
+                                  }}>
+                            <ListItemText primary={"Fake/Fraud"}/>
                         </ListItem>
                         <ListItem button key={""}
                                   onClick={() => {
@@ -221,19 +226,15 @@ export function NotWorkingDialog(props) {
                                   }}>
                             <ListItemText primary={"Switched off/Out of coverage"}/>
                         </ListItem>
-                        <ListItem button key={""}
-                                  onClick={() => {
-                                      // props.incrementDownVote(props.state.id);
-                                      props.sendDownVoteRequest(props.state.id, "Answered but out of stock");
-                                  }}>
-                            <ListItemText primary={"Answered but out of stock"}/>
-                        </ListItem>
-                        <ListItem button key={""}
-                                  onClick={() => {
-                                      // props.incrementDownVote(props.state.id);
-                                      props.sendDownVoteRequest(props.state.id, "Fake");
-                                  }}>
-                            <ListItemText primary={"Fake"}/>
+                        <ListItem
+                            button
+                            key={""}
+                            onClick={() => {
+                                // props.incrementDownVote(props.state.id);
+                                props.sendDownVoteRequest(props.state.id, "Wrong phone number");
+                            }}
+                        >
+                            <ListItemText primary={"Wrong phone number"}/>
                         </ListItem>
                     </List>
                 </div>

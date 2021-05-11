@@ -28,6 +28,7 @@ class Routes extends BaseComponent {
                         <Route exact path={'/:state/:category'} component={Main}/>
                         <Route exact path="/details/:id" component={Main}/>
                         <Route exact path="/volunteer" component={Main}/>
+                        <Route exact path="/volunteers" component={Main}/>
                         <Route exact path="/about" component={AddInfo}/>
                         <Redirect exact from='*' to="/"/>
                     </Switch>

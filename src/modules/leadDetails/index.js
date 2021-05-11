@@ -97,6 +97,7 @@ class LeadDetails extends BaseComponent {
         return (<>
             <LeadDetailsComponent state={this.state} isVolunteerView={this.props.isVolunteerView}
                                   handleNotWorkingPopoverOpen={this.handleNotWorkingPopoverOpen}
+                                  getVolunteerDetails={this.getVolunteerDetails}
                                   sendUpVoteRequest={this.sendUpVoteRequest}
                                   sendDownVoteRequest={this.sendDownVoteRequest}
                                   handleNotWorkingPopoverClose={this.handleNotWorkingPopoverClose}

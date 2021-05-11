@@ -4,6 +4,8 @@ import {TwitterTweetEmbed} from "react-twitter-embed";
 import {Typography} from "@material-ui/core";
 import moment from "moment";
 import utility from "../../utility";
+import Button from '@material-ui/core/Button';
+
 import {
     FacebookIcon,
     FacebookShareButton,
@@ -19,25 +21,36 @@ const LeadDetailsComponent = (props) => {
     const {isVolunteerView} = props;
     const {leadDetails} = props.state;
     return (
+
+        <>
+        {Object.keys(leadDetails).length?
         <div>
             <div className="dialog-box" style={{maxWidth: '90%', margin: 'auto', paddingBottom: '14vh'}}>
-                {isVolunteerView && <div className="p-b-10">
-                    <b>{leadDetails?.type === "SUPPLY" ? "HELP UPDATE THE INFORMATION" : "HELP BY FINDING INFORMATION"}</b>
+                {isVolunteerView && <>
+                <Row className="justify-content-between">
+                    <Column>
+                        <b>{leadDetails?.type === "SUPPLY" ? "YOU CAN HELP" : "YOU CAN HELP"}</b>
+                </Column>
+                    <Column>
+                        <button className="bt-refresh" onClick={props.getVolunteerDetails}>Refresh</button>
+                </Column>
+                </Row>
+                    <div className="p-b-10">
                     {leadDetails?.type === 'SUPPLY' ?
-                        <p className="p-t-20 fc-grey">Please call the number and find out if this information is working
+                        <p className="p-t-20 fc-grey fs-14">Please call the number and find out if this information is working
                             or not
-                            working; after finishing the call, click on the Working or Not Working link. Refresh to see
-                            a new request.</p> :
-                        <p className="p-t-20 fc-grey">Please go through the list of resources on
+                            working; after finishing the call, click on the Working or Not Working.</p> :
+                        <p className="p-t-20 fc-grey fs-14">Please go through the list of resources on
                             <a target="_blank"
                                className="cursor-pointer"
                                href={`https://app.missionhumane.org/${leadDetails?.state}/${leadDetails?.category?.toLowerCase()}`}> app.missionhumane.org/{leadDetails?.state}/{leadDetails?.category?.toLowerCase()}</a> and
                             find a relevant source for this following request. If you have found some help, please reach
                             out to them and provide them the information.</p>}
-                </div>}
-                <Row className="dialog-header">
-                    <b className="p-b-10">Details</b>
-                </Row>
+                </div>
+                </>}
+                {/*<Row className="dialog-header">*/}
+                {/*    <b className="p-b-10">Details</b>*/}
+                {/*</Row>*/}
                 {props.state?.leadDetails &&
                 typeof props.state?.leadDetails.attachments === 'object' &&
                 typeof props.state?.leadDetails.attachments.media_keys === 'object'
@@ -84,18 +97,18 @@ const LeadDetailsComponent = (props) => {
                         </>
                     ) : (
                         <div className="selected-item ">
-                            <div className="p-l-20 p-t-20 p-r-20">
+                            <div className="p-l-20 p-t-20 p-r-20 fs-14">
                                 {" "}
                                 {props.state?.leadDetails.description}
                             </div>
                             {props.state?.uniqueContact && props.state?.uniqueContact.length > 0 ? (
-                                <div className="p-l-20 p-t-20 p-r-20">Contact :</div>
+                                <div className="p-l-20 p-t-20 p-r-20 fs-14">Contact :</div>
                             ) : (
                                 ""
                             )}
                             {props.state?.uniqueContact && props.state?.uniqueContact.length > 0
                                 ? props.state?.uniqueContact.map((data) => (
-                                    <div className="p-l-20 ">
+                                    <div className="p-l-20  fs-14">
                                         <a href={`tel:${data}`}>{data}</a>
                                     </div>
                                 ))
@@ -193,7 +206,12 @@ const LeadDetailsComponent = (props) => {
                                                                     incrementDownVote={(id) => console.log(id)}
             />}
 
-        </div>)
+        </div>
+
+                :
+                <Row className="justify-content-center m-5"><div className="">No request at the moment</div></Row>
+        }
+        </>)
 
 }
 export default LeadDetailsComponent

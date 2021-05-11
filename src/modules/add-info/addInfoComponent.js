@@ -22,25 +22,7 @@ function AddInfoComponent(props) {
             We are a team working to help people find relevant and verified information at the time of the pandemic. Please be careful before sending any money to anyone. We are not responsible for any loss. The information is crowd sourced and it can be inaccurate. Here is the list of contributors of the project:
 
             <br/>
-            <br/>
-            <li>Akash Takyar</li>
-            <li>Kapil Saxena</li>
-            <li>Prashant Raghav</li>
-            <li>Ayush Kulshrestha</li>
-            <li>Anurag Kumar</li>
-            <li>Chandrika</li>
-            <li>Rituraj</li>
-            <li>Nishant Garg</li>
-            <li>Gaurav Chauhan</li>
-            <li>Sristi Rajput</li>
-            <li>Dhanya Mary Biju</li>
-            <li>Sharad Gupta</li>
-            <li>Shivansh Mehendiratta</li>
-            <li>Jayesh Gadewar</li>
-                <li>Srinjoy Chowdhary</li>
-                <li>Sunny Kumar</li>
-            <br/>
-            For any further queries please contact at covidindiahelp.info@gmail.com<br/><br/>v0.1 - beta
+                    For any further queries please contact at covidindiahelp.info@gmail.com or join us on <a href="https://join.slack.com/t/covidindiahelpinfo/shared_invite/zt-q26daxgw-vZDRD3hpSAi2DkLYJuGzDw">slack</a>. <br/><br/>v0.1 - beta
             </p>
             </div>
             <div className="div3">

@@ -407,6 +407,16 @@ input:focus {
 .mobile-view {
   display: block;
 }
+.bt-refresh{
+  max-font-size: 14px;
+  background-color: #096dd9;
+  color: white;
+  border: 0px;
+  border-radius: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 
 @media screen and (max-width: 480px) {
   .desktop-view {
@@ -416,6 +426,17 @@ input:focus {
   .mobile-view {
     display: block;
   }
+
+  .bt-refresh{
+    max-font-size: 12px;
+    background-color: #096dd9;
+    color: white;
+    border: 0px;
+    border-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
 }
 @media screen and (min-width: 480px) {
   .search-location-row {
