@@ -32,7 +32,7 @@ const LeadDetailsComponent = (props) => {
                         <b>{leadDetails?.type === "SUPPLY" ? "YOU CAN HELP" : "YOU CAN HELP"}</b>
                 </Column>
                     <Column>
-                        <button className="bt-refresh" onClick={props.getVolunteerDetails}>Refresh</button>
+                        <button className="bt-refresh" onClick={props.getVolunteerDetails}>Next</button>
                 </Column>
                 </Row>
                     <div className="p-b-10">
