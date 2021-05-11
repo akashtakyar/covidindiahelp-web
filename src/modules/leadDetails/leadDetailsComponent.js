@@ -28,8 +28,10 @@ const LeadDetailsComponent = (props) => {
                             or not
                             working; after finishing the call, click on the Working or Not Working link. Refresh to see
                             a new request.</p> :
-                        <p className="p-t-20 fc-grey">Please go through the list of resources on <a
-                            href={`https://app.missionhumane.org/${leadDetails?.state}/${leadDetails?.category?.toLowerCase()}`}> app.missionhumane.org/{leadDetails?.state}/{leadDetails?.category?.toLowerCase()}</a> and
+                        <p className="p-t-20 fc-grey">Please go through the list of resources on
+                            <a target="_blank"
+                               className="cursor-pointer"
+                               href={`https://app.missionhumane.org/${leadDetails?.state}/${leadDetails?.category?.toLowerCase()}`}> app.missionhumane.org/{leadDetails?.state}/{leadDetails?.category?.toLowerCase()}</a> and
                             find a relevant source for this following request. If you have found some help, please reach
                             out to them and provide them the information.</p>}
                 </div>}
