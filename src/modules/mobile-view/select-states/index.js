@@ -141,7 +141,7 @@ class Coloumn extends BaseComponent {
     render() {
         let pathArray = window.location.pathname.split('/')
         let isDetailView = pathArray.length === 3 && pathArray[pathArray.length - 2] === 'details'
-        let isVolunteerView = pathArray.length === 2 && pathArray[pathArray.length - 1] === 'volunteer' || 'volunteers'
+        let isVolunteerView = pathArray.length === 2 && pathArray[pathArray.length - 1] === 'volunteer'
         return (
             <div className="mobile-view">
                 <Header isInfo={this.state.selectedComponent === genericConstants.WEB_COMPONENT_TYPE.CARDS} toggleState={this.toggleState}/>
