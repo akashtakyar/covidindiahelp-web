@@ -5,6 +5,7 @@ import {Typography} from "@material-ui/core";
 import moment from "moment";
 import utility from "../../utility";
 import Button from '@material-ui/core/Button';
+import parse from 'html-react-parser';
 
 import {
     FacebookIcon,
@@ -32,7 +33,7 @@ function linkify(inputText) {
     replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
     replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
 
-    return replacedText;
+    return parse(replacedText);
 }
 
 const LeadDetailsComponent = (props) => {
