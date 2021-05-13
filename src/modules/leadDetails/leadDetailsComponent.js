@@ -15,11 +15,33 @@ import {
     WhatsappShareButton
 } from "react-share";
 import {NotWorkingDialog} from "../mobile-view/leads/lead";
-import {voteTypeConstants} from "../../constants";
+import {stateNamesConstant, voteTypeConstants} from "../../constants";
+
+function linkify(inputText) {
+    var replacedText, replacePattern1, replacePattern2, replacePattern3;
+
+    //URLs starting with http://, https://, or ftp://
+    replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+    replacedText = inputText.replace(replacePattern1, `<a href="$1" target="_blank">$1</a>`);
+
+    //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
+    replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+    replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
+
+    //Change email addresses to mailto:: links.
+    replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
+    replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
+
+    return replacedText;
+}
 
 const LeadDetailsComponent = (props) => {
     const {isVolunteerView} = props;
     const {leadDetails} = props.state;
+    const url = leadDetails?.category && leadDetails?.state ?
+        `https://app.missionhumane.org/${leadDetails?.state}/${leadDetails?.category?.toLowerCase()}` :
+        (leadDetails?.state ? `https://app.missionhumane.org/${leadDetails?.state}` : `https://app.missionhumane.org/`)
+    const leadDesc = leadDetails?.description ? linkify(leadDetails?.description) : ''
     return (
 
         <>
@@ -43,7 +65,7 @@ const LeadDetailsComponent = (props) => {
                         <p className="p-t-20 fc-grey fs-14">Please go through the list of resources on
                             <a target="_blank"
                                className="cursor-pointer"
-                               href={`https://app.missionhumane.org/${leadDetails?.state}/${leadDetails?.category?.toLowerCase()}`}> app.missionhumane.org/{leadDetails?.state}/{leadDetails?.category?.toLowerCase()}</a> and
+                               href={url}> {url}</a> and
                             find a relevant source for this following request. If you have found some help, please reach
                             out to them and provide them the information.</p>}
                 </div>
@@ -90,6 +112,8 @@ const LeadDetailsComponent = (props) => {
                                 </Column>
                                 <Column>
                                     <div className="p-t-20 p-r-20 p-b-10 bottom-text">
+                                        {utility.toSentenceCase(leadDetails?.state)}{" "}
+                                        {utility.toSentenceCase(leadDetails?.district)}{" "}
                                         {`Source: ${utility.toSentenceCase(props.state?.leadDetails?.channel || '')}`}
                                     </div>
                                 </Column>
@@ -98,8 +122,7 @@ const LeadDetailsComponent = (props) => {
                     ) : (
                         <div className="selected-item ">
                             <div className="p-l-20 p-t-20 p-r-20 fs-14">
-                                {" "}
-                                {props.state?.leadDetails.description}
+                                {leadDesc}
                             </div>
                             {props.state?.uniqueContact && props.state?.uniqueContact.length > 0 ? (
                                 <div className="p-l-20 p-t-20 p-r-20 fs-14">Contact :</div>
@@ -114,19 +137,22 @@ const LeadDetailsComponent = (props) => {
                                 ))
                                 : ""}
                             <Row className="card-timestamp">
-                                <Column>
-                                    <div className="p-l-20 p-t-20 p-r-20 p-b-10 bottom-text">
-                                        {props.state?.leadDetails?.comments?.length > 0 && props.state?.leadDetails.comments.map((comment, index) =>
-                                            comment.type === voteTypeConstants.DOWN_VOTE &&
-                                            <Typography className="card-desc pt-1"
-                                                        variant="body2">
+                                <Row className="p-l-20 p-t-20 p-r-20 p-b-10 bottom-text w-100"
+                                     justifyContent="space-between">
+                                    {props.state?.leadDetails?.comments?.length > 0 && props.state?.leadDetails.comments.map((comment, index) =>
+                                        comment.type === voteTypeConstants.DOWN_VOTE &&
+                                        <Typography className="card-desc pt-1"
+                                                    variant="body2">
                                                 <span
                                                     className="p-t-20 bottom-text">{moment(comment.addedOn).fromNow()}</span> {" "}<span
-                                                className="fc-black">{comment.description}</span>
-                                            </Typography>
-                                        ) || moment(props.state?.leadDetails?.channelCreatedOn || '').fromNow()}
-                                    </div>
-                                </Column>
+                                            className="fc-black">{comment.description}</span>
+                                        </Typography>
+                                    ) || moment(props.state?.leadDetails?.channelCreatedOn || '').fromNow()}
+                                    <span>
+                                        {utility.toSentenceCase(stateNamesConstant[leadDetails?.state])}{" "}
+                                        {utility.toSentenceCase(leadDetails?.district)}{" "}
+                                        </span>
+                                </Row>
                                 {props.state?.leadDetails?.comments?.length < 1 && <Column>
                                     <div className="p-l-20 p-t-20 p-r-20 p-b-10 bottom-text">
                                         {`Source: ${utility.toSentenceCase(props.state?.leadDetails?.channel || '')}`}
@@ -177,20 +203,20 @@ const LeadDetailsComponent = (props) => {
                         <Row>
                             <FacebookShareButton
                                 style={{paddingRight: "3px"}}
-                                url={process.env.REACT_APP_WEBAPP_URL}
+                                url={process.env.REACT_APP_WEBAPP_URL + 'details/' + leadDetails?._id}
                                 quote={`${props.state?.leadDetails.description} Found at`}
                             >
                                 <FacebookIcon size={20} round={true}></FacebookIcon>
                             </FacebookShareButton>
                             <WhatsappShareButton
                                 style={{paddingRight: "3px"}}
-                                url={process.env.REACT_APP_WEBAPP_URL}
+                                url={process.env.REACT_APP_WEBAPP_URL + 'details/' + leadDetails?._id}
                                 title={`${props.state?.leadDetails.description} Found at`}
                             >
                                 <WhatsappIcon size={20} round={true}></WhatsappIcon>
                             </WhatsappShareButton>
                             <TwitterShareButton
-                                url={process.env.REACT_APP_WEBAPP_URL}
+                                url={process.env.REACT_APP_WEBAPP_URL + 'details/' + leadDetails?._id}
                                 title={`${props.state?.leadDetails.description} Found at`}
                             >
                                 <TwitterIcon size={20} round={true}/>

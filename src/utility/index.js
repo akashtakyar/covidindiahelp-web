@@ -612,6 +612,7 @@ function changeDateFormat(date, newFormat) {
 }
 
 function toSentenceCase(stringToChange) {
+    if (!stringToChange) return ''
     return stringToChange.toLowerCase().replace(/(^\s*\w|[\.\!\?]\s*\w)/g, function (c) {
         return c.toUpperCase()
     });
