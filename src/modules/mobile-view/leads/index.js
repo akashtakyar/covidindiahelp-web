@@ -4,7 +4,7 @@ import LeadsComponent from './lead'
 import {getFilteredData, downVote, upVote} from "../../../services/columns"
 import {history} from '../../../managers/history'
 import {genericConstants} from "../../../constants";
-
+import Utility from "../../../utility";
 
 class Category extends BaseComponent {
     constructor(props) {
@@ -15,6 +15,7 @@ class Category extends BaseComponent {
             selectedCategory: props.selectedCategory,
             isShowSharePopup: false,
             isShowNotWorkingPopup: false,
+            isShowWorkingPopup: false,
             id: '',
             popoverText: '',
             selectedItem: {},
@@ -22,7 +23,8 @@ class Category extends BaseComponent {
             responseByIndex: {},
             selectedSortingAttr: 'recent',
             originalResponseData: [],
-            responseMessage: false
+            responseMessage: false,
+            customComment:''
         }
     }
 
@@ -61,12 +63,17 @@ class Category extends BaseComponent {
         } catch (error) {
             console.log(error)
         }
+        this.handlePopoverClose(this.state.isShowSharePopup);
     }
 
-    sendDownVoteRequest = async (id, desription) => {
+    sendDownVoteRequest = async (id, description) => {
+    if(!description){
+        Utility.apiFailureToast("Please add some comment");
+        return;
+        }
         let data = `${id}`
         try {
-            let response = await downVote(data, desription)
+            let response = await downVote(data, description)
             if (response.responseData && Array.isArray(response.responseData) && response.responseData.length) {
                 this.setState({allLeads: response.responseData, originalResponseData: response.responseData})
             }
@@ -76,11 +83,9 @@ class Category extends BaseComponent {
             console.log(error)
         }
         this.handlePopoverClose(this.state.isShowSharePopup);
-
     }
 
     handlePopoverOpen = async (item) => {
-        console.log("item=handlePopoverOpen==", item)
         let uniqueContact = []
         uniqueContact = await this.getUniqueContact(item);
         await this.setState({
@@ -93,7 +98,8 @@ class Category extends BaseComponent {
 
     handlePopoverClose = async (isShowSharePopup = false) => {
         console.log("isShowSharePopup===", isShowSharePopup)
-        await this.setState({popoverAnchor: null, isShowSharePopup: isShowSharePopup, isShowNotWorkingPopup: false});
+        await this.setState({popoverAnchor: null, isShowSharePopup: isShowSharePopup,
+         isShowNotWorkingPopup: false, isShowWorkingPopup:false});
     };
 
     getUniqueContact = async (data) => {
@@ -131,7 +137,6 @@ class Category extends BaseComponent {
                 return b.upVoteCount - a.upVoteCount
             })
         else {
-            console.log("this.state.originalResponseData", this.state.originalResponseData);
             dummyData = dummyData.sort((a, b) => {
                 return b.channelCreatedOn - a.channelCreatedOn
             })
@@ -142,6 +147,14 @@ class Category extends BaseComponent {
     handleNotWorkingPopoverOpen = async (id) => {
         await this.setState({isShowNotWorkingPopup: true, id: id});
     };
+
+    handleWorkingPopoverOpen = async (id) => {
+            await this.setState({isShowWorkingPopup: true, id: id});
+        };
+
+    onStateChange = (key, value)=>{
+      this.setState({[key]:value})
+    }
 
     render() {
         return (
@@ -158,6 +171,8 @@ class Category extends BaseComponent {
                 sendDownVoteRequest={this.sendDownVoteRequest}
                 onSelectSorting={this.onSelectSorting}
                 handleNotWorkingPopoverOpen={this.handleNotWorkingPopoverOpen}
+                handleWorkingPopoverOpen={this.handleWorkingPopoverOpen}
+                onStateChange={this.onStateChange}
             />
         );
     }

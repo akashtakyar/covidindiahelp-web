@@ -1,6 +1,7 @@
 import React from 'react';
 import BaseComponent from "../baseComponent";
 import LeadDetailsComponent from "./leadDetailsComponent";
+import Utility from "../../utility";
 import {downVote, getCardDetails, upVote, getVolunteerCard} from "../../services/columns";
 
 
@@ -8,10 +9,12 @@ class LeadDetails extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
+        customComment:'',
+        workingComment:'',
             leadDetails: '',
             uniqueContact: [],
             isShowNotWorkingPopup: false,
-            anyOtherReason:""
+            isShowWorkingPopup: false
         }
     }
 
@@ -65,20 +68,25 @@ class LeadDetails extends BaseComponent {
             let response = await upVote(data, desription)
             if (!response || !response.responseData || Object.keys(response.responseData).length < 1)
                 return;
-            this.setState({leadDetails: response.responseData})
+            this.setState({leadDetails: response.responseData, workingComment:''})
 
         } catch (error) {
             console.log(error)
         }
+        this.handleWorkingPopoverClose();
     }
 
     sendDownVoteRequest = async (id = '', desription) => {
+    if(!desription){
+            Utility.apiFailureToast("Please add some comment");
+            return;
+            }
         let data = `${this.state?.leadDetails?._id || ''}`
         try {
             let response = await downVote(data, desription)
             if (!response || !response.responseData || Object.keys(response.responseData).length < 1)
                 return;
-            this.setState({leadDetails: response.responseData})
+            this.setState({leadDetails: response.responseData, customComment:''})
 
         } catch (error) {
             console.log(error)
@@ -89,22 +97,31 @@ class LeadDetails extends BaseComponent {
     handleNotWorkingPopoverOpen = () => {
         this.setState({isShowNotWorkingPopup: true})
     }
+    handleWorkingPopoverOpen = () => {
+            this.setState({isShowWorkingPopup: true})
+        }
     handleNotWorkingPopoverClose = () => {
         this.setState({isShowNotWorkingPopup: false})
     }
-    onChangeReason=async(event)=>{
-        await this.setState({[event.target.name]:event.target.value});
+    handleWorkingPopoverClose = () => {
+        this.setState({isShowWorkingPopup: false})
+    }
+
+onStateChange = (key, value)=>{
+      this.setState({[key]:value})
     }
 
     render() {
         return (<>
             <LeadDetailsComponent state={this.state} isVolunteerView={this.props.isVolunteerView}
                                   handleNotWorkingPopoverOpen={this.handleNotWorkingPopoverOpen}
+                                  handleWorkingPopoverOpen={this.handleWorkingPopoverOpen}
                                   getVolunteerDetails={this.getVolunteerDetails}
                                   sendUpVoteRequest={this.sendUpVoteRequest}
                                   sendDownVoteRequest={this.sendDownVoteRequest}
                                   handleNotWorkingPopoverClose={this.handleNotWorkingPopoverClose}
-                                  onChangeReason={this.onChangeReason}
+                                  handleWorkingPopoverClose={this.handleWorkingPopoverClose}
+                                  onStateChange={this.onStateChange}
             />
         </>)
     }

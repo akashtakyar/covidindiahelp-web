@@ -46,6 +46,7 @@ function LeadsComponent(props) {
         <>
             {DialogBox(props)}
             {NotWorkingDialog(props)}
+            {WorkingDialog(props)}
             <Row className="selected-param">
                 <Column style={{width: "100%"}}>
                     <Row
@@ -134,8 +135,9 @@ function LeadsComponent(props) {
                     <span
                         className="underline-text"
                         onClick={() => {
-                            props.incrementUpVote(ite._id);
-                            props.sendUpVoteRequest(ite._id);
+                            props.handleWorkingPopoverOpen(ite._id);
+                            // props.incrementUpVote(ite._id);
+                            // props.sendUpVoteRequest(ite._id);
                         }}
                     >
                       Working:&nbsp;{ite.upVoteCount}
@@ -246,6 +248,54 @@ export function NotWorkingDialog(props) {
                      <button className="bt-refresh" onClick={()=>{props.sendDownVoteRequest(props.state.id,props.state.anyOtherReason)}}>Submit</button>
                      </Column>
                      </Row> 
+                </div>
+                <div>
+                    <input className="custom-comment" type={"text"} placeholder={"Comment"} value={props.state.customComment}
+                     onChange={(e)=>props.onStateChange('customComment',e.target.value)}
+                    />
+                    <button className="add-comment-button"
+                            onClick={() => {
+                                props.sendDownVoteRequest(props.state.id, props.state.customComment);
+                            }}>
+                        Add Comment
+                    </button>
+                </div>
+            </div>
+        </Dialog>
+    );
+}
+
+
+export function WorkingDialog(props) {
+    return (
+        <Dialog
+            open={props.state.isShowWorkingPopup}
+            close={props.handlePopoverClose}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+        >
+            <div className="dialog-box">
+                <Row className="dialog-header">
+                    <Column>
+                        <div className="p-b-10">Choose a reason:</div>
+                    </Column>
+                    <Column
+                        onClick={()=>props.handlePopoverClose()}
+                        style={{cursor: "pointer"}}
+                    >
+                        <img alt="cancel" src="/images/Cancel.svg"/>{" "}
+                    </Column>
+                </Row>
+                <div>
+                    <input className="custom-comment" type={"text"} placeholder={"Comment"} value={props.state.workingComment}
+                           onChange={(e)=>props.onStateChange('workingComment',e.target.value)}
+                    />
+                    <button className="add-comment-button"
+                            onClick={() => {
+                                props.sendUpVoteRequest(props.state.id, props.state.workingComment);
+                            }}>
+                        Add Comment
+                    </button>
                 </div>
             </div>
         </Dialog>
