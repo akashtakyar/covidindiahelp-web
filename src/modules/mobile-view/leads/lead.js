@@ -241,13 +241,13 @@ export function NotWorkingDialog(props) {
                             <ListItemText primary={"Wrong phone number"}/>
                         </ListItem>
                     </List>
-                    <Row className="txt-reason">
-                     <Column>   
-                    <div>Any Other Reason</div>
-                     <textarea name="anyOtherReason" className="text-area-reason" onChange={props.onChangeReason}></textarea>
-                     <button className="bt-refresh" onClick={()=>{props.sendDownVoteRequest(props.state.id,props.state.anyOtherReason)}}>Submit</button>
-                     </Column>
-                     </Row> 
+                    {/*<Row className="txt-reason">*/}
+                    {/* <Column>   */}
+                    {/*<div>Any Other Reason</div>*/}
+                    {/* <textarea name="anyOtherReason" className="text-area-reason" onChange={props.onChangeReason}></textarea>*/}
+                    {/* <button className="bt-refresh" onClick={()=>{props.sendDownVoteRequest(props.state.id,props.state.anyOtherReason)}}>Submit</button>*/}
+                    {/* </Column>*/}
+                    {/* </Row> */}
                 </div>
                 <div>
                     <input className="custom-comment" type={"text"} placeholder={"Comment"} value={props.state.customComment}

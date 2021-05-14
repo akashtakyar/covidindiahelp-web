@@ -95,10 +95,10 @@ class LeadDetails extends BaseComponent {
     }
 
     handleNotWorkingPopoverOpen = () => {
-        this.setState({isShowNotWorkingPopup: true})
+        this.setState({isShowNotWorkingPopup: true, customComment:''})
     }
     handleWorkingPopoverOpen = () => {
-            this.setState({isShowWorkingPopup: true})
+            this.setState({isShowWorkingPopup: true, workingComment:''})
         }
     handleNotWorkingPopoverClose = () => {
         this.setState({isShowNotWorkingPopup: false})
