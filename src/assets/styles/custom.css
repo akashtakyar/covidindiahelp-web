@@ -408,13 +408,19 @@ input:focus {
   display: block;
 }
 .bt-refresh{
-  max-font-size: 14px;
   background-color: #096dd9;
   color: white;
   border: 0px;
   border-radius: 4px;
   padding-left: 10px;
   padding-right: 10px;
+}
+.txt-reason{
+  padding: 0 16px;
+}
+.text-area-reason{
+  margin-bottom: 10px;
+  border-radius: 4px;
 }
 
 

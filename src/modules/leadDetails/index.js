@@ -11,6 +11,7 @@ class LeadDetails extends BaseComponent {
             leadDetails: '',
             uniqueContact: [],
             isShowNotWorkingPopup: false,
+            anyOtherReason:""
         }
     }
 
@@ -91,7 +92,9 @@ class LeadDetails extends BaseComponent {
     handleNotWorkingPopoverClose = () => {
         this.setState({isShowNotWorkingPopup: false})
     }
-
+    onChangeReason=async(event)=>{
+        await this.setState({[event.target.name]:event.target.value});
+    }
 
     render() {
         return (<>
@@ -101,6 +104,7 @@ class LeadDetails extends BaseComponent {
                                   sendUpVoteRequest={this.sendUpVoteRequest}
                                   sendDownVoteRequest={this.sendDownVoteRequest}
                                   handleNotWorkingPopoverClose={this.handleNotWorkingPopoverClose}
+                                  onChangeReason={this.onChangeReason}
             />
         </>)
     }

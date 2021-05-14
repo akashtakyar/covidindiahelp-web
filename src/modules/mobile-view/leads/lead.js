@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
 function LeadsComponent(props) {
     const classes = useStyles();
     let latestComment =null
+    console.log("Props1111",props);
     return (
         <>
             {DialogBox(props)}
@@ -176,6 +177,7 @@ function LeadsComponent(props) {
 }
 
 export function NotWorkingDialog(props) {
+    console.log("props===",props);
     return (
         <Dialog
             open={props.state.isShowNotWorkingPopup}
@@ -237,6 +239,13 @@ export function NotWorkingDialog(props) {
                             <ListItemText primary={"Wrong phone number"}/>
                         </ListItem>
                     </List>
+                    <Row className="txt-reason">
+                     <Column>   
+                    <div>Any Other Reason</div>
+                     <textarea name="anyOtherReason" className="text-area-reason" onChange={props.onChangeReason}></textarea>
+                     <button className="bt-refresh" onClick={()=>{props.sendDownVoteRequest(props.state.id,props.state.anyOtherReason)}}>Submit</button>
+                     </Column>
+                     </Row> 
                 </div>
             </div>
         </Dialog>
