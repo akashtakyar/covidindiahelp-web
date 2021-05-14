@@ -24,7 +24,8 @@ class Category extends BaseComponent {
             selectedSortingAttr: 'recent',
             originalResponseData: [],
             responseMessage: false,
-            customComment:''
+            customComment:'',
+            workingComment:''
         }
     }
 
@@ -60,6 +61,7 @@ class Category extends BaseComponent {
             if (response.responseData && Array.isArray(response.responseData) && response.responseData.length) {
                 this.setState({allLeads: response.responseData, originalResponseData: response.responseData})
             }
+            this.incrementUpVote(id,response?.responseData?.comments || []);
         } catch (error) {
             console.log(error)
         }
@@ -114,9 +116,10 @@ class Category extends BaseComponent {
         return uniqueContact;
     }
 
-    incrementUpVote = (id) => {
+    incrementUpVote = (id, comments=[]) => {
         let index = this.state.responseByIndex[id].index;
         this.state.allLeads[index].upVoteCount = this.state.allLeads[index].upVoteCount + 1;
+        this.state.allLeads[index].comments = comments;
         this.setState({allLeads: this.state.allLeads, originalResponseData: this.state.allLeads})
     }
 
@@ -145,11 +148,11 @@ class Category extends BaseComponent {
     }
 
     handleNotWorkingPopoverOpen = async (id) => {
-        await this.setState({isShowNotWorkingPopup: true, id: id});
+        await this.setState({isShowNotWorkingPopup: true, id: id, customComment:''});
     };
 
     handleWorkingPopoverOpen = async (id) => {
-            await this.setState({isShowWorkingPopup: true, id: id});
+            await this.setState({isShowWorkingPopup: true, id: id, workingComment:''});
         };
 
     onStateChange = (key, value)=>{

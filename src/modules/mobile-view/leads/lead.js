@@ -40,8 +40,8 @@ const useStyles = makeStyles((theme) => ({
 
 function LeadsComponent(props) {
     const classes = useStyles();
-    let latestComment =null
-    console.log("Props1111",props);
+    let latestComment = null
+    console.log("Props1111", props);
     return (
         <>
             {DialogBox(props)}
@@ -103,9 +103,10 @@ function LeadsComponent(props) {
             {props.state.allLeads.length > 0 ? (
                 props.state.allLeads &&
                 props.state.allLeads.map((ite, index) => {
-                    latestComment =utility.getLatestDownVoteComment(ite.comments)
+                    if(ite.comments.length)
+                        latestComment = ite.comments[ite.comments.length - 1] ;
 
-                    return(
+                    return (
                         <>
                             <Card className="m-10" className="lead-card" key={index}>
                                 <CardContent className="lead-container">
@@ -179,7 +180,7 @@ function LeadsComponent(props) {
 }
 
 export function NotWorkingDialog(props) {
-    console.log("props===",props);
+    console.log("props===", props);
     return (
         <Dialog
             open={props.state.isShowNotWorkingPopup}
@@ -193,7 +194,7 @@ export function NotWorkingDialog(props) {
                         <div className="p-b-10">Choose a reason:</div>
                     </Column>
                     <Column
-                        onClick={()=>props.handlePopoverClose()}
+                        onClick={() => props.handlePopoverClose()}
                         style={{cursor: "pointer"}}
                     >
                         <img alt="cancel" src="/images/Cancel.svg"/>{" "}
@@ -250,8 +251,9 @@ export function NotWorkingDialog(props) {
                     {/* </Row> */}
                 </div>
                 <div>
-                    <input className="custom-comment" type={"text"} placeholder={"Comment"} value={props.state.customComment}
-                     onChange={(e)=>props.onStateChange('customComment',e.target.value)}
+                    <input className="custom-comment" type={"text"} placeholder={"Comment"}
+                           value={props.state.customComment}
+                           onChange={(e) => props.onStateChange('customComment', e.target.value)}
                     />
                     <button className="add-comment-button"
                             onClick={() => {
@@ -280,15 +282,16 @@ export function WorkingDialog(props) {
                         <div className="p-b-10">Choose a reason:</div>
                     </Column>
                     <Column
-                        onClick={()=>props.handlePopoverClose()}
+                        onClick={() => props.handlePopoverClose()}
                         style={{cursor: "pointer"}}
                     >
                         <img alt="cancel" src="/images/Cancel.svg"/>{" "}
                     </Column>
                 </Row>
                 <div>
-                    <input className="custom-comment" type={"text"} placeholder={"Comment"} value={props.state.workingComment}
-                           onChange={(e)=>props.onStateChange('workingComment',e.target.value)}
+                    <input className="custom-comment" type={"text"} placeholder={"Comment"}
+                           value={props.state.workingComment}
+                           onChange={(e) => props.onStateChange('workingComment', e.target.value)}
                     />
                     <button className="add-comment-button"
                             onClick={() => {
@@ -417,7 +420,7 @@ function DialogBox(props) {
             <span
                 className=" working-text"
                 onClick={() => {
-                    props.incrementUpVote(props.state.selectedItem._id);
+                    // props.incrementUpVote(props.state.selectedItem._id);
 
                     props.sendUpVoteRequest(props.state.selectedItem._id, "");
                 }}
