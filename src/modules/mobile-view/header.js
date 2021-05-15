@@ -37,7 +37,7 @@ function NavbarComponent(props) {
                          style={{cursor: 'pointer'}}>
                         {props.isInfo ?
                             <>
-                                <button className="volunteer-button" onClick={() => window.open("http://localhost:3000/volunteer")}>Volunteer</button>
+                                <button className="volunteer-button" onClick={() => window.open("https://app.missionhumane.org/volunteer")}>Volunteer</button>
                                 <img onClick={() => window.open("https://forms.gle/5LhpNqX1vCYb671P7")}
                                      className='header-icons' src="/images/add.svg"/>
                             </> :
