@@ -158,6 +158,11 @@ input:focus {
   color: #0052cc !important;
 }
 
+
+.fc-custom-blue {
+  color: #0b6dd9 !important;
+}
+
 .fc-dark-slate-blue {
   color: #172b4d;
 }
@@ -305,6 +310,19 @@ input:focus {
   width: 400px !important;
 }
 
+.volunteer-button {
+background-color: #0091ff;
+box-shadow: none;
+border: 0;
+font-size: 13px;
+margin-right: 10px;
+height: 21px;
+margin-top: 3px;
+padding-right: 10px;
+padding-left: 10px;
+  border-radius: 2px;
+/* padding-top: 3px; */
+}
 @media screen and (max-width: 760px) {
   .twitter-tweet {
     width: 70% !important;
@@ -423,6 +441,9 @@ input:focus {
   border-radius: 4px;
 }
 
+.message-top-screen {
+  padding: 20px;
+}
 
 @media screen and (max-width: 480px) {
   .desktop-view {
@@ -451,6 +472,11 @@ input:focus {
     border: 1px solid rgb(184, 179, 179) !important;
     border-radius: 5px;
     padding: 5px 5px 5px 15px;
+  }
+  .message-top-screen {
+    width: 60%;
+    margin: 10px auto;
+    padding: 20px;
   }
   .search-row {
     padding: 0px;
@@ -525,7 +551,7 @@ input:focus {
 
 @media screen and (max-width: 600px) {
   .disclaimer-text-top {
-    top: 87vh !important;
+    top: 93vh !important;
     font-size: 10px;
     bottom: 0;
     position: fixed;

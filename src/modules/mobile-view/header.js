@@ -11,8 +11,8 @@ function NavbarComponent(props) {
     return (
         <Row
             style={{
-                backgroundColor: "#474951",
-                height: "35px",
+                backgroundColor: "#000",
+                height: "45px",
                 marginLeft: '0px',
                 marginRight: '0px',
                 alignItems: 'center',
@@ -26,11 +26,7 @@ function NavbarComponent(props) {
                     if (props.toggleState) props.toggleState('selectedComponent', genericConstants.WEB_COMPONENT_TYPE.STATE)
                 }}>
                     <Row style={{height: "100%", alignItems: 'center', columnGap: '5px'}}>
-                        <Column className="drawericon" style={{fontSize: "10px", cursor: 'pointer'}}>
-                            <img src="/images/hands.svg" alt={'Covid Help'}/>
-                        </Column>
-                        <Column className="bookmarked" style={{fontSize: "12px", marginLeft: '10px'}}>Mission
-                            Humane</Column>
+                        <Column className="bookmarked" style={{fontSize: "14px", marginLeft: '10px'}}>MissionHumane.org</Column>
                     </Row>
                 </Column>
             </Column>
@@ -41,6 +37,7 @@ function NavbarComponent(props) {
                          style={{cursor: 'pointer'}}>
                         {props.isInfo ?
                             <>
+                                <button className="volunteer-button" onClick={() => window.open("http://localhost:3000/volunteer")}>Volunteer</button>
                                 <img onClick={() => window.open("https://forms.gle/5LhpNqX1vCYb671P7")}
                                      className='header-icons' src="/images/add.svg"/>
                             </> :

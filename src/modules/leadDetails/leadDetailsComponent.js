@@ -60,13 +60,13 @@ const LeadDetailsComponent = (props) => {
                             </Row>
                             <div className="p-b-10">
                                 {leadDetails?.type === 'SUPPLY' ?
-                                    <p className="p-t-20 fc-grey fs-14">Please call the number and find out if this
+                                    <p className="p-t-20 fc-custom-blue fs-14">Please call the number and find out if this
                                         information is working
                                         or not
                                         working; after finishing the call, click on the Working or Not Working.</p> :
-                                    <p className="p-t-20 fc-grey fs-14">Please go through the list of resources on
+                                    <p className="p-t-20 fc-custom-blue fs-14">Please go through the list of resources on
                                         <a target="_blank"
-                                           className="cursor-pointer"
+                                           className="cursor-pointer underline-text"
                                            href={url}> {url}</a> and
                                         find a relevant source for this following request. If you have found some help,
                                         please reach
@@ -115,9 +115,21 @@ const LeadDetailsComponent = (props) => {
                                         </Column>
                                         <Column>
                                             <div className="p-t-20 p-r-20 p-b-10 bottom-text">
-                                                {utility.toSentenceCase(leadDetails?.state)}{" "}
-                                                {utility.toSentenceCase(leadDetails?.district)}{" "}
-                                                {`Source: ${utility.toSentenceCase(props.state?.leadDetails?.channel || '')}`}
+                                                {
+                                                    leadDetails?.district?
+                                                        utility.toSentenceCase(leadDetails?.district+" "):" "
+                                                }
+                                                {
+                                                    leadDetails?.state ?
+                                                        stateNamesConstant[leadDetails?.state] + " "
+                                                        : " "
+                                                }
+                                                {/*{*/}
+                                                {/*    leadDetails.channel?*/}
+                                                {/*        utility.toSentenceCase("Source: " + props.state?.leadDetails?.channel):*/}
+                                                {/*       ''*/}
+                                                {/*}*/}
+
                                             </div>
                                         </Column>
                                     </Row>
@@ -152,9 +164,19 @@ const LeadDetailsComponent = (props) => {
                                                 </Typography>
                                             ) || moment(props.state?.leadDetails?.channelCreatedOn || '').fromNow()}
                                             <span>
-                                        {utility.toSentenceCase(stateNamesConstant[leadDetails?.state])}{" "}
-                                                {utility.toSentenceCase(leadDetails?.district)}{" "}
-                                        </span>
+                                        {
+                                            leadDetails?.district ?
+                                                utility.toSentenceCase(leadDetails?.district+" ") :
+                                                " "
+                                        }
+                                        {
+                                            leadDetails?.state ?
+                                                stateNamesConstant[leadDetails?.state]+" "
+                                                :
+                                                " "
+                                        }
+                                                        </span>
+
                                         </Row>
                                         {props.state?.leadDetails?.comments?.length < 1 && <Column>
                                             <div className="p-l-20 p-t-20 p-r-20 p-b-10 bottom-text">
@@ -244,7 +266,7 @@ const LeadDetailsComponent = (props) => {
 
                 :
                 <Row className="justify-content-center m-5">
-                    <div className="">No request at the moment</div>
+                    <div className="">Loading...</div>
                 </Row>
             }
         </>)
