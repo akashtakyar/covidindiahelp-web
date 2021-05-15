@@ -551,7 +551,7 @@ padding-left: 10px;
 
 @media screen and (max-width: 600px) {
   .disclaimer-text-top {
-    top: 93vh !important;
+    top: 92vh !important;
     font-size: 10px;
     bottom: 0;
     position: fixed;
