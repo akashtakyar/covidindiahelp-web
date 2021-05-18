@@ -84,7 +84,9 @@ const SelectCategoryComponent = (props) =>
                 <CategoryContainer key={idx} onClick={() => props.onSelectCategory(name)}>
                     <CategoryHeaderText>{name.toUpperCase()}</CategoryHeaderText>
                     <CategoryIconContainer>
-                        <img src={`/images/${name.toLowerCase().replace('/', '-')}.svg`} height="60" width="60" alt={name.toLowerCase()} />
+                        <img src={`/images/${name.toLowerCase().replace('/', '-')}.svg`} height="60" width="60" alt={name.toLowerCase()}
+                            onError={(e) => { e.target.onerror = null; e.target.src = "/images/remdesivir.svg" }}
+                        />
                     </CategoryIconContainer>
                     <FindResourceText>
                         <div>

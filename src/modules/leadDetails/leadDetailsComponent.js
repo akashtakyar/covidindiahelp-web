@@ -1,7 +1,7 @@
 import React from 'react'
-import {Column, Row} from "simple-flexbox";
-import {TwitterTweetEmbed} from "react-twitter-embed";
-import {Typography} from "@material-ui/core";
+import { Column, Row } from "simple-flexbox";
+import { TwitterTweetEmbed } from "react-twitter-embed";
+import { Typography } from "@material-ui/core";
 import moment from "moment";
 import utility from "../../utility";
 import Button from '@material-ui/core/Button';
@@ -15,8 +15,8 @@ import {
     WhatsappIcon,
     WhatsappShareButton
 } from "react-share";
-import {NotWorkingDialog, WorkingDialog} from "../mobile-view/leads/lead";
-import {stateNamesConstant, voteTypeConstants} from "../../constants";
+import { NotWorkingDialog, WorkingDialog } from "../mobile-view/leads/lead";
+import { stateNamesConstant, voteTypeConstants } from "../../constants";
 
 function linkify(inputText) {
     var replacedText, replacePattern1, replacePattern2, replacePattern3;
@@ -37,8 +37,8 @@ function linkify(inputText) {
 }
 
 const LeadDetailsComponent = (props) => {
-    const {isVolunteerView} = props;
-    const {leadDetails} = props.state;
+    const { isVolunteerView } = props;
+    const { leadDetails } = props.state;
     const url = leadDetails?.category && leadDetails?.state ?
         `https://app.missionhumane.org/${leadDetails?.state}/${leadDetails?.category?.toLowerCase()}` :
         (leadDetails?.state ? `https://app.missionhumane.org/${leadDetails?.state}` : `https://app.missionhumane.org/`)
@@ -48,7 +48,7 @@ const LeadDetailsComponent = (props) => {
         <>
             {Object.keys(leadDetails).length ?
                 <div>
-                    <div className="dialog-box" style={{maxWidth: '90%', margin: 'auto', paddingBottom: '14vh'}}>
+                    <div className="dialog-box" style={{ maxWidth: '90%', margin: 'auto', paddingBottom: '14vh' }}>
                         {isVolunteerView && <>
                             <Row className="justify-content-between">
                                 <Column>
@@ -61,13 +61,13 @@ const LeadDetailsComponent = (props) => {
                             <div className="p-b-10">
                                 {leadDetails?.type === 'SUPPLY' ?
                                     <p className="p-t-20 fc-custom-blue fs-14">Please call the number and find out if this
-                                        information is working
-                                        or not
+                                    information is working
+                                    or not
                                         working; after finishing the call, click on the Working or Not Working.</p> :
                                     <p className="p-t-20 fc-custom-blue fs-14">Please go through the list of resources on
                                         <a target="_blank"
-                                           className="cursor-pointer underline-text"
-                                           href={url}> {url}</a> and
+                                            className="cursor-pointer underline-text"
+                                            href={url}> {url}</a> and
                                         find a relevant source for this following request. If you have found some help,
                                         please reach
                                         out to them and provide them the information.</p>}
@@ -77,9 +77,9 @@ const LeadDetailsComponent = (props) => {
                         {/*    <b className="p-b-10">Details</b>*/}
                         {/*</Row>*/}
                         {props.state?.leadDetails &&
-                        typeof props.state?.leadDetails.attachments === 'object' &&
-                        typeof props.state?.leadDetails.attachments.media_keys === 'object'
-                        && props.state?.leadDetails.attachments.media_keys.length
+                            typeof props.state?.leadDetails.attachments === 'object' &&
+                            typeof props.state?.leadDetails.attachments.media_keys === 'object'
+                            && props.state?.leadDetails.attachments.media_keys.length
                             ? (
                                 <>
                                     {props.state?.uniqueContact && props.state?.uniqueContact.length > 0 ? (
@@ -95,7 +95,7 @@ const LeadDetailsComponent = (props) => {
                                         ))
                                         : ""}
                                     <TwitterTweetEmbed
-                                        options={{width: 400}}
+                                        options={{ width: 400 }}
                                         tweetId={props.state?.leadDetails.channelID}
                                     />
 
@@ -105,10 +105,10 @@ const LeadDetailsComponent = (props) => {
                                                 {props.state?.leadDetails?.comments?.length > 0 && props.state?.leadDetails.comments.map((comment, index) =>
                                                     comment.type === voteTypeConstants.DOWN_VOTE &&
                                                     <Typography className="card-desc pt-1"
-                                                                variant="body2">
-                                                <span
-                                                    className="p-t-20 bottom-text">{moment(comment.addedOn).fromNow()}</span> {" "}<span
-                                                        className="fc-black">{comment.description}</span>
+                                                        variant="body2">
+                                                        <span
+                                                            className="p-t-20 bottom-text">{moment(comment.addedOn).fromNow()}</span> {" "}<span
+                                                                className="fc-black">{comment.description}</span>
                                                     </Typography>
                                                 ) || moment(props.state?.leadDetails?.channelCreatedOn || '').fromNow()}
                                             </div>
@@ -116,8 +116,9 @@ const LeadDetailsComponent = (props) => {
                                         <Column>
                                             <div className="p-t-20 p-r-20 p-b-10 bottom-text">
                                                 {
-                                                    leadDetails?.district?
-                                                        utility.toSentenceCase(leadDetails?.district+" "):" "
+                                                    leadDetails?.district ?
+                                                        Array.isArray(leadDetails?.district) ? utility.getDistrictFromDescription(leadDetails?.district, leadDetails?.description) + " " :
+                                                            utility.toSentenceCase(leadDetails?.district + " ") : " "
                                                 }
                                                 {
                                                     leadDetails?.state ?
@@ -153,29 +154,29 @@ const LeadDetailsComponent = (props) => {
                                         : ""}
                                     <Row className="card-timestamp">
                                         <Row className="p-l-20 p-t-20 p-r-20 p-b-10 bottom-text w-100"
-                                             justifyContent="space-between">
+                                            justifyContent="space-between">
                                             {props.state?.leadDetails?.comments?.length > 0 && props.state?.leadDetails.comments.map((comment, index) =>
                                                 comment.type === voteTypeConstants.DOWN_VOTE &&
                                                 <Typography className="card-desc pt-1"
-                                                            variant="body2">
-                                                <span
-                                                    className="p-t-20 bottom-text">{moment(comment.addedOn).fromNow()}</span> {" "}<span
-                                                    className="fc-black">{comment.description}</span>
+                                                    variant="body2">
+                                                    <span
+                                                        className="p-t-20 bottom-text">{moment(comment.addedOn).fromNow()}</span> {" "}<span
+                                                            className="fc-black">{comment.description}</span>
                                                 </Typography>
                                             ) || moment(props.state?.leadDetails?.channelCreatedOn || '').fromNow()}
                                             <span>
-                                        {
-                                            leadDetails?.district ?
-                                                utility.toSentenceCase(leadDetails?.district+" ") :
-                                                " "
-                                        }
-                                        {
-                                            leadDetails?.state ?
-                                                stateNamesConstant[leadDetails?.state]+" "
-                                                :
-                                                " "
-                                        }
-                                                        </span>
+                                                {
+                                                    leadDetails?.district ?
+                                                        Array.isArray(leadDetails?.district) ? utility.getDistrictFromDescription(leadDetails?.district, leadDetails?.description) + " " :
+                                                            utility.toSentenceCase(leadDetails?.district + " ") : " "
+                                                }
+                                                {
+                                                    leadDetails?.state ?
+                                                        stateNamesConstant[leadDetails?.state] + " "
+                                                        :
+                                                        " "
+                                                }
+                                            </span>
 
                                         </Row>
                                         {props.state?.leadDetails?.comments?.length < 1 && <Column>
@@ -187,52 +188,52 @@ const LeadDetailsComponent = (props) => {
                                 </div>
                             )}
                         {props.state?.leadDetails?.comments?.length > 0 && <Row>
-                            <div className="p-l-20 bottom-text" style={{textAlign: 'end'}}>
+                            <div className="p-l-20 bottom-text" style={{ textAlign: 'end' }}>
                                 {`Source: ${utility.toSentenceCase(props.state?.leadDetails?.channel || '')}`}
                             </div>
                         </Row>}
 
                         <Row className="card-timestamp p-t-20">
-                            <Row className="card-vote-buttons" style={{cursor: "pointer"}}>
-            <span
-                className=" working-text"
-                onClick={() => {
-                    props.handleWorkingPopoverOpen();
-                }}
-            >
-              <img
-                  style={{width: "20px", paddingRight: "1px"}}
-                  src="/images/Working.svg"
-                  alt={'image'}/>
+                            <Row className="card-vote-buttons" style={{ cursor: "pointer" }}>
+                                <span
+                                    className=" working-text"
+                                    onClick={() => {
+                                        props.handleWorkingPopoverOpen();
+                                    }}
+                                >
+                                    <img
+                                        style={{ width: "20px", paddingRight: "1px" }}
+                                        src="/images/Working.svg"
+                                        alt={'image'} />
               Working:{props.state?.leadDetails.upVoteCount}
-            </span>
+                                </span>
                                 &nbsp;
                                 <span
                                     className="  not-working-text"
-                                    style={{cursor: "pointer"}}
+                                    style={{ cursor: "pointer" }}
                                     onClick={() => {
                                         props.handleNotWorkingPopoverOpen();
                                     }}
                                 >
-              <img
-                  style={{width: "20px", paddingRight: "1px"}}
-                  src="/images/NotWorking.svg"
-              ></img>
+                                    <img
+                                        style={{ width: "20px", paddingRight: "1px" }}
+                                        src="/images/NotWorking.svg"
+                                    ></img>
               Not working:{props.state?.leadDetails.downVoteCount}
-            </span>
+                                </span>
                             </Row>
                             &nbsp;
                             <Column className="card-footer-info">
                                 <Row>
                                     <FacebookShareButton
-                                        style={{paddingRight: "3px"}}
+                                        style={{ paddingRight: "3px" }}
                                         url={process.env.REACT_APP_WEBAPP_URL + 'details/' + leadDetails?._id}
                                         quote={`${props.state?.leadDetails.description} Found at`}
                                     >
                                         <FacebookIcon size={20} round={true}></FacebookIcon>
                                     </FacebookShareButton>
                                     <WhatsappShareButton
-                                        style={{paddingRight: "3px"}}
+                                        style={{ paddingRight: "3px" }}
                                         url={process.env.REACT_APP_WEBAPP_URL + 'details/' + leadDetails?._id}
                                         title={`${props.state?.leadDetails.description} Found at`}
                                     >
@@ -242,7 +243,7 @@ const LeadDetailsComponent = (props) => {
                                         url={process.env.REACT_APP_WEBAPP_URL + 'details/' + leadDetails?._id}
                                         title={`${props.state?.leadDetails.description} Found at`}
                                     >
-                                        <TwitterIcon size={20} round={true}/>
+                                        <TwitterIcon size={20} round={true} />
                                     </TwitterShareButton>
                                 </Row>
                             </Column>
@@ -250,16 +251,16 @@ const LeadDetailsComponent = (props) => {
                     </div>
 
                     {props.state.isShowNotWorkingPopup && <NotWorkingDialog state={props.state}
-                                                                            handlePopoverClose={props.handleNotWorkingPopoverClose}
-                                                                            sendDownVoteRequest={props.sendDownVoteRequest}
-                                                                            onStateChange={props.onStateChange}
-                                                                            incrementDownVote={(id) => console.log(id)}
+                        handlePopoverClose={props.handleNotWorkingPopoverClose}
+                        sendDownVoteRequest={props.sendDownVoteRequest}
+                        onStateChange={props.onStateChange}
+                        incrementDownVote={(id) => console.log(id)}
                     />}
 
                     {props.state.isShowWorkingPopup && <WorkingDialog state={props.state}
-                                                                            handlePopoverClose={props.handleWorkingPopoverClose}
-                                                                            sendUpVoteRequest={props.sendUpVoteRequest}
-                                                                            onStateChange={props.onStateChange}
+                        handlePopoverClose={props.handleWorkingPopoverClose}
+                        sendUpVoteRequest={props.sendUpVoteRequest}
+                        onStateChange={props.onStateChange}
                     />}
 
                 </div>
