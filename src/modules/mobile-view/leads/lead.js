@@ -172,11 +172,23 @@ function LeadsComponent(props) {
                       >
                         Not working:&nbsp;{ite.downVoteCount}
                       </span>
+                      {Array.isArray(ite.district) ? (
+                        <span style={{ marginLeft: "10px", color: "black" }}>
+                          Count:&nbsp;{ite.district.length}
+                        </span>
+                      ) : (
+                        ""
+                      )}
                     </Row>
                     &nbsp;
                     <Column className="card-footer-info">
                       {utility.toSentenceCase(ite.state)}{" "}
-                      {utility.toSentenceCase(ite.district)}{" "}
+                      {Array.isArray(ite.district)
+                        ? utility.getDistrictFromDescription(
+                            ite.district,
+                            ite.description
+                          )
+                        : utility.toSentenceCase(ite.district)}{" "}
                       {ite.comments.length < 1 &&
                         moment(ite.channelCreatedOn).fromNow()}
                     </Column>

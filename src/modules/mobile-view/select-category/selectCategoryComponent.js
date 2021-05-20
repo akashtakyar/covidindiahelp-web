@@ -103,6 +103,9 @@ const SelectCategoryComponent = (props) => (
                   src={`/images/${name.toLowerCase().replace("/", "-")}.svg`}
                   height="60"
                   width="60"
+                  onError={(event) =>
+                    (event.target.src = "/images/tocilizumab.svg")
+                  }
                   alt={name.toLowerCase()}
                 />
               </CategoryIconContainer>
