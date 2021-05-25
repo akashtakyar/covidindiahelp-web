@@ -6,7 +6,7 @@ import Dialog from '@material-ui/core/Dialog';
 function DisclaimerDialog (props) {
     return(
          <Dialog
-        open={props.isDisclaimer}
+        // open={props.isDisclaimer}
         onClose={props.onClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"

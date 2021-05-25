@@ -17,7 +17,7 @@
     "material-ui": "^0.20.2",
     "moment": "^2.24.0",
     "npm": "^7.11.2",
-    "react": "^16.9.0",
+    "react": "^16.14.0",
     "react-bootstrap": "^0.32.3",
     "react-device-detect": "^1.17.0",
     "react-dom": "^16.9.0",
