@@ -168,7 +168,7 @@ export async function getVolunteerCardType(req) {
 
 export async function getCount() {
   // let url = `https://www.covidindiahelp.info:3001/tags`;
-  let url = `https://www.covidindiahelp.info:3002/count`;
+  let url = `https://3tzqfrzicb.execute-api.us-east-1.amazonaws.com/prod-v1/count`;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
     { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
