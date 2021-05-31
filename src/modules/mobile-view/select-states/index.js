@@ -187,6 +187,10 @@ class Coloumn extends BaseComponent {
       pathArray.length === 2 &&
       (pathArray[pathArray.length - 1] === "volunteer" ||
         pathArray[pathArray.length - 1] === "volunteers");
+    let isVolunteerViewType =
+      pathArray.length === 3 &&
+      (pathArray[pathArray.length - 1] === "need" ||
+        pathArray[pathArray.length - 1] === "supply");
     return (
       <div className="mobile-view">
         <Header
@@ -196,7 +200,9 @@ class Coloumn extends BaseComponent {
           }
           toggleState={this.toggleState}
         />
-        {isDetailView || isVolunteerView ? (
+        {isVolunteerViewType ? (
+          <LeadDetails isVolunteerViewType={isVolunteerViewType} />
+        ) : isVolunteerView || isDetailView ? (
           <LeadDetails isVolunteerView={isVolunteerView} />
         ) : (
           this.MobileComponent()
