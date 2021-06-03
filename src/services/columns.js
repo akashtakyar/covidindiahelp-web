@@ -10,6 +10,8 @@ export default {
   getStates: getTags,
   getCardDetails,
   getVolunteerCard,
+  getTagsForState,
+  getCount,
 };
 
 export async function states(toadd) {
@@ -136,7 +138,7 @@ export async function getCardDetails(req) {
     });
 }
 
-export async function getVolunteerCard(req) {
+export async function getVolunteerCard() {
   let url = `https://www.covidindiahelp.info:3002/volunteer-card`;
   return httpService(
     httpConstants.METHOD_TYPE.GET,
@@ -146,6 +148,39 @@ export async function getVolunteerCard(req) {
   )
     .then((response) => Promise.resolve(response))
     .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+
+export async function getVolunteerCardType(req) {
+  let url = `https://www.covidindiahelp.info:3002/volunteer-card/${req.type}`;
+  return httpService(
+    httpConstants.METHOD_TYPE.GET,
+    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    {},
+    url
+  )
+    .then((response) => Promise.resolve(response))
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+
+export async function getCount() {
+  // let url = `https://www.covidindiahelp.info:3001/tags`;
+  let url = `https://3tzqfrzicb.execute-api.us-east-1.amazonaws.com/prod-v1/count`;
+  return httpService(
+    httpConstants.METHOD_TYPE.GET,
+    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    {},
+    url
+  )
+    .then((response) => {
+      // console.log("response dasd",response)
+      return Promise.resolve(response);
+    })
+    .catch(function (err) {
+      // console.log("err dasd",err)
       return Promise.reject(err);
     });
 }
