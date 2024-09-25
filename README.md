@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fakashtakyar%2Fcovidindiahelp-web.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fakashtakyar%2Fcovidindiahelp-web?ref=badge_shield)
+
 # README #
 
 This README would normally document whatever steps are necessary to get your application up and running.
@@ -32,3 +34,7 @@ Join Slack Channel<br/>
 
 Akash
 Ayush
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fakashtakyar%2Fcovidindiahelp-web.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fakashtakyar%2Fcovidindiahelp-web?ref=badge_large)
