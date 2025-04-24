@@ -1,40 +1,65 @@
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fakashtakyar%2Fcovidindiahelp-web.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fakashtakyar%2Fcovidindiahelp-web?ref=badge_shield)
+# API Server with Rate Limiting and CORS Protection
 
-# README #
+This server provides rate limiting and CORS protection for the covidindiahelp-web application's API endpoints.
 
-This README would normally document whatever steps are necessary to get your application up and running.
+## Features
 
-### What is this repository for? ###
+- **Rate Limiting**: Prevents abuse by limiting the number of requests from a single IP address
+  - Global rate limit: 100 requests per 15 minutes (configurable)
+  - API-specific rate limit: 50 requests per 5 minutes (configurable)
+- **CORS Protection**: Controls which domains can access the API
+- **Security Headers**: Implements security best practices using Helmet
 
-Join Slack Channel<br/>
+## Setup
 
-<a href="https://join.slack.com/t/covidindiahelpinfo/shared_invite/zt-q26daxgw-vZDRD3hpSAi2DkLYJuGzDw"><img src="https://camo.githubusercontent.com/641485201f995d93389a976a160479fc4cbaf0cbbf31cf280730c9e2585eaaaf/68747470733a2f2f692e696d6775722e636f6d2f56376a786a616b2e706e67"></a>
-<br/>
+1. Install dependencies:
+   ```
+   npm install
+   ```
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+2. Configure environment variables by creating a `.env` file:
+   ```
+   # Server configuration
+   PORT=5000
 
-### How do I get set up? ###
+   # CORS configuration
+   # Comma-separated list of allowed origins (leave empty to allow all origins)
+   ALLOWED_ORIGINS=http://localhost:3000,https://missionhumane.org
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+   # Rate limiting configuration
+   # Global rate limit (requests per 15 minutes)
+   GLOBAL_RATE_LIMIT=100
+   # API rate limit (requests per 5 minutes)
+   API_RATE_LIMIT=50
+   ```
 
-### Contribution guidelines ###
+3. Start the server:
+   ```
+   npm start
+   ```
 
-* Writing tests
-* Code review
-* Other guidelines
+   For development with auto-restart:
+   ```
+   npm run dev
+   ```
 
-### Who do I talk to? ###
+## API Endpoints
 
-Akash
-Ayush
+- `GET /api/test`: Test endpoint to verify the API is working
 
+## Customizing Rate Limits
 
-## License
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fakashtakyar%2Fcovidindiahelp-web.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fakashtakyar%2Fcovidindiahelp-web?ref=badge_large)
+You can customize the rate limits by modifying the `.env` file:
+
+- `GLOBAL_RATE_LIMIT`: Maximum number of requests allowed per IP address in a 15-minute window
+- `API_RATE_LIMIT`: Maximum number of API requests allowed per IP address in a 5-minute window
+
+## Customizing CORS
+
+To control which domains can access your API, set the `ALLOWED_ORIGINS` environment variable to a comma-separated list of allowed origins. For example:
+
+```
+ALLOWED_ORIGINS=http://localhost:3000,https://missionhumane.org
+```
+
+To allow all origins, leave it empty or set it to `*`.
